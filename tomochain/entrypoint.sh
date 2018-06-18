@@ -3,7 +3,7 @@
 is_initialized=false
 is_first_node=false
 wallet=''
-bootnodes=$(cat .bootnodes | awk '{print}' ORS=',')
+bootnodes=$(cat bootnodes | awk '{print}' ORS=',')
 
 # if the chain exists
 if [[ -d tomochain/tomo/chaindata ]]; then
@@ -12,7 +12,7 @@ if [[ -d tomochain/tomo/chaindata ]]; then
   wallet=$(tomo account list --datadir /build/tomochain | head -n 1 | awk -v FS='({|})' '{print $2}')
 else
   # create a new wallet
-  wallet=$(tomo account new --password .pwd --datadir tomochain | awk -v FS='({|})' '{print $2}')
+  wallet=$(tomo account new --password password --datadir tomochain | awk -v FS='({|})' '{print $2}')
 fi
 
 # if the bootnode file is empty
@@ -37,7 +37,7 @@ if [[ "$is_first_node" = true ]]; then
        --rpcport 8545 \
        --rpcvhosts "*" \
        --unlock ${wallet} \
-       --password .pwd \
+       --password password \
        --mine \
        --gasprice "1" \
        --targetgaslimit "420000000"
@@ -57,7 +57,7 @@ else
        --rpcport 8545 \
        --rpcvhosts "*" \
        --unlock ${wallet} \
-       --password .pwd \
+       --password password \
        --mine \
        --gasprice "1" \
        --targetgaslimit "420000000"

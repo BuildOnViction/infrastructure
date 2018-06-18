@@ -8,18 +8,16 @@ WORKDIR /build
 
 ENV WALLET_KEY ""
 ENV WS_SECRET changeme
-ENV INSTANCE_NAME changeme
-ENV CONTACT_DETAILS ""
 
 COPY ./genesis.json /build/genesis.json
 COPY ./template.json /build/template.json
 COPY ./entrypoint.sh /build/entrypoint.sh
 COPY ./healthcheck.sh /build/healthcheck.sh
-COPY ./.bootnodes /build/.bootnodes
+COPY ./bootnodes /build/bootnodes
 
 RUN chmod +x /build/entrypoint.sh && \
     chmod +x /build/healthcheck.sh && \
-    echo $WALLET_KEY > /build/.pwd
+    echo $WALLET_PASSWORD > /build/password
 
 RUN apt-get update && apt-get install -y git build-essential && \
     git clone https://github.com/tomochain/tomochain.git tomochain && \
