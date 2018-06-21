@@ -8,4 +8,6 @@ WORKDIR /node
 
 COPY . ./
 
+RUN echo "$PASSWORD" > password
+
 ENTRYPOINT ["./entrypoint.sh"]
