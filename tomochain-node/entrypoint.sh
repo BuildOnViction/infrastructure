@@ -53,6 +53,7 @@ if [[ $INDEX -le $(echo "$accounts" | wc -l) && $INDEX -ge 1 ]]; then
   )
   echo "Using account $account"
   params="$params --unlock $account"
+  params="$params --etherbase $account"
 else
   echo "Your index [$INDEX] does not match the number of accounts [$(echo "$accounts" | wc -l)] . Exiting..."
   exit
