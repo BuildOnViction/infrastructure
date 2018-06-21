@@ -1,0 +1,21 @@
+[
+  {
+    "name"              : "node-apis",
+    "script"            : "app.js",
+    "log_date_format"   : "YYYY-MM-DD HH:mm Z",
+    "merge_logs"        : false,
+    "watch"             : false,
+    "max_restarts"      : 10,
+    "exec_interpreter"  : "node",
+    "exec_mode"         : "fork_mode",
+    "env":
+    {
+      "NODE_ENV"        : "production",
+      "RPC_HOST"        : "tomochain",
+      "RPC_PORT"        : "8545",
+      "LISTENING_PORT"  : "30303",
+      "WS_SERVER"       : "ws://52.76.54.184:3000",
+      "VERBOSITY"       : 2
+    }
+  }
+]
