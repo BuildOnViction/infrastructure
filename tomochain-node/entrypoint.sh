@@ -7,8 +7,6 @@ GENESIS_FILE="genesis.json"
 GENESIS_PATH="genesis/$GENESIS_FILE"
 BOOTNODES_FILE="bootnodes"
 BOOTNODES_PATH="bootnodes/$BOOTNODES_FILE"
-PASSWORD_FILE="masternode_wallet_password"
-PASSWORD_PATH="/run/secrets/$PASSWORD_FILE"
 
 # vars from docker env
 # - INDEX (default to 1)
@@ -24,11 +22,8 @@ if [[ ! -d $DATA_DIR/tomo ]]; then
 fi
 
 # set tomo password param
-if [[ -f $PASSWORD_PATH ]]; then
-  params="$params --password $PASSWORD_PATH"
-else
-  echo "Secret [$PASSWORD_FILE] is mendatory. Exiting..."
-  exit
+if [[ ! -f password ]]; then
+  echo "Password file is mendatory. Exiting..."
 fi
 
 # set tomo bootnode param (or dump enode in bootnode file if IS_BOOTNODE)
@@ -36,12 +31,12 @@ if [[ "$IS_BOOTNODE" = true ]]; then
   echo "Dumping self enode address to $BOOTNODES_PATH"
   tomo js getenode.js --datadir $DATA_DIR --keystore $KEYSTORE_DIR \
   2> /dev/null \
-  | sed "s/::/$(hostname -i)/g"
+  | sed "s/::/$(hostname -i)/g" \
   > $BOOTNODES_PATH
 else
   echo "Adding bootnodes to startup params"
   sleep 10
-  params="$params --bootnodes $BOOTNODES_PATH"
+  params="$params --bootnodes $(cat $BOOTNODES_PATH | awk '{print}' ORS=',')"
 fi
 
 # set tomo unlock param (the account to use)
@@ -68,6 +63,7 @@ tomo $params \
      --datadir $DATA_DIR \
      --keystore $KEYSTORE_DIR \
      --identity $IDENTITY \
+     --password ./password \
      --networkid 89 \
      --rpc \
      --rpccorsdomain "*" \
