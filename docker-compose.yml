@@ -1,6 +1,21 @@
 version: "3.4"
 
+# TODO Switch to env files
+
 services:
+
+  ethnetstats:
+    image: ethnetstats:latest
+    environment:
+      WS_SECRET: test
+    ports:
+      - "3001:3000"
+
+  eniapi:
+    image: eniapi:latest
+    environment:
+      WS_SECRET: test
+      INSTANCE_NAME: moon
 
   masternode_sun:
     image: tomo-node:latest
