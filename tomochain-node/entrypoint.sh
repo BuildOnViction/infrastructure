@@ -19,6 +19,7 @@ params=""
 
 # if no blockchain data, init the genesis block
 if [[ ! -d $DATA_DIR/tomo ]]; then
+  echo "No blockchain data, creating genesis block."
   tomo init $GENESIS_PATH --datadir $DATA_DIR 2> /dev/null
 fi
 
