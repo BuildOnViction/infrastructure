@@ -2,12 +2,12 @@ FROM etienne-napoleone/tomochain:latest
 
 LABEL maintainer="etienne@tomochain.com"
 
-ENV PASSWORD ''
+ENV INDEX '1'
+ENV IDENTITY 'unnamed_node'
+ENV IS_BOOTNODE 'false'
 
 WORKDIR /node
 
 COPY . ./
-
-RUN echo "$PASSWORD" > password
 
 ENTRYPOINT ["./entrypoint.sh"]
