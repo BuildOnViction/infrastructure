@@ -36,7 +36,7 @@ if [[ "$IS_BOOTNODE" = true ]]; then
 else
   echo "Adding bootnodes to startup params"
   sleep 10
-  params="$params --bootnodes $(cat $BOOTNODES_PATH | awk '{print}' ORS=',')"
+  params="$params --bootnodes $(cat $BOOTNODES_PATH | head -n 1)"
 fi
 
 # set tomo unlock param (the account to use)
