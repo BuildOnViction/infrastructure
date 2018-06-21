@@ -10,6 +10,7 @@ RUN apk update && \
 FROM node:8-alpine
 
 LABEL maintainer="etienne@tomochain.com"
+# TODO change json to env
 
 WORKDIR /eniapi
 

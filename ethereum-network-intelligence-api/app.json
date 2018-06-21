@@ -10,11 +10,11 @@
     "exec_mode"         : "fork_mode",
     "env":
     {
-      "NODE_ENV"        : "production",
-      "RPC_HOST"        : "tomochain",
+      "NODE_ENV"        : "devnet",
+      "RPC_HOST"        : "masternode_moon",
       "RPC_PORT"        : "8545",
       "LISTENING_PORT"  : "30303",
-      "WS_SERVER"       : "ws://52.76.54.184:3000",
+      "WS_SERVER"       : "ws://ethnetstats:3000",
       "VERBOSITY"       : 2
     }
   }
