@@ -34,9 +34,11 @@ if [[ "$IS_BOOTNODE" = true ]]; then
   | sed "s/::/$(hostname -i)/g" \
   > $BOOTNODES_PATH
 else
-  echo "Adding bootnodes to startup params"
-  sleep 10
-  params="$params --bootnodes $(cat $BOOTNODES_PATH | head -n 1)"
+  while [[ -z $BOOTNODES_PATH ]]; do
+    echo "Adding bootnodes to startup params. Will retry if empty"
+    sleep 10
+    params="$params --bootnodes $(cat $BOOTNODES_PATH | head -n 1)"
+  done
 fi
 
 # set tomo unlock param (the account to use)
