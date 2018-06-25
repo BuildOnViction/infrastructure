@@ -22,6 +22,12 @@ cd infrastructure
 git checkout devnet
 ```
 
+Create the password for the masternodes wallets.
+
+```
+echo "$PASSWORD" > deploy/password
+```
+
 Start the swarm stack.
 
 ```
