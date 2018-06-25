@@ -1,4 +1,4 @@
-from etiennenapoleone/eth-netstats:latest
+FROM tomochain/eth-netstats:latest
 
 LABEL maintainer="etienne@tomochain.com"
 

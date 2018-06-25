@@ -2,8 +2,8 @@ version: "3.4"
 
 services:
 
-  masternode_sun:
-    image: tomo-node:latest
+  tomochain_sun:
+    image: infra-tomochain:devnet
     environment:
       IDENTITY: sun
       IS_BOOTNODE: "true"
@@ -12,16 +12,16 @@ services:
       - sun:/node/data
       - bootnodes:/node/bootnodes
       - ./password:/node/password:ro
-  eniapi_sun:
-    image: eniapi:latest
+  netapi-client_sun:
+    image: infra-netapi-client:devnet
     environment:
       WS_SECRET: test
       INSTANCE_NAME: sun
     volumes:
-      - ./app_sun.json:/eniapi/app.json
+      - ./app_sun.json:/netapi/app.json
 
-  masternode_moon:
-    image: tomo-node:latest
+  tomochain_moon:
+    image: infra-tomochain:devnet
     environment:
       IDENTITY: moon
       IS_BOOTNODE: "false"
@@ -30,16 +30,16 @@ services:
       - moon:/node/data
       - bootnodes:/node/bootnodes:ro
       - ./password:/node/password:ro
-  eniapi_moon:
-    image: eniapi:latest
+  netapi-client_moon:
+    image: infra-netapi-client:devnet
     environment:
       WS_SECRET: test
       INSTANCE_NAME: moon
     volumes:
-      - ./app_moon.json:/eniapi/app.json
+      - ./app_moon.json:/netapi/app.json
 
-  masternode_earth:
-    image: tomo-node:latest
+  tomochain_earth:
+    image: infra-tomochain:devnet
     environment:
       IDENTITY: earth
       IS_BOOTNODE: "false"
@@ -48,27 +48,27 @@ services:
       - earth:/node/data
       - bootnodes:/node/bootnodes:ro
       - ./password:/node/password:ro
-  eniapi_earth:
-    image: eniapi:latest
+  netapi-client_earth:
+    image: infra-netapi-client:devnet
     environment:
       WS_SECRET: test
       INSTANCE_NAME: earth
     volumes:
-      - ./app_sun.json:/eniapi/app.json
+      - ./app_earth.json:/netapi/app.json
 
-  ethnetstats:
-    image: ethnetstats:latest
+  netapi-server:
+    image: infra-netapi-server:devnet
     environment:
       WS_SECRET: test
     ports:
       - "3001:3000"
 
   influxdb:
-    image: tomochain/influxdb:devnet
+    image: tomochain/infra-influxdb:devnet
     volumes:
       - influxdb:/var/lib/influxdb
   telegraf:
-    image: tomochain/telegraf:devnet
+    image: tomochain/infra-telegraf:devnet
     hostname: devnet.tomochain.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

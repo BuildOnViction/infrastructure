@@ -1,4 +1,4 @@
-FROM etiennenapoleone/eth-net-intelligence-api:latest
+FROM tomochain/eth-net-intelligence-api:latest
 
 LABEL maintainer="etienne@tomochain.com"
 

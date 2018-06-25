@@ -1,4 +1,4 @@
-FROM etiennenapoleone/tomochain:latest
+FROM tomochain/tomochain:latest
 
 LABEL maintainer="etienne@tomochain.com"
 
