@@ -1,9 +1,14 @@
 #!/bin/bash
+set -ex
 
-for i in {1..3}; do
-  docker run \
-    -v $(pwd)/deploy/ressources/password:/tomochain/password \
-    -v $(pwd)/deploy/ressources/keystore/:/tomochain/keystore/ \
-    tomochain/tomochain:latest \
-    account new --password ./password --keystore ./keystore
-done
+chmod +x ./deploy/init/init_script.sh
+docker volume create keystore
+docker volume create genesis
+docker run --rm \
+           -v $(pwd)/deploy/ressources/password:/build/password \
+           -v $(pwd)/deploy/init/init_script.sh:/build/init_script.sh \
+           -v $(pwd)/deploy/init/template.json:/build/template.json \
+           -v keystore:/build/keystore \
+           -v genesis:/build/genesis \
+           --entrypoint=/build/init_script.sh \
+           tomochain/tomochain:latest
