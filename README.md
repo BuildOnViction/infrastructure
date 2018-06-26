@@ -25,11 +25,21 @@ git checkout devnet
 Create the password for the masternodes wallets.
 
 ```
-echo "$PASSWORD" > deploy/password
+echo "$PASSWORD" > password
 ```
 
-Start the swarm stack.
+To deploy, init and start the swarm stack.
 
 ```
+./init # only before first run
 docker stack deploy -c deploy/docker-compose.yml devnet
+```
+
+To restart from zero:
+
+```
+docker stack rm devnet 
+./reset.sh
+docker container prune
+docker volume prune
 ```
