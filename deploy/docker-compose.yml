@@ -12,6 +12,8 @@ services:
       - sun:/node/data
       - bootnodes:/node/bootnodes
       - ./password:/node/password:ro
+      - ./genesis/:/node/genesis:ro
+      - ./keystore/:/node/keystore:ro
   netapi-client_sun:
     image: infra-netapi-client:devnet
     environment:
@@ -30,6 +32,8 @@ services:
       - moon:/node/data
       - bootnodes:/node/bootnodes:ro
       - ./password:/node/password:ro
+      - ./genesis/:/node/genesis:ro
+      - ./keystore/:/node/keystore:ro
   netapi-client_moon:
     image: infra-netapi-client:devnet
     environment:
@@ -48,6 +52,8 @@ services:
       - earth:/node/data
       - bootnodes:/node/bootnodes:ro
       - ./password:/node/password:ro
+      - ./genesis/:/node/genesis:ro
+      - ./keystore/:/node/keystore:ro
   netapi-client_earth:
     image: infra-netapi-client:devnet
     environment:
