@@ -11,10 +11,10 @@
     "env":
     {
       "NODE_ENV"        : "devnet",
-      "RPC_HOST"        : "masternode_moon",
+      "RPC_HOST"        : "tomochain_moon",
       "RPC_PORT"        : "8545",
       "LISTENING_PORT"  : "30303",
-      "WS_SERVER"       : "ws://ethnetstats:3000",
+      "WS_SERVER"       : "ws://netapi-server:3000",
       "VERBOSITY"       : 2
     }
   }
