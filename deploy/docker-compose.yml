@@ -67,7 +67,7 @@ services:
     environment:
       WS_SECRET: test
     ports:
-      - "3001:3000"
+      - "3000:3000"
 
   influxdb:
     image: tomochain/infra-influxdb:devnet
@@ -86,7 +86,7 @@ services:
     volumes:
       - grafana:/var/lib/grafana
     ports:
-      - "3000:3000"
+      - "3771:3000"
 
 volumes:
   moon:
