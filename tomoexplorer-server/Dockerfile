@@ -1,4 +1,4 @@
-FROM tomochain/tomochain-explorer-client:latest
+FROM tomochain/tomoexplorer-server:latest
 
 LABEL maintainer="etienne@tomochain.com"
 
