@@ -1,0 +1,28 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 3001
+  },
+  "blockchain": {
+      "rpc": "tomochain_sun",
+      "networkId": 89
+  },
+  "db": {
+    "uri": "mongodb://mongodb:27017/governance"
+  },
+  "redis": {
+      "host": "redis",
+      "port": "6379",
+      "password": null,
+      "prefix": "tomomaster"
+  },
+  "truffle": {
+    "mnemonic": "",
+    "minCandidateCap": "50000000000000000000000",
+    "maxValidatorNumber": 99,
+    "candidateWithdrawDelay": 100,
+    "epochNumber": 990,
+    "blockTimeSecret": 900,
+    "blockTimeOpening": 950
+  }
+}
