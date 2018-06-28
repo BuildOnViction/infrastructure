@@ -1,0 +1,52 @@
+version: "3.4"
+
+services:
+
+  tomochain_sun:
+    image: tomochain/infra-tomochain:devnet
+    environment:
+      IDENTITY: sun
+      IS_BOOTNODE: "true"
+      INDEX: "1"
+    volumes:
+      - sun:/tomochain/data
+      - bootnodes:/tomochain/bootnodes
+      - genesis:/tomochain/genesis/:ro
+      - keystore:/tomochain/keystore/:ro
+      - ./ressources/password:/tomochain/password:ro
+
+  tomochain_moon:
+    image: tomochain/infra-tomochain:devnet
+    environment:
+      IDENTITY: moon
+      IS_BOOTNODE: "false"
+      INDEX: "2"
+    volumes:
+      - moon:/tomochain/data
+      - bootnodes:/tomochain/bootnodes:ro
+      - genesis:/tomochain/genesis/:ro
+      - keystore:/tomochain/keystore/:ro
+      - ./ressources/password:/tomochain/password:ro
+
+  tomochain_earth:
+    image: tomochain/infra-tomochain:devnet
+    environment:
+      IDENTITY: earth
+      IS_BOOTNODE: "false"
+      INDEX: "3"
+    volumes:
+      - earth:/tomochain/data
+      - bootnodes:/tomochain/bootnodes:ro
+      - genesis:/tomochain/genesis/:ro
+      - keystore:/tomochain/keystore/:ro
+      - ./ressources/password:/tomochain/password:ro
+
+volumes:
+  moon:
+  sun:
+  earth:
+  bootnodes:
+  genesis:
+    external: true
+  keystore:
+    external: true
