@@ -1,7 +1,6 @@
 #!/bin/bash
 set -ex
 
-chmod +x ./deploy/init/init_script.sh
 docker volume create keystore
 docker volume create genesis
 docker run --rm \
@@ -12,3 +11,4 @@ docker run --rm \
            -v genesis:/build/genesis \
            --entrypoint=/build/init_script.sh \
            tomochain/tomochain:latest
+docker stack deploy -c deploy/docker-compose.yml devnet
