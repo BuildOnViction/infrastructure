@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+
+  netapi-client_sun:
+    image: tomochain/infra-netapi-client:devnet
+    environment:
+      WS_SECRET: test
+      INSTANCE_NAME: sun
+    volumes:
+      - ./ressources/app_sun.json:/netapi/app.json
+
+  netapi-client_moon:
+    image: tomochain/infra-netapi-client:devnet
+    environment:
+      WS_SECRET: test
+      INSTANCE_NAME: moon
+    volumes:
+      - ./ressources/app_moon.json:/netapi/app.json
+
+  netapi-client_earth:
+    image: tomochain/infra-netapi-client:devnet
+    environment:
+      WS_SECRET: test
+      INSTANCE_NAME: earth
+    volumes:
+      - ./ressources/app_earth.json:/netapi/app.json
+
+  netapi-server:
+    image: tomochain/infra-netapi-server:devnet
+    environment:
+      WS_SECRET: test
+    ports:
+      - "3000:3000"

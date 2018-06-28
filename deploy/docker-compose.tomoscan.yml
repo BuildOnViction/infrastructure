@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+
+  tomoscan-client:
+    image: tomochain/infra-tomoscan-client:latest
+    depends_on:
+      - tomoscan-server
+
+  tomoscan-server:
+    image: tomochain/infra-tomoscan-server:latest
+    environment:
+     - MONGODB_URI=mongodb://mongodb_scan:27017/explorer
+    depends_on:
+     - mongodb_scan
+
+  mongodb_scan:
+    image: mongo:3.6
+    volumes:
+      - "mongodb_scan:/data/db"
+
+volumes:
+  mongodb_scan:
