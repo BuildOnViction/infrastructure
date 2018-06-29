@@ -10,7 +10,7 @@
     "exec_mode"         : "fork_mode",
     "env":
     {
-      "NODE_ENV"        : "devnet",
+      "NODE_ENV"        : "localnet",
       "RPC_HOST"        : "tomochain_sun",
       "RPC_PORT"        : "8545",
       "LISTENING_PORT"  : "30303",

@@ -3,19 +3,19 @@ version: "3.4"
 services:
 
   influxdb:
-    image: tomochain/infra-influxdb:devnet
+    image: tomochain/infra-influxdb:localnet
     volumes:
       - influxdb:/var/lib/influxdb
   telegraf:
-    image: tomochain/infra-telegraf:devnet
-    hostname: devnet.tomochain.com
+    image: tomochain/infra-telegraf:localnet
+    hostname: localnet.tomochain.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/rootfs/sys:ro
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
   grafana:
-    image: tomochain/grafana:devnet
+    image: tomochain/grafana:localnet
     volumes:
       - grafana:/var/lib/grafana
     ports:

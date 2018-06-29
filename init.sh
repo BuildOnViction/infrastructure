@@ -17,4 +17,4 @@ docker stack deploy -c <( docker-compose \
   -f deploy/docker-compose.netstats.yml \
   -f deploy/docker-compose.tomomaster.yml \
   -f deploy/docker-compose.tomoscan.yml \
-  config) devnet
+  config) localnet

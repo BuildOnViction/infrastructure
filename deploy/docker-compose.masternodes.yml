@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   tomochain_sun:
-    image: tomochain/infra-tomochain:devnet
+    image: tomochain/infra-tomochain:localnet
     environment:
       IDENTITY: sun
       IS_BOOTNODE: "true"
@@ -16,7 +16,7 @@ services:
       - ./ressources/password:/tomochain/password:ro
 
   tomochain_moon:
-    image: tomochain/infra-tomochain:devnet
+    image: tomochain/infra-tomochain:localnet
     environment:
       IDENTITY: moon
       IS_BOOTNODE: "false"
@@ -29,7 +29,7 @@ services:
       - ./ressources/password:/tomochain/password:ro
 
   tomochain_earth:
-    image: tomochain/infra-tomochain:devnet
+    image: tomochain/infra-tomochain:localnet
     environment:
       IDENTITY: earth
       IS_BOOTNODE: "false"
