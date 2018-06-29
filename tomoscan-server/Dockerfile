@@ -6,4 +6,4 @@ WORKDIR /app
 
 COPY . ./
 
-ENTRYPOINT ["pm2-docker", "start", "pm2.json", "--only", "dev"]
+RUN npm run build
