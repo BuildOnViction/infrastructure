@@ -11,10 +11,17 @@ docker run --rm \
   -v genesis:/build/genesis \
   --entrypoint=/build/init_script.sh \
   tomochain/tomochain:latest
-docker stack deploy -c <( docker-compose \
+docker-compose \
   -f deploy/docker-compose.masternodes.yml \
   -f deploy/docker-compose.metrics.yml \
   -f deploy/docker-compose.netstats.yml \
   -f deploy/docker-compose.tomomaster.yml \
   -f deploy/docker-compose.tomoscan.yml \
-  config) localnet
+  build
+docker-compose \
+  -f deploy/docker-compose.masternodes.yml \
+  -f deploy/docker-compose.metrics.yml \
+  -f deploy/docker-compose.netstats.yml \
+  -f deploy/docker-compose.tomomaster.yml \
+  -f deploy/docker-compose.tomoscan.yml \
+  up -d

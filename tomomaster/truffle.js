@@ -11,7 +11,7 @@ module.exports = {
             network_id: '*'
         },
         local: {
-            host: 'localhost',
+            host: 'tomochain_sun',
             port: 8545,
             gas: 4000000,
             network_id: '*'

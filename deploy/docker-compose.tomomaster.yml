@@ -2,20 +2,10 @@ version: "3.4"
 
 services:
 
-  nginx_master:
-    image: nginx:1.15-alpine
-    volumes:
-      - ./app.template:/etc/nginx/conf.d/default.conf
-      - ./nginx.template:/etc/nginx/nginx.conf
-      - ./certs:/certs
-    depends_on:
-      - tomomaster
-    ports:
-      - "80:80"
-      - "443:443"
-
   tomomaster:
-    image: tomochain/infra-tomomaster:latest
+    image: tomomaster
+    build:
+      context: ../tomomaster
     depends_on:
       - mongodb_master
 

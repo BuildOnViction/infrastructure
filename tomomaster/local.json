@@ -8,10 +8,10 @@
       "networkId": 89
   },
   "db": {
-    "uri": "mongodb://mongodb:27017/governance"
+    "uri": "mongodb://mongodb_master:27017/governance"
   },
   "redis": {
-      "host": "redis",
+      "host": "redis_master",
       "port": "6379",
       "password": null,
       "prefix": "tomomaster"

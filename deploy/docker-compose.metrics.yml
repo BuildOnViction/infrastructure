@@ -3,11 +3,15 @@ version: "3.4"
 services:
 
   influxdb:
-    image: tomochain/infra-influxdb:localnet
-    volumes:
+    image: influxdb
+    build:
+      context: ../influxdb
+    environment:
       - influxdb:/var/lib/influxdb
   telegraf:
-    image: tomochain/infra-telegraf:localnet
+    image: telegraf
+    build:
+      context: ../telegraf
     hostname: localnet.tomochain.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -15,7 +19,9 @@ services:
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
   grafana:
-    image: tomochain/grafana:localnet
+    image: grafana
+    build:
+      context: ../grafana
     volumes:
       - grafana:/var/lib/grafana
     ports:
