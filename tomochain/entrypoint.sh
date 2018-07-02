@@ -39,9 +39,10 @@ if [[ "$IS_BOOTNODE" = true ]]; then
 else
   echo "Adding bootnodes to startup params. Will retry if empty"
   while [[ ! -f $BOOTNODES_PATH ]]; do
+    echo "No bootnodes found"
     sleep 10
   done
-  echo "WOW $(cat $BOOTNODES_PATH) AND $(cat $BOOTNODES_PATH | head -n 1)"
+  echo "Found bootnode $(cat $BOOTNODES_PATH | head -n 1)"
   params="$params --bootnodes $(cat $BOOTNODES_PATH | head -n 1)"
 fi
 
