@@ -9,12 +9,12 @@ services:
     environment:
       IDENTITY: sun
       IS_BOOTNODE: "true"
-      INDEX: "1"
+    secrets:
+      - password_sun
+      - key_sun
     volumes:
       - sun:/tomochain/data
       - bootnodes:/tomochain/bootnodes
-      - genesis:/tomochain/genesis/:ro
-      - keystore:/tomochain/keystore/:ro
       - ./ressources/password:/tomochain/password:ro
 
   tomochain_moon:
@@ -23,13 +23,12 @@ services:
       context: ../tomochain
     environment:
       IDENTITY: moon
-      IS_BOOTNODE: "false"
-      INDEX: "2"
+    secrets:
+      - password_moon
+      - key_moon
     volumes:
       - moon:/tomochain/data
       - bootnodes:/tomochain/bootnodes:ro
-      - genesis:/tomochain/genesis/:ro
-      - keystore:/tomochain/keystore/:ro
       - ./ressources/password:/tomochain/password:ro
 
   tomochain_earth:
@@ -38,13 +37,12 @@ services:
       context: ../tomochain
     environment:
       IDENTITY: earth
-      IS_BOOTNODE: "false"
-      INDEX: "3"
+    secrets:
+      - password_earth
+      - key_earth
     volumes:
       - earth:/tomochain/data
       - bootnodes:/tomochain/bootnodes:ro
-      - genesis:/tomochain/genesis/:ro
-      - keystore:/tomochain/keystore/:ro
       - ./ressources/password:/tomochain/password:ro
 
 volumes:
@@ -52,7 +50,17 @@ volumes:
   sun:
   earth:
   bootnodes:
-  genesis:
-    external: true
-  keystore:
-    external: true
+
+secrets:
+  password_sun:
+    file: ./secrets/password_sun.secret
+  key_sun:
+    file: ./secrets/key_sun.secret
+  password_moon:
+    file: ./secrets/password_moon.secret
+  key_moon:
+    file: ./secrets/key_moon.secret
+  password_earth:
+    file: ./secrets/password_earth.secret
+  key_earth:
+    file: ./secrets/key_earth.secret
