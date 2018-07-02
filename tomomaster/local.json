@@ -17,7 +17,7 @@
       "prefix": "tomomaster"
   },
   "truffle": {
-    "mnemonic": "",
+    "mnemonic": ":mnemonic:",
     "minCandidateCap": "50000000000000000000000",
     "maxValidatorNumber": 99,
     "candidateWithdrawDelay": 100,

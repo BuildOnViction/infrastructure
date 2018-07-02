@@ -6,6 +6,8 @@ services:
     image: tomomaster
     build:
       context: ../tomomaster
+    secrets:
+      - mnemonic_tomomaster
     depends_on:
       - mongodb_master
 
@@ -19,3 +21,7 @@ services:
 
 volumes:
   mongodb_master:
+
+secrets:
+  mnemonic_tomomaster:
+    file: ./secrets/mnemonic_tomomaster.secret
