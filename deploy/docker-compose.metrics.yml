@@ -25,7 +25,7 @@ services:
     volumes:
       - grafana:/var/lib/grafana
     ports:
-      - "3771:3000"
+      - "3003:3000"
 
 volumes:
   influxdb:

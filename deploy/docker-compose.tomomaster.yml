@@ -6,6 +6,8 @@ services:
     image: tomomaster
     build:
       context: ../tomomaster
+    ports:
+      - "3001:3001"
     secrets:
       - mnemonic_tomomaster
     depends_on:

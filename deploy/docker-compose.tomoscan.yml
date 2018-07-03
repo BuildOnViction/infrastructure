@@ -6,6 +6,8 @@ services:
     image: tomoscan-client
     build:
       context: ../tomoscan-client
+    ports:
+      - "3002:3000"
     depends_on:
       - tomoscan-server
 

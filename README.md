@@ -37,10 +37,10 @@ To build the images, create the containers and start them, simply run `deploy.sh
 
 ## Access
 
-- Grafana: http://localhost:port
--
-- Tomomaster:
-- Tomoscan:
+- Netstats: http://localhost:3000
+- Tomomaster: http://localhost:3001
+- Tomoscan: http://localhost:3002
+- Grafana: http://localhost:3003
 
 ## Workflow
 
