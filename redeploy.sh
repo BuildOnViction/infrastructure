@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -x
 
 docker-compose \
   -f deploy/docker-compose.tomochain.yml \
