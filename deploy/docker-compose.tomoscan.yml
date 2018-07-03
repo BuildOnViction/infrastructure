@@ -22,8 +22,3 @@ services:
 
   mongodb_scan:
     image: mongo:3.6
-    volumes:
-      - "mongodb_scan:/data/db"
-
-volumes:
-  mongodb_scan:
