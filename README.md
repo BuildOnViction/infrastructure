@@ -57,7 +57,7 @@ repos
 ```
 
 - Edit some code in the tomochain repo
-- Build the base from tomochain repo `docker build -t tomochain/tomochain:latest .`
+- Build the base image from tomochain repo `docker build -t tomochain/tomochain:latest .`
 - In the infrastructure repo, run `./redeploy.sh`
 
 And voilà!
