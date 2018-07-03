@@ -46,11 +46,21 @@ To build the images, create the containers and start them, simply run `deploy.sh
 
 This is subject to change. The goal is to reduce manual steps.
 
-Exemple with the tomochain repo:
+Exemple when working on the tomochain repo.
 
-- Work in your project repo
-- Build the repo base image `docker build -t tomochain/tomochain:latest`
-- In the infrastructure folder, run `./redeploy.sh`
+Let's say you have the infrastructure and and tomochain repo cloned locally on your machine.
+```
+repos
+├── infrastructure
+├── tomochain
+└── ...
+```
+
+- Edit some code in the tomochain repo
+- Build the base from tomochain repo `docker build -t tomochain/tomochain:latest .`
+- In the infrastructure repo, run `./redeploy.sh`
+
+And voilà!
 
 ## Undeploy
 
