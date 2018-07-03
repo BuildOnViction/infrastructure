@@ -1,6 +1,6 @@
 [
   {
-    "name"              : "eni-api",
+    "name"              : "netstats",
     "script"            : "app.js",
     "log_date_format"   : "YYYY-MM-DD HH:mm Z",
     "merge_logs"        : false,
@@ -14,7 +14,7 @@
       "RPC_HOST"        : "tomochain_earth",
       "RPC_PORT"        : "8545",
       "LISTENING_PORT"  : "30303",
-      "WS_SERVER"       : "ws://netapi-server:3000",
+      "WS_SERVER"       : "ws://netstats-server:3000",
       "VERBOSITY"       : 2
     }
   }

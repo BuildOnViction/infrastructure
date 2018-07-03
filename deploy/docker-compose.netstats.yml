@@ -2,38 +2,38 @@ version: "3.4"
 
 services:
 
-  netapi-client_sun:
-    image: netapi-client_sun
+  netstats-client_sun:
+    image: netstats-client_sun
     build:
       context: ../ethereum-network-intelligence-api
     environment:
       WS_SECRET: test
       INSTANCE_NAME: sun
     volumes:
-      - ./ressources/app_sun.json:/netapi/app.json
+      - ./ressources/app_sun.json:/netstats/app.json
 
-  netapi-client_moon:
-    image: netapi-client_moon
+  netstats-client_moon:
+    image: netstats-client_moon
     build:
       context: ../ethereum-network-intelligence-api
     environment:
       WS_SECRET: test
       INSTANCE_NAME: moon
     volumes:
-      - ./ressources/app_moon.json:/netapi/app.json
+      - ./ressources/app_moon.json:/netstats/app.json
 
-  netapi-client_earth:
-    image: netapi-client_earth
+  netstats-client_earth:
+    image: netstats-client_earth
     build:
       context: ../ethereum-network-intelligence-api
     environment:
       WS_SECRET: test
       INSTANCE_NAME: earth
     volumes:
-      - ./ressources/app_earth.json:/netapi/app.json
+      - ./ressources/app_earth.json:/netstats/app.json
 
-  netapi-server:
-    image: netapi-server
+  netstats-server:
+    image: netstats-server
     build:
       context: ../eth-netstats
     environment:
