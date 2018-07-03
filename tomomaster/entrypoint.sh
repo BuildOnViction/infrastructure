@@ -6,7 +6,7 @@ sed -i -e "s/:mnemonic:/$(cat $MNEMONIC_PATH)/g" local.json
 echo $(cat $MNEMONIC_PATH)
 
 mv local.json config
-npm build
+npm run build
 mv TomoValidator.json build/contracts
 mv TomoRandomize.json build/contracts
 mv BlockSigner.json build/contracts
