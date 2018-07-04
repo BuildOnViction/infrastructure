@@ -15,7 +15,6 @@ services:
     volumes:
       - sun:/tomochain/data
       - bootnodes:/tomochain/bootnodes
-      - ./ressources/password:/tomochain/password:ro
 
   tomochain_moon:
     image: tomochain_moon
@@ -29,7 +28,6 @@ services:
     volumes:
       - moon:/tomochain/data
       - bootnodes:/tomochain/bootnodes:ro
-      - ./ressources/password:/tomochain/password:ro
 
   tomochain_earth:
     image: tomochain_earth
@@ -43,7 +41,15 @@ services:
     volumes:
       - earth:/tomochain/data
       - bootnodes:/tomochain/bootnodes:ro
-      - ./ressources/password:/tomochain/password:ro
+  # 
+  # tomochain_node:
+  #   image: tomochain_node
+  #   build:
+  #     context: ../tomochain
+  #   environment:
+  #     IS_MASTERNODE: "false"
+  #   volumes:
+  #     - bootnodes:/tomochain/bootnodes:ro
 
 volumes:
   moon:
