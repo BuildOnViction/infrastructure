@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker-compose \
+docker-compose -p tomochain \
   -f deploy/docker-compose.tomochain.yml \
   -f deploy/docker-compose.metrics.yml \
   -f deploy/docker-compose.netstats.yml \
