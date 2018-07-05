@@ -6,9 +6,8 @@ services:
     image: netstats-client_sun
     build:
       context: ../ethereum-network-intelligence-api
-    environment:
-      WS_SECRET: test
-      INSTANCE_NAME: sun
+    env_file:
+      - config/netstats/netstats-client_sun.env
     volumes:
       - ./ressources/app_sun.json:/netstats/app.json
 
@@ -16,9 +15,8 @@ services:
     image: netstats-client_moon
     build:
       context: ../ethereum-network-intelligence-api
-    environment:
-      WS_SECRET: test
-      INSTANCE_NAME: moon
+    env_file:
+      - config/netstats/netstats-client_moon.env
     volumes:
       - ./ressources/app_moon.json:/netstats/app.json
 
@@ -26,9 +24,8 @@ services:
     image: netstats-client_earth
     build:
       context: ../ethereum-network-intelligence-api
-    environment:
-      WS_SECRET: test
-      INSTANCE_NAME: earth
+    env_file:
+      - config/netstats/netstats-client_earth.env
     volumes:
       - ./ressources/app_earth.json:/netstats/app.json
 
@@ -36,7 +33,7 @@ services:
     image: netstats-server
     build:
       context: ../eth-netstats
-    environment:
-      WS_SECRET: test
+    env_file:
+      - config/netstats/netstats-server.env
     ports:
       - "3000:3000"

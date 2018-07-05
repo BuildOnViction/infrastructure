@@ -9,21 +9,30 @@ This repo holds the dockerized infrastructure meant to be used to test local dev
 ## Requirements
 
 - Docker
+- Docker-compose
 
 ## Initialize
 
-Before deploying, you need to fill in some passwords and private values who can't be versioned.
-You can run the `init.sh` multiple times, just keep in minds it will overwrite all the file on each runs.
+Firstly, clone the repository and checkout the localnet branch.
 
 ```
 git clone https://github.com/tomochain/infrastructure.git
 cd infrastructure
 git checkout localnet
+```
 
+Before deploying, we need to configure our environment.
+Edit the `COMPOSE_FILE` variable of the `.env` if you want to deploy only certain parts of the infrastructure.
+Run `./init.sh` to create the configuration folder.
+
+```
+vim .env       # optional
 ./init.sh
 ```
 
-Also, if you don't need the whole infrastructure, feel free to edit `deploy.sh`, `redeploy.sh`, `undeploy.sh` and `logs.sh` to remove the unwanted docker-compose files.
+⚠️ This command will reset the **whole** configuration folder on every run.
+
+Now edit the `# please fill` parts of the configuration (`deploy/config`)
 
 ## Deploy
 
@@ -33,6 +42,12 @@ To build the images, create the containers and start them, simply run `deploy.sh
 ./deploy.sh
 
 ./logs.sh       # if you want to follow the logs
+```
+
+You can also control individual parts of the infrastructure.
+
+```
+docker-compose -f deploy/tomochain.yml down
 ```
 
 ## Access
@@ -49,6 +64,7 @@ This is subject to change. The goal is to reduce manual steps.
 Exemple when working on the tomochain repo.
 
 Let's say you have the infrastructure and and tomochain repo cloned locally on your machine.
+
 ```
 repos
 ├── infrastructure
@@ -65,7 +81,9 @@ And voilà!
 ## Undeploy
 
 In case you want to reset your environment, run `undeploy.sh`
+
 ```
 ./undeploy
 ```
+
 It will prompt you for volumes pruning. It's handy for deleting all the persistent volumes created for localnet but be aware that it can also delete unrelated volumes

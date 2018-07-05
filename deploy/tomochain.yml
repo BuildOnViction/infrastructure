@@ -1,0 +1,39 @@
+version: "3.4"
+
+services:
+
+  tomochain_sun:
+    image: tomochain_sun
+    build:
+      context: ../tomochain
+    env_file:
+      - config/tomochain/tomochain_sun.env
+    volumes:
+      - sun:/tomochain/data
+      - bootnodes:/tomochain/bootnodes
+
+  tomochain_moon:
+    image: tomochain_moon
+    build:
+      context: ../tomochain
+    env_file:
+      - config/tomochain/tomochain_moon.env
+    volumes:
+      - moon:/tomochain/data
+      - bootnodes:/tomochain/bootnodes:ro
+
+  tomochain_earth:
+    image: tomochain_earth
+    build:
+      context: ../tomochain
+    env_file:
+      - config/tomochain/tomochain_earth.env
+    volumes:
+      - earth:/tomochain/data
+      - bootnodes:/tomochain/bootnodes:ro
+
+volumes:
+  moon:
+  sun:
+  earth:
+  bootnodes:

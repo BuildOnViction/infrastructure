@@ -22,20 +22,14 @@ services:
     image: grafana
     build:
       context: ../grafana
-    environment:
-      POSTGRES_PASSWORD: tomochain
-      GF_DATABASE_HOST: postgres_grafana
-      GF_DATABASE_TYPE: postgres
-      GF_DATABASE_NAME: grafana
-      GF_DATABASE_USER: postgres
-      GF_DATABASE_PASSWORD: tomochain
+    env_file:
+      - config/metrics/grafana.env
     ports:
       - "3003:3000"
   postgres_grafana:
     image: postgres:10.4-alpine
-    environment:
-      POSTGRES_DB: grafana
-      POSTGRES_PASSWORD: tomochain
+    env_file:
+      - config/metrics/postgres_grafana.env
     volumes:
       - postgres_grafana:/var/lib/postgresql/data
 

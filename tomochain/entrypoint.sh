@@ -3,14 +3,12 @@
 # vars from docker env
 # - IDENTITY (default to unnamed_node)
 # - IS_BOOTNODE (default to false)
+# - PASSWORD (default to empty)
+# - PRIVATE_KEY (default to empty)
 
 # constants
 DATA_DIR="data"
 KEYSTORE_DIR="keystore"
-PASSWORD_FILE="password_$IDENTITY"
-PASSWORD_PATH="/run/secrets/$PASSWORD_FILE"
-KEY_FILE="key_$IDENTITY"
-KEY_PATH="/run/secrets/$KEY_FILE"
 GENESIS_FILE="genesis.json"
 GENESIS_PATH="genesis/$GENESIS_FILE"
 BOOTNODES_FILE="bootnodes"
@@ -24,9 +22,18 @@ if [[ ! -d $DATA_DIR/tomo ]]; then
   tomo init $GENESIS_PATH --datadir $DATA_DIR 2> /dev/null
 fi
 
-# set tomo password param
-if [[ ! -f $PASSWORD_PATH ]]; then
-  echo "Password file is mendatory. Exiting..."
+# check if account private key is set
+if [[ -z $PRIVATE_KEY ]]; then
+  echo "Account private key is mendatory. Exiting..."
+else
+  echo $PRIVATE_KEY > ./private_key
+fi
+
+# check if account password is set
+if [[ -z $PASSWORD ]]; then
+  echo "Account password is mendatory. Exiting..."
+else
+  echo $PASSWORD > ./password
 fi
 
 # set tomo bootnode param (or dump enode in bootnode file if IS_BOOTNODE)
@@ -51,8 +58,8 @@ fi
 
 # if the keystore is empty, import
 if [[ "$(ls -A $KEYSTORE_DIR)" ]]; then
-  tomo  account import $KEY_PATH \
-    --password $PASSWORD_PATH \
+  tomo  account import ./private_key \
+    --password ./password \
     --datadir $DATA_DIR \
     --keystore $KEYSTORE_DIR
   account=$(
@@ -66,21 +73,21 @@ if [[ "$(ls -A $KEYSTORE_DIR)" ]]; then
 fi
 
 set -x
-tomo $params \
-     --datadir $DATA_DIR \
-     --keystore $KEYSTORE_DIR \
-     --identity $IDENTITY \
-     --password $PASSWORD_PATH \
-     --networkid 89 \
-     --rpc \
-     --rpccorsdomain "*" \
-     --rpcaddr 0.0.0.0 \
-     --rpcport 8545 \
-     --rpcvhosts "*" \
-     --ws \
-     --wsaddr 0.0.0.0 \
-     --wsport 8546 \
-     --wsorigins "*" \
-     --mine \
-     --gasprice "1" \
-     --targetgaslimit "420000000"
+exec tomo $params \
+  --datadir $DATA_DIR \
+  --keystore $KEYSTORE_DIR \
+  --identity $IDENTITY \
+  --password ./password \
+  --networkid 89 \
+  --rpc \
+  --rpccorsdomain "*" \
+  --rpcaddr 0.0.0.0 \
+  --rpcport 8545 \
+  --rpcvhosts "*" \
+  --ws \
+  --wsaddr 0.0.0.0 \
+  --wsport 8546 \
+  --wsorigins "*" \
+  --mine \
+  --gasprice "1" \
+  --targetgaslimit "420000000"
