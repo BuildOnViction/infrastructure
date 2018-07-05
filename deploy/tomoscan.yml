@@ -17,8 +17,8 @@ services:
       context: ../tomoscan-server
     ports:
       - "3333:3333"
-    environment:
-     - MONGODB_URI=mongodb://mongodb_scan:27017/explorer
+    env_file:
+      - config/tomoscan/tomoscan-server.env
     depends_on:
      - mongodb_scan
 

@@ -8,8 +8,8 @@ services:
       context: ../tomomaster
     ports:
       - "3001:3001"
-    secrets:
-      - mnemonic_tomomaster
+    env_file:
+      - config/tomomaster/tomomaster.env
     depends_on:
       - mongodb_master
 
@@ -18,7 +18,3 @@ services:
 
   redis_master:
     image: redis:4-alpine
-
-secrets:
-  mnemonic_tomomaster:
-    file: ./secrets/mnemonic_tomomaster.secret

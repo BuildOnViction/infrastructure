@@ -6,12 +6,8 @@ services:
     image: tomochain_sun
     build:
       context: ../tomochain
-    environment:
-      IDENTITY: sun
-      IS_BOOTNODE: "true"
-    secrets:
-      - password_sun
-      - key_sun
+    env_file:
+      - config/tomochain/tomochain_sun.env
     volumes:
       - sun:/tomochain/data
       - bootnodes:/tomochain/bootnodes
@@ -20,11 +16,8 @@ services:
     image: tomochain_moon
     build:
       context: ../tomochain
-    environment:
-      IDENTITY: moon
-    secrets:
-      - password_moon
-      - key_moon
+    env_file:
+      - config/tomochain/tomochain_moon.env
     volumes:
       - moon:/tomochain/data
       - bootnodes:/tomochain/bootnodes:ro
@@ -33,40 +26,14 @@ services:
     image: tomochain_earth
     build:
       context: ../tomochain
-    environment:
-      IDENTITY: earth
-    secrets:
-      - password_earth
-      - key_earth
+    env_file:
+      - config/tomochain/tomochain_earth.env
     volumes:
       - earth:/tomochain/data
       - bootnodes:/tomochain/bootnodes:ro
-  # 
-  # tomochain_node:
-  #   image: tomochain_node
-  #   build:
-  #     context: ../tomochain
-  #   environment:
-  #     IS_MASTERNODE: "false"
-  #   volumes:
-  #     - bootnodes:/tomochain/bootnodes:ro
 
 volumes:
   moon:
   sun:
   earth:
   bootnodes:
-
-secrets:
-  password_sun:
-    file: ./secrets/password_sun.secret
-  key_sun:
-    file: ./secrets/key_sun.secret
-  password_moon:
-    file: ./secrets/password_moon.secret
-  key_moon:
-    file: ./secrets/key_moon.secret
-  password_earth:
-    file: ./secrets/password_earth.secret
-  key_earth:
-    file: ./secrets/key_earth.secret
