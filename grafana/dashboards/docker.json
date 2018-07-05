@@ -81,7 +81,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "percentage": true,
+      "percentage": false,
       "pointradius": 1,
       "points": false,
       "renderer": "flot",
@@ -93,7 +93,7 @@
         }
       ],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": false,
       "targets": [
         {
@@ -620,7 +620,7 @@
         }
       ],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": false,
       "targets": [
         {
@@ -746,9 +746,9 @@
         "current": {},
         "datasource": "influxdb",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Hosts:",
-        "multi": true,
+        "multi": false,
         "name": "hosts",
         "options": [],
         "query": "SHOW TAG VALUES WITH KEY = \"engine_host\"",
@@ -784,8 +784,8 @@
     ]
   },
   "time": {
-    "from": "2018-07-05T03:53:24.193Z",
-    "to": "2018-07-05T04:08:24.193Z"
+    "from": "now-30m",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [

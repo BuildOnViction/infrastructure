@@ -8,3 +8,6 @@ ENV GF_PATH_PROVISIONING=/etc/grafana/provisioning \
 
 COPY ./provisioning /etc/grafana/provisioning
 COPY ./dashboards /var/lib/grafana/dashboards
+COPY ./entrypoint.sh ./
+
+ENTRYPOINT ["./entrypoint.sh"]
