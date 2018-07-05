@@ -47,7 +47,7 @@ To build the images, create the containers and start them, simply run `deploy.sh
 You can also control individual parts of the infrastructure.
 
 ```
-docker-compose -f deploy/tomochain.yml down
+docker-compose -f deploy/tomochain.yml down|up|logs
 ```
 
 ## Access
