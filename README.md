@@ -9,6 +9,7 @@ This repo holds the dockerized infrastructure meant to be used to test local dev
 ## Requirements
 
 - Docker
+- Docker-compose
 
 ## Initialize
 
