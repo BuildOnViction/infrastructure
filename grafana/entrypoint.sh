@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # sleep to wait for postgres init
-echo "Waiting 20s for postgres"
-sleep 20
+echo "Waiting 30s for postgres"
+sleep 30
 
 exec ./run.sh

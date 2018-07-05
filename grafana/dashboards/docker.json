@@ -307,68 +307,6 @@
               "value": "/^$containers$/"
             }
           ]
-        },
-        {
-          "alias": "[ [[tag_engine_host]] ] [[tag_container_name]]",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "engine_host"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "container_name"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "limit": "",
-          "measurement": "docker_container_mem",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "usage"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "engine_host",
-              "operator": "=~",
-              "value": "/^$hosts$/"
-            },
-            {
-              "condition": "AND",
-              "key": "container_name",
-              "operator": "=~",
-              "value": "/^$containers$/"
-            }
-          ]
         }
       ],
       "thresholds": [],
@@ -735,7 +673,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
