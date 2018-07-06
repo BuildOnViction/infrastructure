@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker-compose up -d --build
+docker-compose build --pull
+docker-compose up -d
