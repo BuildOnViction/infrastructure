@@ -12,7 +12,7 @@ services:
     image: telegraf
     build:
       context: ../telegraf
-    hostname: localnet.tomochain.com
+    hostname: devnet.tomochain.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/rootfs/sys:ro

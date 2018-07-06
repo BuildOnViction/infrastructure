@@ -1,8 +1,8 @@
-# infrastructure: localnet
+# infrastructure: devnet
 
 🏗️ Work in progress 🚧
 
-This is the localnet branch of the Tomochain infrastructure.
+This is the devnet branch of the Tomochain infrastructure.
 
 This repo holds the dockerized infrastructure meant to be used to test local development.
 
@@ -13,12 +13,12 @@ This repo holds the dockerized infrastructure meant to be used to test local dev
 
 ## Initialize
 
-Firstly, clone the repository and checkout the localnet branch.
+Firstly, clone the repository and checkout the devnet branch.
 
 ```
 git clone https://github.com/tomochain/infrastructure.git
 cd infrastructure
-git checkout localnet
+git checkout devnet
 ```
 
 Before deploying, we need to configure our environment.
@@ -86,4 +86,4 @@ In case you want to reset your environment, run `undeploy.sh`
 ./undeploy
 ```
 
-It will prompt you for volumes pruning. It's handy for deleting all the persistent volumes created for localnet but be aware that it can also delete unrelated volumes
+It will prompt you for volumes pruning. It's handy for deleting all the persistent volumes created for devnet but be aware that it can also delete unrelated volumes
