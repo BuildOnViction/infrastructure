@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker-compose down
+docker stack rm devnet
 docker volume prune
