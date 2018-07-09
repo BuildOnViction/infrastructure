@@ -23,23 +23,25 @@ if [[ ! -d $DATA_DIR/tomo ]]; then
 fi
 
 # check if account private key is set
-if [[ -z $PRIVATE_KEY ]] || [[ -z $PRIVATE_KEY_FILE ]]; then
+if [[ -z $PRIVATE_KEY ]] && [[ -z $PRIVATE_KEY_FILE ]]; then
   echo "Account private key is mendatory. Exiting..."
+  exit 1
 else
   if [[ -z $PRIVATE_KEY ]]; then
-    $PRIVATE_KEY=$(cat $PRIVATE_KEY_FILE)
+    PRIVATE_KEY=$(cat $PRIVATE_KEY_FILE)
   fi
-  echo $PRIVATE_KEY > ./private_key
+  echo "$PRIVATE_KEY" > ./private_key
 fi
 
 # check if account password is set
-if [[ -z $PASSWORD ]] || [[ -z $PASSWORD_FILE ]]; then
+if [[ -z $PASSWORD ]] && [[ -z $PASSWORD_FILE ]]; then
   echo "Account password is mendatory. Exiting..."
+  exit 1
 else
   if [[ -z $PASSWORD ]]; then
-    $PASSWORD=$(cat $PASSWORD_FILE)
+    PASSWORD=$(cat $PASSWORD_FILE)
   fi
-  echo $PASSWORD > ./password
+  echo "$PASSWORD" > ./password
 fi
 
 # set tomo bootnode param (or dump enode in bootnode file if IS_BOOTNODE)
