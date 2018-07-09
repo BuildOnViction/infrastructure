@@ -4,28 +4,44 @@ services:
 
   netstats-client_sun:
     image: tomochain/infra-netstats-client:devnet
-    env_file:
-      - config/netstats/netstats-client_sun.env
-    volumes:
-      - ./ressources/app_sun.json:/netstats/app.json
+    environment:
+      INSTANCE_NAME: sun
+      RPC_HOST: 'tomochain_sun'
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - netstats_ws_secret
 
   netstats-client_moon:
     image: tomochain/infra-netstats-client:devnet
-    env_file:
-      - config/netstats/netstats-client_moon.env
-    volumes:
-      - ./ressources/app_moon.json:/netstats/app.json
+    environment:
+      INSTANCE_NAME: moon
+      RPC_HOST: 'tomochain_moon'
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - netstats_ws_secret
 
   netstats-client_earth:
     image: tomochain/infra-netstats-client:devnet
-    env_file:
-      - config/netstats/netstats-client_earth.env
-    volumes:
-      - ./ressources/app_earth.json:/netstats/app.json
+    environment:
+      INSTANCE_NAME: earth
+      RPC_HOST: 'tomochain_earth'
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - netstats_ws_secret
 
   netstats-server:
     image: tomochain/infra-netstats-server:devnet
-    env_file:
-      - config/netstats/netstats-server.env
+    environment:
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - netstats_ws_secret
     ports:
       - "3000:3000"
+
+secrets:
+  netstats_ws_secret:
+    external: true
+  metrics_gf_database_password:
+    external: true
+  metrics_gf_security_admin_password:
+    external: true
