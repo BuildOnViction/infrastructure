@@ -3,36 +3,28 @@ version: "3.4"
 services:
 
   netstats-client_sun:
-    image: netstats-client_sun
-    build:
-      context: ../ethereum-network-intelligence-api
+    image: tomochain/infra-netstats-client:devnet
     env_file:
       - config/netstats/netstats-client_sun.env
     volumes:
       - ./ressources/app_sun.json:/netstats/app.json
 
   netstats-client_moon:
-    image: netstats-client_moon
-    build:
-      context: ../ethereum-network-intelligence-api
+    image: tomochain/infra-netstats-client:devnet
     env_file:
       - config/netstats/netstats-client_moon.env
     volumes:
       - ./ressources/app_moon.json:/netstats/app.json
 
   netstats-client_earth:
-    image: netstats-client_earth
-    build:
-      context: ../ethereum-network-intelligence-api
+    image: tomochain/infra-netstats-client:devnet
     env_file:
       - config/netstats/netstats-client_earth.env
     volumes:
       - ./ressources/app_earth.json:/netstats/app.json
 
   netstats-server:
-    image: netstats-server
-    build:
-      context: ../eth-netstats
+    image: tomochain/infra-netstats-server:devnet
     env_file:
       - config/netstats/netstats-server.env
     ports:

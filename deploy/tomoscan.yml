@@ -3,18 +3,14 @@ version: "3.4"
 services:
 
   tomoscan-client:
-    image: tomoscan-client
-    build:
-      context: ../tomoscan-client
+    image: tomochain/infra-tomoscan-client:devnet
     ports:
       - "3002:3000"
     depends_on:
       - tomoscan-server
 
   tomoscan-server:
-    image: tomoscan-server
-    build:
-      context: ../tomoscan-server
+    image: tomochain/infra-tomoscan-server:devnet
     ports:
       - "3333:3333"
     env_file:

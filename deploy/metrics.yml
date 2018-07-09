@@ -3,9 +3,7 @@ version: "3.4"
 services:
 
   influxdb:
-    image: influxdb
-    build:
-      context: ../influxdb
+    image: tomochain/infra-influxdb:devnet
     volumes:
       - influxdb:/var/lib/influxdb
   telegraf:
@@ -19,9 +17,7 @@ services:
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
   grafana:
-    image: grafana
-    build:
-      context: ../grafana
+    image: tomochain/infra-grafana:devnet
     env_file:
       - config/metrics/grafana.env
     ports:
