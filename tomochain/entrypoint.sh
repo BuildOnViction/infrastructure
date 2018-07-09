@@ -23,16 +23,22 @@ if [[ ! -d $DATA_DIR/tomo ]]; then
 fi
 
 # check if account private key is set
-if [[ -z $PRIVATE_KEY ]]; then
+if [[ -z $PRIVATE_KEY ]] || [[ -z $PRIVATE_KEY_FILE ]]; then
   echo "Account private key is mendatory. Exiting..."
 else
+  if [[ -z $PRIVATE_KEY ]]; then
+    $PRIVATE_KEY=$(cat $PRIVATE_KEY_FILE)
+  fi
   echo $PRIVATE_KEY > ./private_key
 fi
 
 # check if account password is set
-if [[ -z $PASSWORD ]]; then
+if [[ -z $PASSWORD ]] || [[ -z $PASSWORD_FILE ]]; then
   echo "Account password is mendatory. Exiting..."
 else
+  if [[ -z $PASSWORD ]]; then
+    $PASSWORD=$(cat $PASSWORD_FILE)
+  fi
   echo $PASSWORD > ./password
 fi
 
