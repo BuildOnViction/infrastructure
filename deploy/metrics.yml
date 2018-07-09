@@ -16,16 +16,37 @@ services:
       - /etc:/rootfs/etc:ro
   grafana:
     image: tomochain/infra-grafana:devnet
-    env_file:
-      - config/metrics/grafana.env
+    environment:
+      - GF_PATH_PROVISIONING: /etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED: true
+      - GF_DATABASE_HOST: postgres_grafana
+      - GF_DATABASE_TYPE: postgres
+      - GF_DATABASE_NAME: grafana
+      - GF_DATABASE_USER: postgres
+      - GF_DATABASE_PASSWORD__FILE: /run/secrets/metrics_gf_database_password
+      - GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/metrics_gf_security_admin_password
+    secrets:
+      - metrics_gf_database_password
+      - metrics_gf_security_admin_password
     ports:
       - "3003:3000"
   postgres_grafana:
     image: postgres:10.4-alpine
-    env_file:
-      - config/metrics/postgres_grafana.env
+    environment:
+      - POSTGRES_DB: grafana
+      - POSTGRES_PASSWORD_FILE: /run/secrets/metrics_postgres_password
+    secrets:
+      - metrics_postgres_password
     volumes:
       - postgres_grafana:/var/lib/postgresql/data
+
+secrets:
+  metrics_postgres_password:
+    external: true
+  metrics_gf_database_password:
+    external: true
+  metrics_gf_security_admin_password:
+    external: true
 
 volumes:
   influxdb:
