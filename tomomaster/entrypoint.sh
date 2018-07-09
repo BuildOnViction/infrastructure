@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ -z $MNEMONIC_FILE ]]; then
+if [[ ! -z $MNEMONIC_FILE ]]; then
   export MNEMONIC=$(cat $MNEMONIC_FILE)
 fi
 
