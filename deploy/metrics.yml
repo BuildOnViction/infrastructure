@@ -18,7 +18,7 @@ services:
     image: tomochain/infra-grafana:devnet
     environment:
       GF_PATH_PROVISIONING: /etc/grafana/provisioning
-      GF_AUTH_ANONYMOUS_ENABLED: true
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
       GF_DATABASE_HOST: postgres_grafana
       GF_DATABASE_TYPE: postgres
       GF_DATABASE_NAME: grafana
