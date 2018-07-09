@@ -20,7 +20,7 @@ services:
     image: tomochain/infra-tomochain:devnet
     environment:
       IDENTITY: moon
-      IS_BOOTNODE: "true"
+      IS_BOOTNODE: "false"
       PASSWORD_FILE: /run/secrets/tomochain_password_moon
       PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_moon
     secrets:
@@ -34,7 +34,7 @@ services:
     image: tomochain/infra-tomochain:devnet
     environment:
       IDENTITY: earth
-      IS_BOOTNODE: "true"
+      IS_BOOTNODE: "false"
       PASSWORD_FILE: /run/secrets/tomochain_password_earth
       PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_earth
     secrets:
