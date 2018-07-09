@@ -41,7 +41,3 @@ services:
 secrets:
   netstats_ws_secret:
     external: true
-  metrics_gf_database_password:
-    external: true
-  metrics_gf_security_admin_password:
-    external: true
