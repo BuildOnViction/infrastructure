@@ -6,8 +6,10 @@ services:
     image: tomochain/infra-tomomaster:devnet
     ports:
       - "3001:3001"
-    env_file:
-      - config/tomomaster/tomomaster.env
+    environment:
+      MNEMONIC_FILE: /run/secrets/tomomaster_mnemonic
+    secrets:
+      - tomomaster_mnemonic
     depends_on:
       - mongodb_master
 
@@ -16,3 +18,7 @@ services:
 
   redis_master:
     image: redis:4-alpine
+
+secrets:
+  tomomaster_mnemonic:
+    external: true

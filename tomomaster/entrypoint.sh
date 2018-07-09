@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [[ -z $MNEMONIC_FILE ]]; then
+  export MNEMONIC=$(cat $MNEMONIC_FILE)
+fi
+
 mv local.json config
 
 truffle migrate --compile-all --reset development
