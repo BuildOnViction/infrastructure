@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose up -d --build
+docker stack deploy -c <(docker-compose config) devnet

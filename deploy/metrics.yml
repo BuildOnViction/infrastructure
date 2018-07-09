@@ -7,9 +7,7 @@ services:
     volumes:
       - influxdb:/var/lib/influxdb
   telegraf:
-    image: telegraf
-    build:
-      context: ../telegraf
+    image: tomochain/infra-telegraf:devnet
     hostname: devnet.tomochain.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
