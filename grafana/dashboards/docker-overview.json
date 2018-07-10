@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.1.3"
+      "version": "5.2.1"
     },
     {
       "type": "panel",
@@ -42,11 +42,12 @@
       }
     ]
   },
+  "description": "Overview of the docker swarm state",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1530763222409,
+  "iteration": 1531213562771,
   "links": [],
   "panels": [
     {
@@ -55,11 +56,11 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "influxdb",
-      "description": "CPU usage per container",
+      "description": "CPU usage.\n\nPercentage is per core. \n\nExample: A 4 cores CPU, can go up to 400%.",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 24,
+        "h": 9,
+        "w": 12,
         "x": 0,
         "y": 0
       },
@@ -67,13 +68,13 @@
       "legend": {
         "alignAsTable": true,
         "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
+        "current": false,
+        "max": false,
+        "min": false,
         "rightSide": true,
         "show": true,
-        "sort": "current",
-        "sortDesc": true,
+        "sort": null,
+        "sortDesc": null,
         "total": false,
         "values": true
       },
@@ -82,22 +83,16 @@
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
-      "pointradius": 1,
+      "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "repeat": null,
-      "repeatDirection": "h",
-      "seriesOverrides": [
-        {
-          "alias": ""
-        }
-      ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": true,
       "steppedLine": false,
       "targets": [
         {
-          "alias": "[ [[tag_engine_host]] ] [[tag_container_name]]",
+          "alias": "[[tag_com.docker.swarm.service.name]]",
           "groupBy": [
             {
               "params": [
@@ -107,26 +102,20 @@
             },
             {
               "params": [
-                "engine_host"
+                "com.docker.swarm.service.name"
               ],
               "type": "tag"
             },
             {
               "params": [
-                "container_name"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "none"
+                "null"
               ],
               "type": "fill"
             }
           ],
           "measurement": "docker_container_cpu",
           "orderByTime": "ASC",
-          "policy": "autogen",
+          "policy": "default",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -148,12 +137,6 @@
               "key": "engine_host",
               "operator": "=~",
               "value": "/^$hosts$/"
-            },
-            {
-              "condition": "AND",
-              "key": "container_name",
-              "operator": "=~",
-              "value": "/^$containers$/"
             }
           ]
         }
@@ -167,7 +150,7 @@
         "sort": 2,
         "value_type": "individual"
       },
-      "transparent": false,
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -180,158 +163,7 @@
         {
           "decimals": null,
           "format": "percent",
-          "label": "CPU usage",
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "influxdb",
-      "description": "Memory usage per container",
-      "fill": 1,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 7
-      },
-      "id": 3,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sort": "current",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 1,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "seriesOverrides": [
-        {
-          "alias": ""
-        }
-      ],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "[ [[tag_engine_host]] ] [[tag_container_name]]",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "engine_host"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "container_name"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "limit": "",
-          "measurement": "docker_container_mem",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "usage"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "engine_host",
-              "operator": "=~",
-              "value": "/^$hosts$/"
-            },
-            {
-              "condition": "AND",
-              "key": "container_name",
-              "operator": "=~",
-              "value": "/^$containers$/"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Memory",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "transparent": false,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "decbytes",
-          "label": "Memory usage",
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -348,7 +180,7 @@
       ],
       "yaxis": {
         "align": false,
-        "alignLevel": null
+        "alignLevel": 10
       }
     },
     {
@@ -357,24 +189,25 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "influxdb",
-      "description": "Downstream network usage per container",
+      "description": "RAM usage.",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 14
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
       },
-      "id": 4,
+      "id": 3,
       "legend": {
         "alignAsTable": true,
         "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
+        "current": false,
+        "max": false,
+        "min": false,
         "rightSide": true,
         "show": true,
-        "sortDesc": true,
+        "sort": null,
+        "sortDesc": null,
         "total": false,
         "values": true
       },
@@ -383,55 +216,172 @@
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
-      "pointradius": 1,
+      "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "repeatDirection": "h",
-      "seriesOverrides": [
-        {
-          "alias": ""
-        },
-        {
-          "alias": "[ etienne-pc ][ downstream ] deploy_redis_master_1",
-          "yaxis": 2
-        }
-      ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": true,
       "steppedLine": false,
       "targets": [
         {
-          "alias": "[ [[tag_engine_host]] ] [[tag_container_name]]",
+          "alias": "[[tag_com.docker.swarm.service.name]]",
           "groupBy": [
             {
               "params": [
-                "1s"
+                "$__interval"
               ],
               "type": "time"
             },
             {
               "params": [
-                "engine_host"
+                "com.docker.swarm.service.name"
               ],
               "type": "tag"
             },
             {
               "params": [
-                "container_name"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "none"
+                "null"
               ],
               "type": "fill"
             }
           ],
-          "limit": "",
+          "measurement": "docker_container_mem",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "usage_percent"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "engine_host",
+              "operator": "=~",
+              "value": "/^$hosts$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "RAM",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": "",
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": 10
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "influxdb",
+      "description": "Network uplink usage.",
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": null,
+        "sortDesc": null,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "[[tag_com.docker.swarm.service.name]]",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "com.docker.swarm.service.name"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "measurement": "docker_container_net",
           "orderByTime": "ASC",
-          "policy": "autogen",
+          "policy": "default",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -448,7 +398,7 @@
               },
               {
                 "params": [
-                  "1s"
+                  "10s"
                 ],
                 "type": "non_negative_derivative"
               }
@@ -459,12 +409,6 @@
               "key": "engine_host",
               "operator": "=~",
               "value": "/^$hosts$/"
-            },
-            {
-              "condition": "AND",
-              "key": "container_name",
-              "operator": "=~",
-              "value": "/^$containers$/"
             }
           ]
         }
@@ -472,13 +416,13 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Network - Downstream",
+      "title": "Network uplink",
       "tooltip": {
         "shared": true,
         "sort": 2,
         "value_type": "individual"
       },
-      "transparent": false,
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -491,24 +435,24 @@
         {
           "decimals": null,
           "format": "Bps",
-          "label": "Downstream",
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": null,
           "show": true
         },
         {
-          "format": "Bps",
-          "label": "Upstream",
+          "format": "short",
+          "label": null,
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": false
+          "show": true
         }
       ],
       "yaxis": {
         "align": false,
-        "alignLevel": null
+        "alignLevel": 10
       }
     },
     {
@@ -517,25 +461,25 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "influxdb",
-      "description": "Upstream network usage per container",
+      "description": "Network downlink usage.",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 21
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 9
       },
       "id": 5,
       "legend": {
         "alignAsTable": true,
         "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
+        "current": false,
+        "max": false,
+        "min": false,
         "rightSide": true,
         "show": true,
-        "sort": "current",
-        "sortDesc": true,
+        "sort": null,
+        "sortDesc": null,
         "total": false,
         "values": true
       },
@@ -544,55 +488,39 @@
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
-      "pointradius": 1,
+      "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "repeatDirection": "h",
-      "seriesOverrides": [
-        {
-          "alias": ""
-        },
-        {
-          "alias": "[ etienne-pc ][ downstream ] deploy_redis_master_1",
-          "yaxis": 2
-        }
-      ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": true,
       "steppedLine": false,
       "targets": [
         {
-          "alias": "[ [[tag_engine_host]] ] [[tag_container_name]]",
+          "alias": "[[tag_com.docker.swarm.service.name]]",
           "groupBy": [
             {
               "params": [
-                "1s"
+                "$__interval"
               ],
               "type": "time"
             },
             {
               "params": [
-                "engine_host"
+                "com.docker.swarm.service.name"
               ],
               "type": "tag"
             },
             {
               "params": [
-                "container_name"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "none"
+                "null"
               ],
               "type": "fill"
             }
           ],
-          "limit": "",
           "measurement": "docker_container_net",
           "orderByTime": "ASC",
-          "policy": "autogen",
+          "policy": "default",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -609,7 +537,7 @@
               },
               {
                 "params": [
-                  "1s"
+                  "10s"
                 ],
                 "type": "non_negative_derivative"
               }
@@ -620,12 +548,6 @@
               "key": "engine_host",
               "operator": "=~",
               "value": "/^$hosts$/"
-            },
-            {
-              "condition": "AND",
-              "key": "container_name",
-              "operator": "=~",
-              "value": "/^$containers$/"
             }
           ]
         }
@@ -633,13 +555,13 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Network - Upstream",
+      "title": "Network downlink",
       "tooltip": {
         "shared": true,
         "sort": 2,
         "value_type": "individual"
       },
-      "transparent": false,
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -652,24 +574,24 @@
         {
           "decimals": null,
           "format": "Bps",
-          "label": "Upstream",
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": null,
           "show": true
         },
         {
-          "format": "Bps",
-          "label": "Upstream",
+          "format": "short",
+          "label": null,
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": false
+          "show": true
         }
       ],
       "yaxis": {
         "align": false,
-        "alignLevel": null
+        "alignLevel": 10
       }
     }
   ],
@@ -680,7 +602,7 @@
   "templating": {
     "list": [
       {
-        "allValue": "",
+        "allValue": null,
         "current": {},
         "datasource": "influxdb",
         "hide": 0,
@@ -691,27 +613,7 @@
         "options": [],
         "query": "SHOW TAG VALUES WITH KEY = \"engine_host\"",
         "refresh": 1,
-        "regex": "[^\\*]*",
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": "",
-        "current": {},
-        "datasource": "influxdb",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Containers:",
-        "multi": true,
-        "name": "containers",
-        "options": [],
-        "query": "SHOW TAG VALUES WITH KEY = \"container_name\"",
-        "refresh": 1,
-        "regex": "[^\\*]*",
+        "regex": "",
         "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
@@ -722,7 +624,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -751,7 +653,7 @@
     ]
   },
   "timezone": "",
-  "title": "Docker",
-  "uid": "jZUFQ3Smz",
-  "version": 1
+  "title": "Docker overview",
+  "uid": "stynTMdmk",
+  "version": 3
 }
