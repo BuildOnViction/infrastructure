@@ -4,6 +4,7 @@ services:
 
   tomochain_sun:
     image: tomochain_sun
+    tty: true
     build:
       context: ../tomochain
     env_file:
@@ -14,6 +15,7 @@ services:
 
   tomochain_moon:
     image: tomochain_moon
+    tty: true
     build:
       context: ../tomochain
     env_file:
@@ -24,6 +26,7 @@ services:
 
   tomochain_earth:
     image: tomochain_earth
+    tty: true
     build:
       context: ../tomochain
     env_file:
