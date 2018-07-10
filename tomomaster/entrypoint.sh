@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 mv local.json config
 
 truffle migrate --compile-all --reset development

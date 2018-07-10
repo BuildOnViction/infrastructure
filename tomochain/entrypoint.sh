@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -x
 # vars from docker env
 # - IDENTITY (default to unnamed_node)
 # - IS_BOOTNODE (default to false)
