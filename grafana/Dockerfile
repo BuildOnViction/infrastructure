@@ -1,4 +1,4 @@
-FROM grafana/grafana:5.1.3
+FROM grafana/grafana:5.2.1
 
 LABEL maintainer="etienne@tomochain.com"
 
