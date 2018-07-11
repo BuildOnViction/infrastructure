@@ -4,6 +4,9 @@ services:
 
   proxy:
     image: tomochain/infra-gobetween:test
+    ports:
+      - 80:80
+      - 443:443
     secrets:
       - proxy_cert_pem
       - proxy_cert_private_key
