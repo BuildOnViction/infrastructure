@@ -15,7 +15,7 @@ protocol = "tls"
   key_path = "/run/secrets/proxy_cert_private_key"
 
 [servers.stats]
-bind = "stats.devnet.tomochain.com"
+bind = "0.0.0.0:443"
 
   [servers.stats.discovery]
   kind = "static"
@@ -24,7 +24,7 @@ bind = "stats.devnet.tomochain.com"
   ]
 
 [servers.tomomaster]
-bind = "master.devnet.tomochain.com"
+bind = "0.0.0.0:443"
 
   [servers.tomomaster.discovery]
     kind = "static"
@@ -33,7 +33,7 @@ bind = "master.devnet.tomochain.com"
     ]
 
 [servers.tomoscan]
-bind = "scan.devnet.tomochain.com"
+bind = "0.0.0.0:443"
 
   [servers.tomoscan.discovery]
     kind = "static"
@@ -42,7 +42,7 @@ bind = "scan.devnet.tomochain.com"
     ]
 
 [servers.grafana]
-bind = "grafana.devnet.tomochain.com"
+bind = "0.0.0.0:443"
 
   [servers.grafana.discovery]
     kind = "static"
