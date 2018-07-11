@@ -47,15 +47,11 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1531284978289,
+  "iteration": 1531286902627,
   "links": [],
   "panels": [
     {
-      "aliasColors": {
-        "Running": "#7eb26d",
-        "Stopped": "#bf1b00",
-        "Total": "#65c5db"
-      },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -69,19 +65,18 @@
         "x": 0,
         "y": 0
       },
-      "id": 7,
+      "id": 6,
       "legend": {
         "alignAsTable": true,
         "avg": false,
         "current": true,
         "hideEmpty": false,
-        "hideZero": false,
         "max": false,
         "min": false,
         "rightSide": true,
         "show": true,
-        "sort": "current",
-        "sortDesc": true,
+        "sort": null,
+        "sortDesc": null,
         "total": false,
         "values": true
       },
@@ -93,42 +88,13 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Total containers",
-          "color": "#65c5db",
-          "dashes": true,
-          "fill": 0,
-          "linewidth": 3
-        },
-        {
-          "alias": "Running containers",
-          "color": "#508642",
-          "fill": 4,
-          "linewidth": 0,
-          "stack": "A"
-        },
-        {
-          "alias": "Stopped containers",
-          "color": "#bf1b00",
-          "fill": 3,
-          "linewidth": 0,
-          "stack": "A"
-        },
-        {
-          "alias": "Paused containers",
-          "color": "#e5ac0e",
-          "fill": 3,
-          "linewidth": 0,
-          "stack": "A"
-        }
-      ],
+      "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": false,
       "targets": [
         {
-          "alias": "Total containers",
+          "alias": "[[tag_container_name]] ([[tag_container_image]]:[[tag_container_version]])",
           "groupBy": [
             {
               "params": [
@@ -138,29 +104,45 @@
             },
             {
               "params": [
+                "container_name"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "container_image"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "container_version"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
                 "linear"
               ],
               "type": "fill"
             }
           ],
-          "measurement": "docker",
+          "measurement": "docker_container_cpu",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"n_containers\") FROM \"docker\" WHERE (\"engine_host\" =~ /^$hosts$/) AND $timeFilter GROUP BY time($__interval) fill(linear)",
-          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "n_containers"
+                  "usage_system"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "count"
               }
             ]
           ],
@@ -169,135 +151,12 @@
               "key": "engine_host",
               "operator": "=~",
               "value": "/^$hosts$/"
-            }
-          ]
-        },
-        {
-          "alias": "Stopped containers",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
             },
             {
-              "params": [
-                "linear"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "docker",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "n_containers_stopped"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "engine_host",
+              "condition": "AND",
+              "key": "com.docker.swarm.service.name",
               "operator": "=~",
-              "value": "/^$hosts$/"
-            }
-          ]
-        },
-        {
-          "alias": "Running containers",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "linear"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "docker",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "n_containers_running"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "engine_host",
-              "operator": "=~",
-              "value": "/^$hosts$/"
-            }
-          ]
-        },
-        {
-          "alias": "Paused containers",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "linear"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "docker",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "n_containers_paused"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "engine_host",
-              "operator": "=~",
-              "value": "/^$hosts$/"
+              "value": "/^$services$/"
             }
           ]
         }
@@ -305,7 +164,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Docker process status",
+      "title": "Service containers",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -360,17 +219,17 @@
       },
       "id": 2,
       "legend": {
-        "alignAsTable": true,
-        "avg": true,
+        "alignAsTable": false,
+        "avg": false,
         "current": false,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": null,
         "sortDesc": null,
         "total": false,
-        "values": true
+        "values": false
       },
       "lines": true,
       "linewidth": 1,
@@ -382,11 +241,11 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "alias": "[[tag_com.docker.swarm.service.name]]",
+          "alias": "[[tag_container_name]]",
           "groupBy": [
             {
               "params": [
@@ -396,7 +255,7 @@
             },
             {
               "params": [
-                "com.docker.swarm.service.name"
+                "container_name"
               ],
               "type": "tag"
             },
@@ -431,6 +290,12 @@
               "key": "engine_host",
               "operator": "=~",
               "value": "/^$hosts$/"
+            },
+            {
+              "condition": "AND",
+              "key": "com.docker.swarm.service.name",
+              "operator": "=~",
+              "value": "/^$services$/"
             }
           ]
         }
@@ -493,17 +358,17 @@
       },
       "id": 3,
       "legend": {
-        "alignAsTable": true,
-        "avg": true,
+        "alignAsTable": false,
+        "avg": false,
         "current": false,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": null,
         "sortDesc": null,
         "total": false,
-        "values": true
+        "values": false
       },
       "lines": true,
       "linewidth": 1,
@@ -515,11 +380,11 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "alias": "[[tag_com.docker.swarm.service.name]]",
+          "alias": "[[tag_container_name]]",
           "groupBy": [
             {
               "params": [
@@ -529,7 +394,7 @@
             },
             {
               "params": [
-                "com.docker.swarm.service.name"
+                "container_name"
               ],
               "type": "tag"
             },
@@ -564,6 +429,12 @@
               "key": "engine_host",
               "operator": "=~",
               "value": "/^$hosts$/"
+            },
+            {
+              "condition": "AND",
+              "key": "com.docker.swarm.service.name",
+              "operator": "=~",
+              "value": "/^$services$/"
             }
           ]
         }
@@ -616,7 +487,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "influxdb",
-      "description": "Network downlink usage.",
+      "description": "Network uplink usage.",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -624,19 +495,19 @@
         "x": 0,
         "y": 12
       },
-      "id": 10,
+      "id": 4,
       "legend": {
-        "alignAsTable": true,
-        "avg": true,
+        "alignAsTable": false,
+        "avg": false,
         "current": false,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": null,
         "sortDesc": null,
         "total": false,
-        "values": true
+        "values": false
       },
       "lines": true,
       "linewidth": 1,
@@ -648,11 +519,11 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "alias": "[[tag_com.docker.swarm.service.name]]",
+          "alias": "[[tag_container_name]]",
           "groupBy": [
             {
               "params": [
@@ -662,146 +533,7 @@
             },
             {
               "params": [
-                "com.docker.swarm.service.name"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "docker_container_net",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "rx_bytes"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "10s"
-                ],
-                "type": "non_negative_derivative"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "engine_host",
-              "operator": "=~",
-              "value": "/^$hosts$/"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Network downlink",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "transparent": false,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "Bps",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": 10
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "influxdb",
-      "description": "Network uplink usage.",
-      "fill": 1,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 12
-      },
-      "id": 9,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": null,
-        "sortDesc": null,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "[[tag_com.docker.swarm.service.name]]",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "com.docker.swarm.service.name"
+                "container_name"
               ],
               "type": "tag"
             },
@@ -842,6 +574,12 @@
               "key": "engine_host",
               "operator": "=~",
               "value": "/^$hosts$/"
+            },
+            {
+              "condition": "AND",
+              "key": "com.docker.swarm.service.name",
+              "operator": "=~",
+              "value": "/^$services$/"
             }
           ]
         }
@@ -887,9 +625,154 @@
         "align": false,
         "alignLevel": 10
       }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "influxdb",
+      "description": "Network downlink usage.",
+      "fill": 1,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "id": 5,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "sort": null,
+        "sortDesc": null,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "[[tag_container_name]]",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "container_name"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "docker_container_net",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rx_bytes"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "10s"
+                ],
+                "type": "non_negative_derivative"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "engine_host",
+              "operator": "=~",
+              "value": "/^$hosts$/"
+            },
+            {
+              "condition": "AND",
+              "key": "com.docker.swarm.service.name",
+              "operator": "=~",
+              "value": "/^$services$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Network downlink",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "transparent": false,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "Bps",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": 10
+      }
     }
   ],
-  "refresh": "10s",
+  "refresh": false,
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -906,6 +789,26 @@
         "name": "hosts",
         "options": [],
         "query": "SHOW TAG VALUES WITH KEY = \"engine_host\"",
+        "refresh": 1,
+        "regex": "",
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "influxdb",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Services:",
+        "multi": false,
+        "name": "services",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"com.docker.swarm.service.name\"",
         "refresh": 1,
         "regex": "",
         "sort": 1,
@@ -947,7 +850,7 @@
     ]
   },
   "timezone": "",
-  "title": "Docker overview",
-  "uid": "stynTMdmk",
-  "version": 1
+  "title": "Docker services",
+  "uid": "k3tTJVdik",
+  "version": 3
 }
