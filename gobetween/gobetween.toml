@@ -1,3 +1,12 @@
+[logging]
+level = "info"   # "debug" | "info" | "warn" | "error"
+output = "stdout" # "stdout" | "stderr" | "/path/to/gobetween.log"
+
+[api]
+enabled = false
+
+[servers]
+
 [servers.default]
 protocol = "tls"
 
@@ -6,6 +15,7 @@ protocol = "tls"
   key_path = "/run/secrets/proxy_cert_private_key"
 
 [servers.stats]
+bind = "stats.devnet.tomochain.com"
 
   [servers.stats.discovery]
   kind = "static"
@@ -14,6 +24,7 @@ protocol = "tls"
   ]
 
 [servers.tomomaster]
+bind = "master.devnet.tomochain.com"
 
   [servers.tomomaster.discovery]
     kind = "static"
@@ -22,6 +33,7 @@ protocol = "tls"
     ]
 
 [servers.tomoscan]
+bind = "scan.devnet.tomochain.com"
 
   [servers.tomoscan.discovery]
     kind = "static"
@@ -30,6 +42,7 @@ protocol = "tls"
     ]
 
 [servers.grafana]
+bind = "grafana.devnet.tomochain.com"
 
   [servers.grafana.discovery]
     kind = "static"
