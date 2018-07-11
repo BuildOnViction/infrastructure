@@ -4,6 +4,7 @@ services:
 
   tomochain_sun:
     image: tomochain/infra-tomochain:devnet
+    tty: true
     environment:
       IDENTITY: sun
       IS_BOOTNODE: "true"
@@ -18,6 +19,7 @@ services:
 
   tomochain_moon:
     image: tomochain/infra-tomochain:devnet
+    tty: true
     environment:
       IDENTITY: moon
       IS_BOOTNODE: "false"
@@ -32,6 +34,7 @@ services:
 
   tomochain_earth:
     image: tomochain/infra-tomochain:devnet
+    tty: true
     environment:
       IDENTITY: earth
       IS_BOOTNODE: "false"
