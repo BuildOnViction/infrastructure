@@ -1,0 +1,38 @@
+[servers.default]
+protocol = "tls"
+
+  [servers.default.tls]
+  cert_path = "/run/secrets/proxy_cert_pem"
+  key_path = "/run/secrets/proxy_cert_private_key"
+
+[servers.stats]
+
+  [servers.stats.discovery]
+  kind = "static"
+  static_list = [
+    "netstats-server:3000 sni=stats.devnet.tomochain.com"
+  ]
+
+[servers.tomomaster]
+
+  [servers.tomomaster.discovery]
+    kind = "static"
+    static_list = [
+      "tomomaster:3001 sni=master.devnet.tomochain.com"
+    ]
+
+[servers.tomoscan]
+
+  [servers.tomoscan.discovery]
+    kind = "static"
+    static_list = [
+      "tomoscan-client:3000 sni=scan.devnet.tomochain.com"
+    ]
+
+[servers.grafana]
+
+  [servers.grafana.discovery]
+    kind = "static"
+    static_list = [
+      "grafana:3000 sni=grafana.devnet.tomochain.com"
+    ]
