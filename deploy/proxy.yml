@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   proxy:
-    image: tomochain/infra-gobetween:test
+    image: tomochain/infra-traefik:test
     ports:
       - 80:80
       - 443:443

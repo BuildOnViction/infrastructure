@@ -1,0 +1,43 @@
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+      [[entryPoints.https.tls.certificates]]
+      certFile = "/run/secrets/proxy_cert_pem"
+      keyFile = "/run/secrets/proxy_cert_private_key"
+
+[frontends]
+  [frontends.stats]
+  backend = "stats"
+    [frontends.stats.routes.test_1]
+    rule = "Host:stats.devnet.tomochain.com"
+  [frontends.master]
+  backend = "master"
+    [frontends.master.routes.test_1]
+    rule = "Host:master.devnet.tomochain.com"
+  [frontends.scan]
+  backend = "scan"
+    [frontends.scan.routes.test_1]
+    rule = "Host:scan.devnet.tomochain.com"
+  [frontends.grafana]
+  backend = "grafana"
+    [frontends.grafana.routes.test_1]
+    rule = "Host:grafana.devnet.tomochain.com"
+
+[backends]
+  [backends.stats]
+    [backends.stats.servers.server1]
+    url = "netstats-server:3000"
+  [backends.master]
+    [backends.master.servers.server1]
+    url = "tomomaster:3001"
+  [backends.scan]
+    [backends.scan.servers.server1]
+    url = "tomoscan-client:3000"
+  [backends.grafana]
+    [backends.grafana.servers.server1]
+    url = "grafana:3000"
