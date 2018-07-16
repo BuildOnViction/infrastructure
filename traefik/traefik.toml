@@ -1,4 +1,5 @@
-logLevel = "INFO"
+logLevel = "DEBUG"
+debug = true
 
 [accessLog]
 
@@ -14,34 +15,36 @@ logLevel = "INFO"
       certFile = "/run/secrets/proxy_cert_pem"
       keyFile = "/run/secrets/proxy_cert_private_key"
 
+[file]
+
+[backends]
+  [backends.backendStats]
+    [backends.backendStats.servers.server1]
+    url = "http://netstats-server:3000"
+  [backends.backendMaster]
+    [backends.backendMaster.servers.server1]
+    url = "http://tomomaster:3001"
+  [backends.backendScan]
+    [backends.backendScan.servers.server1]
+    url = "http://tomoscan-client:3000"
+  [backends.backendGrafana]
+    [backends.backendGrafana.servers.server1]
+    url = "http://grafana:3000"
+
 [frontends]
   [frontends.stats]
-  backend = "stats"
+  backend = "backendStats"
     [frontends.stats.routes.test_1]
     rule = "Host:stats.devnet.tomochain.com"
   [frontends.master]
-  backend = "master"
-    [frontends.master.routes.test_1]
+  backend = "backendMaster"
+    [frontends.master.routes.test_2]
     rule = "Host:master.devnet.tomochain.com"
   [frontends.scan]
-  backend = "scan"
-    [frontends.scan.routes.test_1]
+  backend = "backendScan"
+    [frontends.scan.routes.test_3]
     rule = "Host:scan.devnet.tomochain.com"
   [frontends.grafana]
-  backend = "grafana"
-    [frontends.grafana.routes.test_1]
+  backend = "backendGrafana"
+    [frontends.grafana.routes.test_4]
     rule = "Host:grafana.devnet.tomochain.com"
-
-[backends]
-  [backends.stats]
-    [backends.stats.servers.server1]
-    url = "netstats-server:3000"
-  [backends.master]
-    [backends.master.servers.server1]
-    url = "tomomaster:3001"
-  [backends.scan]
-    [backends.scan.servers.server1]
-    url = "tomoscan-client:3000"
-  [backends.grafana]
-    [backends.grafana.servers.server1]
-    url = "grafana:3000"
