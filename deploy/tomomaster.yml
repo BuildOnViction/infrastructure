@@ -4,8 +4,6 @@ services:
 
   tomomaster:
     image: tomochain/infra-tomomaster:devnet
-    ports:
-      - "3001:3001"
     environment:
       MNEMONIC_FILE: /run/secrets/tomomaster_mnemonic
     secrets:
