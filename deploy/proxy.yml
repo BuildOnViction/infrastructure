@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   proxy:
-    image: tomochain/infra-nginx:test
+    image: tomochain/infra-nginx:devnet
     ports:
       - 80:80
       - 443:443
