@@ -82,6 +82,7 @@ fi
 
 set -x
 exec tomo $params \
+  --verbosity 4 \
   --datadir $DATA_DIR \
   --keystore $KEYSTORE_DIR \
   --identity $IDENTITY \
