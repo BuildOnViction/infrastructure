@@ -5,7 +5,7 @@ services:
   netstats-client_sun:
     image: tomochain/infra-netstats-client:devnet
     environment:
-      WS_SERVER: ws://stats.devnet.tomochain.com
+      WS_SERVER: wss://stats.devnet.tomochain.com
       INSTANCE_NAME: sun
       RPC_HOST: 'tomochain_sun'
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
@@ -15,7 +15,7 @@ services:
   netstats-client_moon:
     image: tomochain/infra-netstats-client:devnet
     environment:
-      WS_SERVER: ws://stats.devnet.tomochain.com
+      WS_SERVER: wss://stats.devnet.tomochain.com
       INSTANCE_NAME: moon
       RPC_HOST: 'tomochain_moon'
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
@@ -25,7 +25,7 @@ services:
   netstats-client_earth:
     image: tomochain/infra-netstats-client:devnet
     environment:
-      WS_SERVER: ws://stats.devnet.tomochain.com
+      WS_SERVER: wss://stats.devnet.tomochain.com
       INSTANCE_NAME: earth
       RPC_HOST: 'tomochain_earth'
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
