@@ -7,6 +7,9 @@ services:
     tty: true
     build:
       context: ../tomochain
+    ports:
+      - 8545:8545
+      - 30303:30303
     env_file:
       - config/tomochain/tomochain_sun.env
     volumes:

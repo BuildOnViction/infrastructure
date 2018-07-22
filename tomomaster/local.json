@@ -4,7 +4,7 @@
     "port": 3001
   },
   "blockchain": {
-      "rpc": "http://tomochain_sun:8545",
+      "rpc": "http://tomochain_moon:8545",
       "networkId": 89
   },
   "db": {
