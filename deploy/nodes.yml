@@ -6,7 +6,7 @@ services:
     image: bootnode:test
     tty: true
     volumes:
-      - bootnodes:/tomochain/bootnodes:ro
+      - bootnodes:/tomochain/bootnodes
 
   masternode_sun:
     image: node:test
