@@ -1,7 +1,7 @@
 #!/bin/sh -x
 
 # vars from docker env
-# - IDENTITY (default to 'unnamed_node')
+# - IDENTITY (default to empty)
 # - PASSWORD (default to empty)
 # - PRIVATE_KEY (default to empty)
 # - BOOTNODES (default to empty)
