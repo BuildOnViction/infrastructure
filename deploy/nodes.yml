@@ -90,3 +90,4 @@ volumes:
   moon:
   sun:
   earth:
+  bootnodes:
