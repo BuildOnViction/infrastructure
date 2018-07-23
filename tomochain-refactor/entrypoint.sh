@@ -17,7 +17,13 @@ GENESIS_PATH="genesis/$GENESIS_FILE"
 BOOTNODES_FILE="bootnodes"
 BOOTNODES_PATH="bootnodes/$BOOTNODES_FILE"
 
+# variables
 params=""
+accountsCount=$(
+  tomo account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
+  2> /dev/null \
+  | wc -l
+)
 
 # file to env
 for env in IDENTITY PASSWORD PRIVATE_KEY BOOTNODES WS_SECRET NETSTATS_HOST \
@@ -47,30 +53,31 @@ if [[ ! -f ./password ]]; then
 fi
 
 # private key
-if [[ "$(ls -A $KEYSTORE_DIR)" ]]; then
+if [[ $accountsCount -le 0 ]]; then
+  echo "No accounts found"
   if [[ ! -z $PRIVATE_KEY ]]; then
     echo "Creating account from private key"
     echo "$PRIVATE_KEY" > ./private_key
     tomo  account import ./private_key \
       --datadir $DATA_DIR \
-      --keystore $KEYSTORE_DIR
-      --password ./password \
+      --keystore $KEYSTORE_DIR \
+      --password ./password
   else
     echo "Creating new account"
     tomo account new \
       --datadir $DATA_DIR \
-      --keystore $KEYSTORE_DIR
+      --keystore $KEYSTORE_DIR \
       --password ./password
   fi
-  account=$(
-    tomo account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
-    2> /dev/null \
-    | head -n 1 \
-    | cut -d"{" -f 2 | cut -d"}" -f 1
-  )
-  echo "Using account $account"
-  params="$params --unlock $account"
 fi
+account=$(
+  tomo account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
+  2> /dev/null \
+  | head -n 1 \
+  | cut -d"{" -f 2 | cut -d"}" -f 1
+)
+echo "Using account $account"
+params="$params --unlock $account"
 
 # bootnodes
 if [[ ! -z $BOOTNODES ]]; then
