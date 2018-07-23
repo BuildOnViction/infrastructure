@@ -14,8 +14,6 @@ DATA_DIR="data"
 KEYSTORE_DIR="keystore"
 GENESIS_FILE="genesis.json"
 GENESIS_PATH="genesis/$GENESIS_FILE"
-BOOTNODES_FILE="bootnodes"
-BOOTNODES_PATH="bootnodes/$BOOTNODES_FILE"
 
 # variables
 params=""
