@@ -2,7 +2,7 @@ FROM tomochain/tomochain:latest
 
 LABEL maintainer="etienne@tomochain.com"
 
-ENV IDENTITY 'unnamed_node'
+ENV IDENTITY ''
 ENV PASSWORD ''
 ENV PRIVATE_KEY ''
 ENV BOOTNODES ''
