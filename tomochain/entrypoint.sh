@@ -1,10 +1,13 @@
-#!/bin/sh
+#!/bin/sh -x
 
 # vars from docker env
-# - IDENTITY (default to unnamed_node)
-# - IS_BOOTNODE (default to false)
+# - IDENTITY (default to 'unnamed_node')
 # - PASSWORD (default to empty)
 # - PRIVATE_KEY (default to empty)
+# - BOOTNODES (default to empty)
+# - WS_SECRET (default to empty)
+# - NETSTATS_HOST (default to 'netstats-server:3000')
+# - NETSTATS_PORT (default to 'netstats-server:3000')
 
 # constants
 DATA_DIR="data"
@@ -14,73 +17,97 @@ GENESIS_PATH="genesis/$GENESIS_FILE"
 BOOTNODES_FILE="bootnodes"
 BOOTNODES_PATH="bootnodes/$BOOTNODES_FILE"
 
+# variables
 params=""
+accountsCount=$(
+  tomo account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
+  2> /dev/null \
+  | wc -l
+)
 
-# if no blockchain data, init the genesis block
+# file to env
+for env in IDENTITY PASSWORD PRIVATE_KEY BOOTNODES WS_SECRET NETSTATS_HOST \
+           NETSTATS_PORT; do
+  file=$(eval echo "\$${env}_FILE")
+  if [[ -f $file ]] && [[ ! -z $file ]]; then
+    echo "Replacing $env by $file"
+    export $env=$(cat $file)
+  elif [[ "$env" == "BOOTNODES"]]; then
+    echo "Bootnodes file is not available. Waiting for it to be provisioned..."
+    while true ; do
+      if [[ -f $file ]] && [[ $(grep -e enode $file) ]]; then
+        echo "Fount bootnode file."
+        break
+      fi
+      echo "Still no bootnodes file, sleeping..."
+      sleep 5
+    done
+    export $env=$(cat $file)
+  fi
+done
+
+# identity
+if [[ -z $IDENTITY ]]; then
+  IDENTITY="unnamed_$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c6)"
+fi
+
+# data dir
 if [[ ! -d $DATA_DIR/tomo ]]; then
   echo "No blockchain data, creating genesis block."
   tomo init $GENESIS_PATH --datadir $DATA_DIR 2> /dev/null
 fi
 
-# check if account private key is set
-if [[ -z $PRIVATE_KEY ]] && [[ -z $PRIVATE_KEY_FILE ]]; then
-  echo "Account private key is mendatory. Exiting..."
-  exit 1
-else
-  if [[ -z $PRIVATE_KEY ]]; then
-    PRIVATE_KEY=$(cat $PRIVATE_KEY_FILE)
+# password file
+if [[ ! -f ./password ]]; then
+  if [[ ! -z $PASSWORD ]]; then
+    echo "Password env is set. Writing into file."
+    echo "$PASSWORD" > ./password
+  else
+    echo "No password set (or empty), generating a new one"
+    $(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32} > password)
   fi
-  echo "$PRIVATE_KEY" > ./private_key
 fi
 
-# check if account password is set
-if [[ -z $PASSWORD ]] && [[ -z $PASSWORD_FILE ]]; then
-  echo "Account password is mendatory. Exiting..."
-  exit 1
-else
-  if [[ -z $PASSWORD ]]; then
-    PASSWORD=$(cat $PASSWORD_FILE)
+# private key
+if [[ $accountsCount -le 0 ]]; then
+  echo "No accounts found"
+  if [[ ! -z $PRIVATE_KEY ]]; then
+    echo "Creating account from private key"
+    echo "$PRIVATE_KEY" > ./private_key
+    tomo  account import ./private_key \
+      --datadir $DATA_DIR \
+      --keystore $KEYSTORE_DIR \
+      --password ./password
+  else
+    echo "Creating new account"
+    tomo account new \
+      --datadir $DATA_DIR \
+      --keystore $KEYSTORE_DIR \
+      --password ./password
   fi
-  echo "$PASSWORD" > ./password
 fi
-
-# set tomo bootnode param (or dump enode in bootnode file if IS_BOOTNODE)
-if [[ "$IS_BOOTNODE" = true ]]; then
-  echo "Dumping self enode address to $BOOTNODES_PATH"
-  tomo js getenode.js --datadir $DATA_DIR --keystore $KEYSTORE_DIR \
+account=$(
+  tomo account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
   2> /dev/null \
-  | sed "s/::/$(hostname -i)/g" \
-  > $BOOTNODES_PATH
+  | head -n 1 \
+  | cut -d"{" -f 2 | cut -d"}" -f 1
+)
+echo "Using account $account"
+params="$params --unlock $account"
+
+# bootnodes
+if [[ ! -z $BOOTNODES ]]; then
+  params="$params --bootnodes $BOOTNODES"
+fi
+
+# netstats
+if [[ ! -z $WS_SECRET ]]; then
+  echo "Will report to netstats server ${NETSTATS_HOST}:${NETSTATS_PORT}"
+  params="$params --ethstats ${IDENTITY}:${WS_SECRET}@${NETSTATS_HOST}:${NETSTATS_PORT}"
 else
-  echo "Adding bootnodes to startup params. Will retry if empty"
-  while true ; do
-    if [[ -f $BOOTNODES_PATH ]] && [[ $(grep -e enode $BOOTNODES_PATH) ]]; then
-      echo "Found bootnodes $(cat $BOOTNODES_PATH)"
-      break
-    fi
-    echo "No bootnodes found"
-    sleep 5
-  done
-  params="$params --bootnodes $(cat $BOOTNODES_PATH | head -n 1)"
+  echo "WS_SECRET not set, will not report to netstats server."
 fi
 
-# if the keystore is empty, import
-if [[ "$(ls -A $KEYSTORE_DIR)" ]]; then
-  tomo  account import ./private_key \
-    --password ./password \
-    --datadir $DATA_DIR \
-    --keystore $KEYSTORE_DIR
-  account=$(
-    tomo account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
-    2> /dev/null \
-    | head -n 1 \
-    | cut -d"{" -f 2 | cut -d"}" -f 1
-  )
-  echo "Using account $account"
-  params="$params --unlock $account"
-fi
-
-set -x
 exec tomo $params \
   --verbosity 4 \
   --datadir $DATA_DIR \
