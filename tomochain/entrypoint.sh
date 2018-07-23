@@ -32,7 +32,7 @@ for env in IDENTITY PASSWORD PRIVATE_KEY BOOTNODES WS_SECRET NETSTATS_HOST \
   if [[ -f $file ]] && [[ ! -z $file ]]; then
     echo "Replacing $env by $file"
     export $env=$(cat $file)
-  elif [[ "$env" == "BOOTNODES"]]; then
+  elif [[ "$env" == "BOOTNODES" ]]; then
     echo "Bootnodes file is not available. Waiting for it to be provisioned..."
     while true ; do
       if [[ -f $file ]] && [[ $(grep -e enode $file) ]]; then
