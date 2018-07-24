@@ -4,12 +4,12 @@
 
 This is the devnet branch of the Tomochain infrastructure.
 
-This repo holds the dockerized infrastructure meant to be used to test local development.
+This repo holds the devnet dockerized infrastructure.
 
 ## Requirements
 
-- Docker
-- Docker-compose
+- [Docker](https://docs.docker.com/install/) >= 17.09.0
+- [Docker-compose](https://docs.docker.com/compose/install/)
 
 ## Initialize
 
@@ -21,66 +21,30 @@ cd infrastructure
 git checkout devnet
 ```
 
-Before deploying, we need to configure our environment.
-Edit the `COMPOSE_FILE` variable of the `.env` if you want to deploy only certain parts of the infrastructure.
-Run `./init.sh` to create the configuration folder.
+We need to set some sensitive data as docker secrets.
 
 ```
-vim .env       # optional
 ./init.sh
 ```
 
-⚠️ This command will reset the **whole** configuration folder on every run.
-
-Now edit the `# please fill` parts of the configuration (`deploy/config`)
-
 ## Deploy
 
-To build the images, create the containers and start them, simply run `deploy.sh`.
+Create de swarm services.
 
 ```
 ./deploy.sh
-
-./logs.sh       # if you want to follow the logs
-```
-
-You can also control individual parts of the infrastructure.
-
-```
-docker-compose -f deploy/tomochain.yml down|up|logs
 ```
 
 ## Access
 
-- Netstats: http://localhost:3000
-- Tomomaster: http://localhost:3001
-- Tomoscan: http://localhost:3002
-- Grafana: http://localhost:3003
-
-## Workflow
-
-This is subject to change. The goal is to reduce manual steps.
-
-Exemple when working on the tomochain repo.
-
-Let's say you have the infrastructure and and tomochain repo cloned locally on your machine.
-
-```
-repos
-├── infrastructure
-├── tomochain
-└── ...
-```
-
-- Edit some code in the tomochain repo
-- Build the base image from tomochain repo `docker build -t tomochain/tomochain:latest .`
-- In the infrastructure repo, run `./redeploy.sh`
-
-And voilà!
+- [Netstats](https://stats.devnet.tomochain.com)
+- [Tomomaster](https://master.devnet.tomochain.com)
+- [Tomoscan](https://scan.devnet.tomochain.com)
+- [Grafana](https://grafana.devnet.tomochain.com)
 
 ## Undeploy
 
-In case you want to reset your environment, run `undeploy.sh`
+In case you want to reset the environment.
 
 ```
 ./undeploy
