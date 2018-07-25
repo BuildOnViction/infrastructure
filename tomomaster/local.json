@@ -5,8 +5,11 @@
   },
   "blockchain": {
       "rpc": "http://masternode_sun:8545",
-      "networkId": 89
+      "networkId": 89,
+      "epoch": 990,
+      "blockTime": 2
   },
+  "explorerUrl": "https://scan.devnet.tomochain.com",
   "db": {
     "uri": "mongodb://mongodb_master:27017/governance"
   },
