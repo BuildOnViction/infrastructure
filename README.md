@@ -20,6 +20,11 @@ git clone https://github.com/tomochain/infrastructure.git
 cd infrastructure
 git checkout devnet
 ```
+The host should be in swarm mode.
+
+```
+docker swarm init
+```
 
 We need to set some sensitive data as docker secrets.
 
