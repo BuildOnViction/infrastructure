@@ -6,3 +6,7 @@ services:
     image: mazzolino/shepherd:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
