@@ -52,7 +52,7 @@ unset input && read input \
 ; docker secret create proxy_cert_pem "${input}"
 echo "Certificate private key file (path): "
 unset input && read input \
-; docker secret create proxy_cert_private_key "${input}""
+; docker secret create proxy_cert_private_key "${input}"
 
 clear
 echo -e "\n[ review ]\n"
