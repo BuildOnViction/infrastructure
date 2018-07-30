@@ -12,6 +12,10 @@ services:
     secrets:
       - proxy_cert_pem
       - proxy_cert_private_key
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
 secrets:
   proxy_cert_pem:

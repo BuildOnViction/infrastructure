@@ -6,6 +6,10 @@ services:
     image: tomochain/infra-tomoscan-client:devnet
     depends_on:
       - tomoscan-server
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   tomoscan-server:
     image: tomochain/infra-tomoscan-server:devnet
@@ -13,6 +17,14 @@ services:
       MONGODB_URI: mongodb://mongodb_scan:27017/explorer
     depends_on:
      - mongodb_scan
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   mongodb_scan:
     image: mongo:3.6
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager

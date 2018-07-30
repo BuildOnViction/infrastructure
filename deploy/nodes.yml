@@ -84,6 +84,9 @@ services:
       - netstats_ws_secret
     deploy:
       replicas: 0
+      placement:
+        constraints:
+          - node.role != manager
 
 secrets:
   tomochain_password_sun:

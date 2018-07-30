@@ -10,12 +10,24 @@ services:
       - tomomaster_mnemonic
     depends_on:
       - mongodb_master
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   mongodb_master:
     image: mongo:3.6
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   redis_master:
     image: redis:4-alpine
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
 secrets:
   tomomaster_mnemonic:
