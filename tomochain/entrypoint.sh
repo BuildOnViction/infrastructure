@@ -107,7 +107,7 @@ else
 fi
 
 # dump
-echo "dump: $IDENTITY $account $bootnode"
+echo "dump: $IDENTITY $account $BOOTNODES"
 
 exec tomo $params \
   --verbosity 4 \
