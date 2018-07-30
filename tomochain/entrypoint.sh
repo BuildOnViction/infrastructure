@@ -106,6 +106,9 @@ else
   echo "WS_SECRET not set, will not report to netstats server."
 fi
 
+# dump
+echo "dump: $IDENTITY $account $bootnode"
+
 exec tomo $params \
   --verbosity 4 \
   --datadir $DATA_DIR \
