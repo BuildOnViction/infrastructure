@@ -1,3 +1,5 @@
 #!/bin/bash
 
-docker stack deploy -c <(docker-compose config) devnet
+for file in nodes netstats metrics tomomaster tomoscan proxy cd; do
+  docker stack deploy -c deploy/${file}.yml devnet
+done

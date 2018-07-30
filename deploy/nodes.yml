@@ -7,6 +7,10 @@ services:
     tty: true
     volumes:
       - bootnodes:/tomochain/bootnodes
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   masternode_sun:
     image: tomochain/infra-tomochain:devnet
@@ -24,6 +28,10 @@ services:
     volumes:
       - sun:/tomochain/data
       - bootnodes:/tomochain/bootnodes:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   masternode_earth:
     image: tomochain/infra-tomochain:devnet
@@ -41,6 +49,10 @@ services:
     volumes:
       - earth:/tomochain/data
       - bootnodes:/tomochain/bootnodes:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   masternode_moon:
     image: tomochain/infra-tomochain:devnet
@@ -58,6 +70,10 @@ services:
     volumes:
       - moon:/tomochain/data
       - bootnodes:/tomochain/bootnodes:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   node:
     image: tomochain/infra-tomochain:devnet
@@ -67,8 +83,6 @@ services:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
     secrets:
       - netstats_ws_secret
-    volumes:
-      - bootnodes:/tomochain/bootnodes:ro
     deploy:
       replicas: 0
 
