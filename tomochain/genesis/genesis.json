@@ -9,8 +9,8 @@
     "byzantiumBlock": 4,
     "clique": {
       "period": 2,
-      "epoch": 20,
-      "rewardCheckpoint": 20,
+      "epoch": 990,
+      "rewardCheckpoint": 990,
       "reward": 10
     }
   },
