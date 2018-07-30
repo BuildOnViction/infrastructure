@@ -79,7 +79,6 @@ services:
     image: tomochain/infra-tomochain:devnet
     tty: true
     environment:
-      BOOTNODES_FILE: /tomochain/bootnodes/bootnodes
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
     secrets:
       - netstats_ws_secret
