@@ -11,7 +11,8 @@
       "period": 2,
       "epoch": 990,
       "rewardCheckpoint": 990,
-      "reward": 10
+      "reward": 10,
+      "gap": 50
     }
   },
   "nonce": "0x0",
