@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker stack rm devnet
+docker stack rm localnet
 docker container prune
 docker volume prune

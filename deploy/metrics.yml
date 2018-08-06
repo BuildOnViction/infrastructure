@@ -3,12 +3,12 @@ version: "3.4"
 services:
 
   influxdb:
-    image: tomochain/infra-influxdb:devnet
+    image: tomochain/infra-influxdb:localnet
     volumes:
       - influxdb:/var/lib/influxdb
   telegraf:
-    image: tomochain/infra-telegraf:devnet
-    hostname: devnet.tomochain.com
+    image: tomochain/infra-telegraf:localnet
+    hostname: localnet.tomochain.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/rootfs/sys:ro
@@ -17,7 +17,7 @@ services:
     deploy:
       mode: global
   grafana:
-    image: tomochain/infra-grafana:devnet
+    image: tomochain/infra-grafana:localnet
     environment:
       GF_PATH_PROVISIONING: /etc/grafana/provisioning
       GF_AUTH_ANONYMOUS_ENABLED: "true"

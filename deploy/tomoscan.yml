@@ -3,12 +3,12 @@ version: "3.4"
 services:
 
   tomoscan-client:
-    image: tomochain/infra-tomoscan-client:devnet
+    image: tomochain/infra-tomoscan-client:localnet
     depends_on:
       - tomoscan-server
 
   tomoscan-server:
-    image: tomochain/infra-tomoscan-server:devnet
+    image: tomochain/infra-tomoscan-server:localnet
     environment:
       MONGODB_URI: mongodb://mongodb_scan:27017/explorer
     depends_on:

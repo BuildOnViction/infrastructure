@@ -9,7 +9,7 @@
       "epoch": 990,
       "blockTime": 2
   },
-  "explorerUrl": "https://scan.devnet.tomochain.com",
+  "explorerUrl": "https://scan.localnet.tomochain.com",
   "db": {
     "uri": "mongodb://mongodb_master:27017/governance"
   },

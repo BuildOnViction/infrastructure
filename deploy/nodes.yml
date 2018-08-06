@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   bootnode:
-    image: tomochain/infra-bootnode:devnet
+    image: tomochain/infra-bootnode:localnet
     tty: true
     volumes:
       - bootnodes:/tomochain/bootnodes
@@ -13,7 +13,7 @@ services:
           - node.role == manager
 
   masternode_sun:
-    image: tomochain/infra-tomochain:devnet
+    image: tomochain/infra-tomochain:localnet
     tty: true
     environment:
       IDENTITY: sun
@@ -34,7 +34,7 @@ services:
           - node.role == manager
 
   masternode_earth:
-    image: tomochain/infra-tomochain:devnet
+    image: tomochain/infra-tomochain:localnet
     tty: true
     environment:
       IDENTITY: earth
@@ -55,7 +55,7 @@ services:
           - node.role == manager
 
   masternode_moon:
-    image: tomochain/infra-tomochain:devnet
+    image: tomochain/infra-tomochain:localnet
     tty: true
     environment:
       IDENTITY: moon
@@ -76,7 +76,7 @@ services:
           - node.role == manager
 
   node:
-    image: tomochain/infra-tomochain:devnet
+    image: tomochain/infra-tomochain:localnet
     tty: true
     environment:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret

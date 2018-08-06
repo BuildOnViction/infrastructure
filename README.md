@@ -1,10 +1,10 @@
-# infrastructure: devnet
+# infrastructure: localnet
 
 🏗️ Work in progress 🚧
 
-This is the devnet branch of the Tomochain infrastructure.
+This is the localnet branch of the Tomochain infrastructure.
 
-This repo holds the devnet dockerized infrastructure.
+This repo holds the localnet dockerized infrastructure.
 
 ## Requirements
 
@@ -13,12 +13,12 @@ This repo holds the devnet dockerized infrastructure.
 
 ## Initialize
 
-Firstly, clone the repository and checkout the devnet branch.
+Firstly, clone the repository and checkout the localnet branch.
 
 ```
 git clone https://github.com/tomochain/infrastructure.git
 cd infrastructure
-git checkout devnet
+git checkout localnet
 ```
 The host should be in swarm mode.
 
@@ -42,10 +42,10 @@ Create de swarm services.
 
 ## Access
 
-- [Netstats](https://stats.devnet.tomochain.com)
-- [Tomomaster](https://master.devnet.tomochain.com)
-- [Tomoscan](https://scan.devnet.tomochain.com)
-- [Grafana](https://grafana.devnet.tomochain.com)
+- [Netstats](https://stats.localnet.tomochain.com)
+- [Tomomaster](https://master.localnet.tomochain.com)
+- [Tomoscan](https://scan.localnet.tomochain.com)
+- [Grafana](https://grafana.localnet.tomochain.com)
 
 ## Undeploy
 
@@ -55,4 +55,4 @@ In case you want to reset the environment.
 ./undeploy
 ```
 
-It will prompt you for volumes pruning. It's handy for deleting all the persistent volumes created for devnet but be aware that it can also delete unrelated volumes
+It will prompt you for volumes pruning. It's handy for deleting all the persistent volumes created for localnet but be aware that it can also delete unrelated volumes

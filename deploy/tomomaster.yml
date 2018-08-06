@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   tomomaster:
-    image: tomochain/infra-tomomaster:devnet
+    image: tomochain/infra-tomomaster:localnet
     environment:
       MNEMONIC_FILE: /run/secrets/tomomaster_mnemonic
     secrets:
