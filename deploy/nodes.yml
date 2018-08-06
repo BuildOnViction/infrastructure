@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   bootnode:
-    image: tomochain/infra-bootnode:localnet
+    image: tomochain/infra-bootnode:devnet
     tty: true
     volumes:
       - bootnodes:/tomochain/bootnodes
@@ -14,6 +14,8 @@ services:
 
   masternode_sun:
     image: tomochain/infra-tomochain:localnet
+    build:
+      context: ../tomochain
     tty: true
     environment:
       IDENTITY: sun
@@ -21,9 +23,6 @@ services:
       PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_sun
       BOOTNODES_FILE: /tomochain/bootnodes/bootnodes
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
-    ports:
-      - 8545:8545
-      - 30303:30303
     secrets:
       - tomochain_password_sun
       - tomochain_pk_sun
@@ -38,6 +37,8 @@ services:
 
   masternode_earth:
     image: tomochain/infra-tomochain:localnet
+    build:
+      context: ../tomochain
     tty: true
     environment:
       IDENTITY: earth
@@ -59,6 +60,8 @@ services:
 
   masternode_moon:
     image: tomochain/infra-tomochain:localnet
+    build:
+      context: ../tomochain
     tty: true
     environment:
       IDENTITY: moon
@@ -66,6 +69,9 @@ services:
       PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_moon
       BOOTNODES_FILE: /tomochain/bootnodes/bootnodes
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    ports:
+      - 8545:8545
+      - 30303:30303
     secrets:
       - tomochain_password_moon
       - tomochain_pk_moon
@@ -80,6 +86,8 @@ services:
 
   node:
     image: tomochain/infra-tomochain:localnet
+    build:
+      context: ../tomochain
     tty: true
     environment:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret

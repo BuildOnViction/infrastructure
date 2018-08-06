@@ -4,6 +4,8 @@ services:
 
   influxdb:
     image: tomochain/infra-influxdb:localnet
+    build:
+      context: ../influxdb
     volumes:
       - influxdb:/var/lib/influxdb
   telegraf:
@@ -18,6 +20,8 @@ services:
       mode: global
   grafana:
     image: tomochain/infra-grafana:localnet
+    build:
+      context: ../grafana
     environment:
       GF_PATH_PROVISIONING: /etc/grafana/provisioning
       GF_AUTH_ANONYMOUS_ENABLED: "true"

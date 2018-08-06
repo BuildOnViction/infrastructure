@@ -4,6 +4,8 @@ services:
 
   tomomaster:
     image: tomochain/infra-tomomaster:localnet
+    build:
+      context: ../tomomaster
     environment:
       MNEMONIC_FILE: /run/secrets/tomomaster_mnemonic
     ports:

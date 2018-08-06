@@ -4,6 +4,8 @@ services:
 
   tomoscan-client:
     image: tomochain/infra-tomoscan-client:localnet
+    build:
+      context: ../tomoscan-client
     ports:
       - "3002:3000"
     depends_on:
@@ -11,6 +13,8 @@ services:
 
   tomoscan-server:
     image: tomochain/infra-tomoscan-server:localnet
+    build:
+      context: ../tomoscan-server
     environment:
       MONGODB_URI: mongodb://mongodb_scan:27017/explorer
     ports:

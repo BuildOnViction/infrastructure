@@ -34,7 +34,7 @@ We need to set some sensitive data as docker secrets.
 
 ## Deploy
 
-Create de swarm services.
+Build the images and create the swarm services.
 
 ```
 ./deploy.sh
@@ -42,10 +42,26 @@ Create de swarm services.
 
 ## Access
 
-- [Netstats](https://stats.localnet.tomochain.com)
-- [Tomomaster](https://master.localnet.tomochain.com)
-- [Tomoscan](https://scan.localnet.tomochain.com)
-- [Grafana](https://grafana.localnet.tomochain.com)
+- [Netstats](http://localhost:3000)
+- [Tomomaster](http://localhost:3001)
+- [Tomoscan](http://localhost:3002)
+- [Grafana](http://localhost:3003)
+- RPC http://localhost:8545 (moon)
+- Masternode client http://localhost:30303 (moon)
+
+## Update (for Tomochain devs)
+
+When working on one of the Tomochain projects parts of the infrastructure, you can test your latest code by rebuilding your base image with the tag `tomochain/infra-projectname`. And then launch the update script with the service name as parameter.
+Ex. with Tomomaster:
+
+```
+~/projects/tomomaster$ docker build -t tomochain/infra-tomomaster .
+~/projects/tomomaster$ cd ~/projects/infrastructure
+~/projects/infrastructure$ ./update.sh tomomaster
+
+```
+
+Launching it without arguments will rebuild all the containers. You will need to wait approx. 5 mins for the update container to update all your services automatically.
 
 ## Undeploy
 

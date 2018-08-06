@@ -4,6 +4,8 @@ services:
 
   netstats-server:
     image: tomochain/infra-netstats-server:localnet
+    build:
+      context: ../netstats
     environment:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
     ports:
