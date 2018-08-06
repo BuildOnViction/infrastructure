@@ -21,6 +21,9 @@ services:
       PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_sun
       BOOTNODES_FILE: /tomochain/bootnodes/bootnodes
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    ports:
+      - 8545:8545
+      - 30303:30303
     secrets:
       - tomochain_password_sun
       - tomochain_pk_sun

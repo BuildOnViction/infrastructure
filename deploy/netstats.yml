@@ -6,6 +6,8 @@ services:
     image: tomochain/infra-netstats-server:localnet
     environment:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    ports:
+      - "3000:3000"
     secrets:
       - netstats_ws_secret
 

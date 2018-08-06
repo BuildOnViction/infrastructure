@@ -6,6 +6,8 @@ services:
     image: tomochain/infra-tomomaster:localnet
     environment:
       MNEMONIC_FILE: /run/secrets/tomomaster_mnemonic
+    ports:
+      - "3001:3001"
     secrets:
       - tomomaster_mnemonic
     depends_on:
