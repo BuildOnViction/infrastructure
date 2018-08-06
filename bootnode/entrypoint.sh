@@ -19,7 +19,8 @@ fi
 # dump address
 address="enode://$(bootnode -nodekey bootnode.key -writeaddress)@[$(hostname -i)]:30301"
 
-echo "Bootnode address is $address"
+echo "Bootnode address is:"
+echo "$address"
 echo "$address" > ./bootnodes/bootnodes
 
 exec bootnode -nodekey bootnode.key
