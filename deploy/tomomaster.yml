@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   tomomaster:
-    image: tomomaster:test
+    image: tomochain/tomomaster:localnet
     environment:
       BC_RPC: 'http://masternode_moon:8545'
       BC_EPOCH: '990'
@@ -18,7 +18,7 @@ services:
       - mongodb_master
 
   tomomaster_crawler:
-    image: tomomaster:test
+    image: tomochain/tomomaster:localnet
     command: run crawl
     environment:
       BC_RPC: 'http://masternode_moon:8545'
