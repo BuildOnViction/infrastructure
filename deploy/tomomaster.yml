@@ -3,15 +3,29 @@ version: "3.4"
 services:
 
   tomomaster:
-    image: tomochain/infra-tomomaster:localnet
-    build:
-      context: ../tomomaster
+    image: tomomaster:test
     environment:
-      MNEMONIC_FILE: /run/secrets/tomomaster_mnemonic
+      BC_RPC: 'http://masternode_moon:8545'
+      BC_EPOCH: '990'
+      EXPLORER_URL: 'https://localhost:3002'
+      DB_URI: 'mongodb://mongodb_master:27017/governance'
+      REDIS_HOST: 'redis_master'
     ports:
       - "3001:3001"
     secrets:
       - tomomaster_mnemonic
+    depends_on:
+      - mongodb_master
+
+  tomomaster_crawler:
+    image: tomomaster:test
+    command: run crawl
+    environment:
+      BC_RPC: 'http://masternode_moon:8545'
+      BC_EPOCH: '990'
+      EXPLORER_URL: 'https://localhost:3002'
+      DB_URI: 'mongodb://mongodb_master:27017/governance'
+      REDIS_HOST: 'redis_master'
     depends_on:
       - mongodb_master
 
