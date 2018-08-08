@@ -39,12 +39,6 @@ echo "Existing private key for node 'earth': "
 unset input && read -s input \
 ; echo $input | docker secret create tomochain_pk_earth -
 
-echo -e "\n[ tomomaster ]\n"
-
-echo "Existing account mnemonic for Tomomaster: "
-unset input && read -s input \
-; echo $input | docker secret create tomomaster_mnemonic -
-
 clear
 echo -e "\n[ review ]\n"
 docker secret list
