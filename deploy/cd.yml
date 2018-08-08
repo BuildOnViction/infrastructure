@@ -6,6 +6,8 @@ services:
     image: mazzolino/shepherd:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      BLACKLIST_SERVICES: "devnet_masternode_sun devnet_masternode_moon devnet_masternode_earth"
     deploy:
       placement:
         constraints:
