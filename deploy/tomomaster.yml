@@ -3,20 +3,20 @@ version: "3.4"
 services:
 
   tomomaster:
-    image: tomochain/infra-tomomaster:devnet
+    image: tomochain/tomomaster:latest
     environment:
-      MNEMONIC_FILE: /run/secrets/tomomaster_mnemonic
-    secrets:
-      - tomomaster_mnemonic
-    depends_on:
-      - mongodb_master
+      BC_RPC: 'http://masternode_moon:8545'
+      BC_EPOCH: '990'
+      EXPLORER_URL: 'https://scan.devnet.tomochain.com'
+      DB_URI: 'mongodb://mongodb_master:27017/governance'
+
+  tomomaster_crawler:
+    image: tomochain/tomomaster:latest
+    command: run crawl
+    environment:
+      BC_RPC: 'http://masternode_moon:8545'
+      BC_EPOCH: '990'
+      DB_URI: 'mongodb://mongodb_master:27017/governance'
 
   mongodb_master:
     image: mongo:3.6
-
-  redis_master:
-    image: redis:4-alpine
-
-secrets:
-  tomomaster_mnemonic:
-    external: true
