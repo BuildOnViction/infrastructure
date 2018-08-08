@@ -8,6 +8,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       BLACKLIST_SERVICES: "devnet_masternode_sun devnet_masternode_moon devnet_masternode_earth"
+      SLEEP_TIME: "1m"
     deploy:
       placement:
         constraints:
