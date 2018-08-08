@@ -16,8 +16,6 @@ services:
       - /sys:/rootfs/sys:ro
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
-    deploy:
-      mode: global
   grafana:
     image: tomochain/infra-grafana:localnet
     build:
