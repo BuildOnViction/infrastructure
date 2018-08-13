@@ -1,0 +1,121 @@
+version: "3.4"
+
+services:
+
+  shepherd:
+    image: mazzolino/shepherd:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      SLEEP_TIME: "1m"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  telegraf:
+    image: tomochain/infra-telegraf:devnet
+    hostname: devnet.tomochain.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+
+  influxdb:
+    image: tomochain/infra-influxdb:devnet
+    volumes:
+      - influxdb:/var/lib/influxdb
+
+  grafana:
+    image: tomochain/infra-grafana:devnet
+    environment:
+      GF_PATH_PROVISIONING: /etc/grafana/provisioning
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_DATABASE_HOST: grafana_db
+      GF_DATABASE_TYPE: postgres
+      GF_DATABASE_NAME: grafana
+      GF_DATABASE_USER: postgres
+      GF_DATABASE_PASSWORD__FILE: /run/secrets/metrics_gf_database_password
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/metrics_gf_security_admin_password
+    secrets:
+      - metrics_gf_database_password
+      - metrics_gf_security_admin_password
+
+  grafana_db:
+    image: postgres:10.4-alpine
+    environment:
+      POSTGRES_DB: grafana
+      POSTGRES_PASSWORD_FILE: /run/secrets/metrics_postgres_password
+    secrets:
+      - metrics_postgres_password
+    volumes:
+      - grafana_db:/var/lib/postgresql/data
+
+  netstats-server:
+    image: tomochain/infra-netstats-server:devnet
+    environment:
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - netstats_ws_secret
+
+  tomomaster:
+    image: tomochain/tomomaster:latest
+    environment:
+      BC_RPC: 'https://sun.devnet.tomochain.com:8545'
+      BC_EPOCH: '990'
+      EXPLORER_URL: 'https://scan.devnet.tomochain.com'
+      DB_URI: 'mongodb://tomomaster_db:27017/governance'
+
+  tomomaster_crawler:
+    image: tomochain/tomomaster:latest
+    command: run crawl
+    environment:
+      BC_RPC: 'https://sun.devnet.tomochain.com:8545'
+      BC_EPOCH: '990'
+      DB_URI: 'mongodb://tomomaster_db:27017/governance'
+      REDIS_HOST: 'tomomaster_redis'
+
+  tomoscan:
+    image: tomochain/infra-tomoscan-client:devnet
+
+  tomoscan_crawler:
+    image: tomochain/infra-tomoscan-server:devnet
+    environment:
+      MONGODB_URI: mongodb://tomoscan_db:27017/explorer
+
+  tomomaster_db:
+    image: mongo:3.6
+
+  tomomaster_redis:
+    image: redis:4-alpine
+
+  tomoscan_db:
+    image: mongo:3.6
+
+  proxy:
+    image: tomochain/infra-nginx:devnet
+    ports:
+      - 80:80
+      - 443:443
+    secrets:
+      - proxy_cert_pem
+      - proxy_cert_private_key
+
+secrets:
+  metrics_postgres_password:
+    external: true
+  metrics_gf_database_password:
+    external: true
+  metrics_gf_security_admin_password:
+    external: true
+  netstats_ws_secret:
+    external: true
+  proxy_cert_pem:
+    external: true
+  proxy_cert_private_key:
+    external: true
+
+volumes:
+  influxdb:
+  grafana_db:

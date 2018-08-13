@@ -1,0 +1,53 @@
+version: "3.4"
+
+services:
+
+  shepherd:
+    image: mazzolino/shepherd:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      SLEEP_TIME: "5m"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  telegraf:
+    image: tomochain/infra-telegraf:devnet
+    hostname: sun.devnet.tomochain.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+
+  masternode_sun:
+    image: tomochain/infra-tomochain:devnet
+    tty: true
+    environment:
+      IDENTITY: sun
+      PASSWORD_FILE: /run/secrets/tomochain_password_sun
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_sun
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+      BOOTNODES: ''
+    ports:
+      - 8545:8545
+      - 8546:8546
+    secrets:
+      - tomochain_password_sun
+      - tomochain_pk_sun
+      - netstats_ws_secret
+    volumes:
+      - sun:/tomochain/data
+
+secrets:
+  tomochain_password_sun:
+    external: true
+  tomochain_pk_sun:
+    external: true
+  netstats_ws_secret:
+    external: true
+
+volumes:
+  sun:
