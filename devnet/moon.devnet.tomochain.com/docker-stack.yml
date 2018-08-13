@@ -36,6 +36,7 @@ services:
     ports:
       - 8545:8545
       - 8546:8546
+      - 30303:30303
     secrets:
       - tomochain_password_moon
       - tomochain_pk_moon
