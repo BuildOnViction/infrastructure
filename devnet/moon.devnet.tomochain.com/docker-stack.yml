@@ -29,7 +29,7 @@ services:
       IDENTITY: moon
       PASSWORD_FILE: /run/secrets/tomochain_password_moon
       PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_moon
-      NETSTATS_HOST: stats.devnet.tomochain.com
+      NETSTATS_HOST: wss://stats.devnet.tomochain.com
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
       BOOTNODES: 'enode://95d1b493a6d6f7a39ee85364460f2e8385360f88cb8c451170a11e5fc0bad17633079dac03ac43331c24edca0e3963f84f2bcf77e577a6b41296a5ba9b5718a5@[18.136.4.187]:30301'
