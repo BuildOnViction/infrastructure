@@ -12,6 +12,8 @@ ENV NETSTATS_PORT '3000'
 
 WORKDIR /tomochain
 
+RUN apk add --no-cache ca-certificates
+
 COPY . ./
 
 ENTRYPOINT ["./entrypoint.sh"]
