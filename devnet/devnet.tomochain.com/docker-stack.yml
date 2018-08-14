@@ -98,6 +98,8 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 2053:2053
+      - 2083:2083
     secrets:
       - proxy_cert_pem
       - proxy_cert_private_key
