@@ -11,17 +11,16 @@ for env in PRIVATE_KEY IP; do
   fi
 done
 
-
-# private key
-if [[ ! -z $IP ]]; then
-  params="$params -nat extip:$IP"
-fi
-
 # private key
 if [[ -z $PRIVATE_KEY ]]; then
   bootnode -genkey bootnode.key $params
 else
   echo "$PRIVATE_KEY" > bootnode.key
 fi
+
+# dump address
+address="enode://$(bootnode -nodekey bootnode.key -writeaddress)@[$(hostname -i)]:30301"
+
+echo "$address" > ./bootnodes/bootnodes
 
 exec bootnode -nodekey bootnode.key $params
