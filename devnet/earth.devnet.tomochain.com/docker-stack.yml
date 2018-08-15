@@ -32,7 +32,7 @@ services:
       NETSTATS_HOST: stats.devnet.tomochain.com
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
-      BOOTNODES: 'enode://95d1b493a6d6f7a39ee85364460f2e8385360f88cb8c451170a11e5fc0bad17633079dac03ac43331c24edca0e3963f84f2bcf77e577a6b41296a5ba9b5718a5@18.136.4.187:30301'
+      BOOTNODES: 'enode://b4036537aa0cf0475b08495c5ebb8bd986664a246ae7f9b20dda7439606db9f81f0b83a99e170d5b3b13e9a812ce68ec8b285277d4bef375cd330c234b3d0b24@18.136.4.187:30301'
     ports:
       - 8545:8545
       - 8546:8546
