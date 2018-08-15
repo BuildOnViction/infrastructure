@@ -116,6 +116,7 @@ exec tomo $params \
   --identity $IDENTITY \
   --password ./password \
   --networkid 89 \
+  --port 30303 \
   --rpc \
   --rpccorsdomain "*" \
   --rpcaddr 0.0.0.0 \
