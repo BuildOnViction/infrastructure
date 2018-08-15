@@ -13,6 +13,8 @@ services:
     environment:
       MONGODB_URI: mongodb://mongodb_scan:27017/explorer
       REDIS_HOST: redis_scan
+      CLIENT_URL: https://scan.devnet.tomochain.com/
+      WEB3_URI: https://devnet.tomochain.com
     depends_on:
       - mongodb_scan
       - redis_scan
