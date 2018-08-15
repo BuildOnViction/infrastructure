@@ -3,24 +3,32 @@ version: "3.4"
 services:
 
   tomoscan-client:
-    image: tomochain/infra-tomoscan-client:localnet
-    build:
-      context: ../tomoscan-client
+    image: tomochain/tomoscan-client:localnet
     ports:
       - "3002:3000"
     depends_on:
       - tomoscan-server
 
   tomoscan-server:
-    image: tomochain/infra-tomoscan-server:localnet
-    build:
-      context: ../tomoscan-server
+    image: tomochain/tomoscan-server:localnet
     environment:
       MONGODB_URI: mongodb://mongodb_scan:27017/explorer
+      REDIS_HOST: redis_scan
+
+  tomoscan-crawler:
+    image: tomochain/tomoscan-server:localnet
+    command: run crawl
+    environment:
+      MONGODB_URI: mongodb://mongodb_scan:27017/explorer
+      REDIS_HOST: redis_scan
     ports:
       - "3333:3333"
     depends_on:
       - mongodb_scan
+      - redis_scan
 
   mongodb_scan:
     image: mongo:3.6
+
+  redis_scan:
+    image: redis:4-alpine
