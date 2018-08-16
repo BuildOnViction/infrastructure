@@ -21,7 +21,7 @@ services:
       - netstats_ws_secret
     volumes:
       - sun:/tomochain/data
-      - bootnodes:/tomochain/bootnodes:ro
+      - devnet_bootnodes:/tomochain/bootnodes:ro
     deploy:
       placement:
         constraints:
@@ -44,7 +44,7 @@ services:
       - netstats_ws_secret
     volumes:
       - earth:/tomochain/data
-      - bootnodes:/tomochain/bootnodes:ro
+      - devnet_bootnodes:/tomochain/bootnodes:ro
     deploy:
       placement:
         constraints:
@@ -67,7 +67,7 @@ services:
       - netstats_ws_secret
     volumes:
       - moon:/tomochain/data
-      - bootnodes:/tomochain/bootnodes:ro
+      - devnet_bootnodes:/tomochain/bootnodes:ro
     deploy:
       placement:
         constraints:
@@ -93,5 +93,5 @@ volumes:
   sun:
   earth:
   moon:
-  bootnodes:
+  devnet_bootnodes:
     external: true
