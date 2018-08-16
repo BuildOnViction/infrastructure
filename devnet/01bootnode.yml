@@ -9,11 +9,11 @@ services:
     ports:
       - 39391:39391
     volumes:
-      - bootnode:/tomochain
+      - bootnodes:/tomochain
     deploy:
       placement:
         constraints:
           - node.role == manager
 
 volumes:
-  bootnode:
+  bootnodes:

@@ -1,0 +1,97 @@
+version: "3.4"
+
+services:
+
+  masternode_sun:
+    image: tomochain/infra-tomochain:devnet
+    tty: true
+    environment:
+      IDENTITY: sun
+      PASSWORD_FILE: /run/secrets/tomochain_password_sun
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_sun
+      BOOTNODES_FILE: /tomochain/bootnodes/bootnodes
+      NETSTATS_HOST: stats.devnet.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    ports:
+      - 39393:39393
+    secrets:
+      - tomochain_password_sun
+      - tomochain_pk_sun
+      - netstats_ws_secret
+    volumes:
+      - sun:/tomochain/data
+      - bootnodes:/tomochain/bootnodes:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  masternode_earth:
+    image: tomochain/infra-tomochain:devnet
+    tty: true
+    environment:
+      IDENTITY: earth
+      PASSWORD_FILE: /run/secrets/tomochain_password_earth
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_earth
+      BOOTNODES_FILE: /tomochain/bootnodes/bootnodes
+      NETSTATS_HOST: stats.devnet.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - tomochain_password_earth
+      - tomochain_pk_earth
+      - netstats_ws_secret
+    volumes:
+      - earth:/tomochain/data
+      - bootnodes:/tomochain/bootnodes:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  masternode_moon:
+    image: tomochain/infra-tomochain:devnet
+    tty: true
+    environment:
+      IDENTITY: moon
+      PASSWORD_FILE: /run/secrets/tomochain_password_moon
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_moon
+      BOOTNODES_FILE: /tomochain/bootnodes/bootnodes
+      NETSTATS_HOST: stats.devnet.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - tomochain_password_moon
+      - tomochain_pk_moon
+      - netstats_ws_secret
+    volumes:
+      - moon:/tomochain/data
+      - bootnodes:/tomochain/bootnodes:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+secrets:
+  tomochain_password_earth:
+    external: true
+  tomochain_pk_earth:
+    external: true
+  tomochain_password_sun:
+    external: true
+  tomochain_pk_sun:
+    external: true
+  tomochain_password_moon:
+    external: true
+  tomochain_pk_moon:
+    external: true
+  netstats_ws_secret:
+    external: true
+
+volumes:
+  sun:
+  earth:
+  moon:
+  bootnodes:
+    external: true
