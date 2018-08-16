@@ -12,14 +12,14 @@ for env in PRIVATE_KEY VERBOSITY; do
 done
 
 # private key
-if [[ ! -z $PRIVATE_KEY ]]; then
+if [[ ! -z "$PRIVATE_KEY" ]]; then
   echo "$PRIVATE_KEY" > bootnode.key
 elif [[ ! -f ./bootnode.key ]]; then
   bootnode -genkey bootnode.key
 fi
 
-# private key
-if [[ ! -z $VERBOSITY ]]; then
+# verbosity
+if [[ ! -z "$VERBOSITY" ]]; then
   params="$params -verbosity $VERBOSITY"
 fi
 
