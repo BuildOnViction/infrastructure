@@ -91,7 +91,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manage
+          - node.role == manager
 
   tomoscan_db:
     image: mongo:3.6
