@@ -14,9 +14,9 @@ services:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
       BOOTNODES: 'enode://f190d5fd9d71fab730ff0b58c2595a06abfed73de3fba180344b39da6f4605d0acbf91f00b0683f4b6a5a6d8515b64a1c288eadf78047b5ca1b3d6f090d3ec57@[10.0.14.8]:39391'
     ports:
-      - 8545:8545
-      - 8546:8546
-      - 39393:39393
+      - target: 39393
+        published: 39393
+        mode: host
     secrets:
       - tomochain_password_moon
       - tomochain_pk_moon
