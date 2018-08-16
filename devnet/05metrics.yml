@@ -1,0 +1,66 @@
+version: "3.4"
+
+services:
+
+  telegraf:
+    image: tomochain/infra-telegraf:devnet
+    hostname: devnet.tomochain.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+
+  influxdb:
+    image: tomochain/infra-influxdb:devnet
+    volumes:
+      - influxdb:/var/lib/influxdb
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  grafana:
+    image: tomochain/infra-grafana:devnet
+    environment:
+      GF_PATH_PROVISIONING: /etc/grafana/provisioning
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_DATABASE_HOST: grafana_db
+      GF_DATABASE_TYPE: postgres
+      GF_DATABASE_NAME: grafana
+      GF_DATABASE_USER: postgres
+      GF_DATABASE_PASSWORD__FILE: /run/secrets/metrics_gf_database_password
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/metrics_gf_security_admin_password
+    secrets:
+      - metrics_gf_database_password
+      - metrics_gf_security_admin_password
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  grafana_db:
+    image: postgres:10.4-alpine
+    environment:
+      POSTGRES_DB: grafana
+      POSTGRES_PASSWORD_FILE: /run/secrets/metrics_postgres_password
+    secrets:
+      - metrics_postgres_password
+    volumes:
+      - grafana_db:/var/lib/postgresql/data
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+secrets:
+  metrics_postgres_password:
+    external: true
+  metrics_gf_database_password:
+    external: true
+  metrics_gf_security_admin_password:
+    external: true
+
+volumes:
+  influxdb:
+  grafana_db:
