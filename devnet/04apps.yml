@@ -50,14 +50,14 @@ services:
           - node.role == manager
 
   tomoscan:
-    image: tomochain/tomoscan-client:devnet
+    image: tomochain/tomoscan-client:latest
     deploy:
       placement:
         constraints:
           - node.role == manager
 
   tomoscan_server:
-    image: tomochain/tomoscan-server:devnet
+    image: tomochain/tomoscan-server:latest
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
@@ -69,7 +69,7 @@ services:
           - node.role == manager
 
   tomoscan_crawler:
-    image: tomochain/tomoscan-server:devnet
+    image: tomochain/tomoscan-server:latest
     command: run crawl
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
