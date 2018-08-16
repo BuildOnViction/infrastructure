@@ -26,6 +26,10 @@ services:
     image: tomochain/infra-influxdb:devnet
     volumes:
       - influxdb:/var/lib/influxdb
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   grafana:
     image: tomochain/infra-grafana:devnet
@@ -41,6 +45,10 @@ services:
     secrets:
       - metrics_gf_database_password
       - metrics_gf_security_admin_password
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   grafana_db:
     image: postgres:10.4-alpine
@@ -51,6 +59,10 @@ services:
       - metrics_postgres_password
     volumes:
       - grafana_db:/var/lib/postgresql/data
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   netstats-server:
     image: tomochain/infra-netstats-server:devnet
@@ -58,6 +70,10 @@ services:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
     secrets:
       - netstats_ws_secret
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   tomomaster:
     image: tomochain/tomomaster:latest
@@ -66,6 +82,10 @@ services:
       BC_EPOCH: '990'
       EXPLORER_URL: 'https://scan.devnet.tomochain.com'
       DB_URI: 'mongodb://tomomaster_db:27017/governance'
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   tomomaster_crawler:
     image: tomochain/tomomaster:latest
@@ -75,23 +95,47 @@ services:
       BC_EPOCH: '990'
       DB_URI: 'mongodb://tomomaster_db:27017/governance'
       REDIS_HOST: 'tomomaster_redis'
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   tomoscan:
     image: tomochain/infra-tomoscan-client:devnet
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   tomoscan_crawler:
     image: tomochain/infra-tomoscan-server:devnet
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   tomomaster_db:
     image: mongo:3.6
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   tomomaster_redis:
     image: redis:4-alpine
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   tomoscan_db:
     image: mongo:3.6
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   proxy:
     image: tomochain/infra-nginx:devnet
@@ -102,6 +146,10 @@ services:
     secrets:
       - proxy_cert_pem
       - proxy_cert_private_key
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
 secrets:
   metrics_postgres_password:
