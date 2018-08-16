@@ -9,7 +9,7 @@ services:
     ports:
       - 39391:39391
     volumes:
-      - bootnodes:/tomochain
+      - bootnodes:/tomochain/bootnodes
     deploy:
       placement:
         constraints:
