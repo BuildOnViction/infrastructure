@@ -50,16 +50,30 @@ services:
           - node.role == manager
 
   tomoscan:
-    image: tomochain/infra-tomoscan-client:devnet
+    image: tomochain/tomoscan-client:devnet
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  tomoscan_server:
+    image: tomochain/tomoscan-server:devnet
+    environment:
+      MONGODB_URI: mongodb://tomoscan_db:27017/explorer
+      REDIS_HOST: tomoscan_redis
+      CLIENT_URL: https://scan.devnet.tomochain.com/
+      WEB3_URI: https://devnet.tomochain.com
     deploy:
       placement:
         constraints:
           - node.role == manager
 
   tomoscan_crawler:
-    image: tomochain/infra-tomoscan-server:devnet
+    image: tomochain/tomoscan-server:devnet
+    command: run crawl
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
+      REDIS_HOST: tomoscan_redis
     deploy:
       placement:
         constraints:
@@ -77,10 +91,17 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == manage
 
   tomoscan_db:
     image: mongo:3.6
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  tomoscan_redis:
+    image: redis:4-alpine
     deploy:
       placement:
         constraints:
