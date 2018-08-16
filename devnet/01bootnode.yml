@@ -6,8 +6,6 @@ services:
     image: tomochain/infra-bootnode:devnet
     environment:
       VERBOSITY: 6
-    ports:
-      - 39391:39391
     volumes:
       - bootnodes:/tomochain/bootnodes
     deploy:
