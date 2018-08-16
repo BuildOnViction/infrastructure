@@ -137,17 +137,6 @@ services:
         constraints:
           - node.role == manager
 
-  bootnode:
-    image: tomochain/infra-bootnode:devnet
-    ports:
-      - 39391:39391
-    volumes:
-      - bootnode:/tomochain
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
   proxy:
     image: tomochain/infra-nginx:devnet
     ports:
@@ -179,4 +168,3 @@ secrets:
 volumes:
   influxdb:
   grafana_db:
-  bootnode:
