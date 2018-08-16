@@ -3,7 +3,7 @@
 params=""
 
 # file to env
-for env in PRIVATE_KEY; do
+for env in PRIVATE_KEY VERBOSITY; do
   file=$(eval echo "\$${env}_FILE")
   if [[ -f $file ]] && [[ ! -z $file ]]; then
     echo "Replacing $env by $file"
@@ -18,9 +18,14 @@ elif [[ ! -f ./bootnode.key ]]; then
   bootnode -genkey bootnode.key
 fi
 
+# private key
+if [[ ! -z $VERBOSITY ]]; then
+  params="$params -verbosity $VERBOSITY"
+fi
+
 # dump address
-address="enode://$(bootnode -nodekey bootnode.key -writeaddress)@[$(hostname -i)]:30301"
+address="enode://$(bootnode -nodekey bootnode.key -writeaddress)@[$(hostname -i)]:39391"
 
 echo "$address" > ./bootnodes/bootnodes
 
-exec bootnode -nodekey bootnode.key --addr :39391
+exec bootnode $params -nodekey bootnode.key --addr :39391
