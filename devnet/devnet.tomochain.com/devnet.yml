@@ -141,6 +141,8 @@ services:
     image: tomochain/infra-bootnode:devnet
     ports:
       - 39391:39391
+    volumes:
+      - bootnode:/tomochain
     deploy:
       placement:
         constraints:
@@ -177,3 +179,4 @@ secrets:
 volumes:
   influxdb:
   grafana_db:
+  bootnode:
