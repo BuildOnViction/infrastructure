@@ -137,6 +137,15 @@ services:
         constraints:
           - node.role == manager
 
+  bootnode:
+    image: tomochain/infra-bootnode:devnet
+    ports:
+      - 39391:39391
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
   proxy:
     image: tomochain/infra-nginx:devnet
     ports:
