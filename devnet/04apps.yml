@@ -27,7 +27,7 @@ services:
   tomomaster:
     image: tomochain/tomomaster:latest
     environment:
-      BC_RPC: 'https://devnet.tomochain.com'
+      BC_RPC: 'http://masternode_moon:8545'
       BC_EPOCH: '990'
       EXPLORER_URL: 'https://scan.devnet.tomochain.com'
       DB_URI: 'mongodb://tomomaster_db:27017/governance'
@@ -63,6 +63,7 @@ services:
       REDIS_HOST: tomoscan_redis
       CLIENT_URL: https://scan.devnet.tomochain.com/
       WEB3_URI: https://devnet.tomochain.com
+      SENDGRID_API_KEY_FILE: /run/secrets/sendgrid_api_key
     deploy:
       placement:
         constraints:

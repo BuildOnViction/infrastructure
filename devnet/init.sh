@@ -39,6 +39,12 @@ echo "Existing private key for node 'earth': "
 unset input && read -s input \
 ; echo $input | docker secret create tomochain_pk_earth -
 
+echo -e "\n[ tomoscan ]\n"
+
+echo "Existing Sendgrid api key: "
+unset input && read -s input \
+; echo $input | docker secret create sendgrid_api_key -
+
 echo -e "\n[ proxy ]\n"
 
 echo "Certificate pem file (path): "
