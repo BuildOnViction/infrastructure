@@ -1,0 +1,10 @@
+version: "3.4"
+
+services:
+
+  bootnode:
+    image: tomochain/infra-bootnode:devnet
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
