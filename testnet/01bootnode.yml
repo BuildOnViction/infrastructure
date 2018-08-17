@@ -4,11 +4,6 @@ services:
 
   bootnode:
     image: tomochain/infra-bootnode:devnet
-    ports:
-      - target: 30301
-        published: 30301
-        protocol: udp
-        mode: host
     volumes:
       - bootnode:/tomochain
     deploy:

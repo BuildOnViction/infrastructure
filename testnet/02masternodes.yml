@@ -1,0 +1,93 @@
+version: "3.4"
+
+services:
+
+  masternode_sun:
+    image: tomochain/infra-tomochain:devnet
+    tty: true
+    environment:
+      IDENTITY: sun
+      PASSWORD_FILE: /run/secrets/tomochain_password_sun
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_sun
+      BOOTNODES: enode://19f51a3c75fb89c103d9357dd3f1cb15beea5865db025d1521e1f36d55a77f034f43749651fb7dbf1083ecc2c84014c01e316f8359220a7314c9effcfaea7873@172.31.1.60:30301
+      NETSTATS_HOST: stats.testnet.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - tomochain_password_sun
+      - tomochain_pk_sun
+      - netstats_ws_secret
+    volumes:
+      - sun:/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.masternode == sun
+
+  masternode_earth:
+    image: tomochain/infra-tomochain:devnet
+    tty: true
+    environment:
+      IDENTITY: earth
+      PASSWORD_FILE: /run/secrets/tomochain_password_earth
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_earth
+      BOOTNODES: enode://19f51a3c75fb89c103d9357dd3f1cb15beea5865db025d1521e1f36d55a77f034f43749651fb7dbf1083ecc2c84014c01e316f8359220a7314c9effcfaea7873@172.31.1.60:30301
+      NETSTATS_HOST: stats.testnet.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - tomochain_password_earth
+      - tomochain_pk_earth
+      - netstats_ws_secret
+    volumes:
+      - earth:/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.masternode == earth
+
+  masternode_moon:
+    image: tomochain/infra-tomochain:devnet
+    tty: true
+    environment:
+      IDENTITY: moon
+      PASSWORD_FILE: /run/secrets/tomochain_password_moon
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_moon
+      BOOTNODES: enode://19f51a3c75fb89c103d9357dd3f1cb15beea5865db025d1521e1f36d55a77f034f43749651fb7dbf1083ecc2c84014c01e316f8359220a7314c9effcfaea7873@172.31.1.60:30301
+      NETSTATS_HOST: stats.testnet.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    secrets:
+      - tomochain_password_moon
+      - tomochain_pk_moon
+      - netstats_ws_secret
+    volumes:
+      - moon:/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.masternode == moon
+
+secrets:
+  tomochain_password_earth:
+    external: true
+  tomochain_pk_earth:
+    external: true
+  tomochain_password_sun:
+    external: true
+  tomochain_pk_sun:
+    external: true
+  tomochain_password_moon:
+    external: true
+  tomochain_pk_moon:
+    external: true
+  netstats_ws_secret:
+    external: true
+
+volumes:
+  sun:
+  earth:
+  moon:
