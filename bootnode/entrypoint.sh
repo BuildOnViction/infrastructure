@@ -17,8 +17,8 @@ elif [[ ! -f ./bootnode.key ]]; then
 fi
 
 # dump address
-address="enode://$(bootnode -nodekey bootnode.key -writeaddress)@[$(hostname -i)]:30301"
+address="enode://$(bootnode -nodekey bootnode.key -writeaddress)@[$(hostname -i)]:39391"
 
 echo "$address" > ./bootnodes/bootnodes
 
-exec bootnode -verbosity 6 -nodekey bootnode.key --addr :30301
+exec bootnode -nodekey bootnode.key --addr :39391 -verbosity 6
