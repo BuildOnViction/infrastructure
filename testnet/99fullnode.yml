@@ -7,7 +7,7 @@ services:
     tty: true
     environment:
       IDENTITY: changeme
-      BOOTNODES: enode://6afd409255adbfcef2f1a416f913fda8c7effbf0a6773693cb64f2c34423db9a25206a2447e1666411e4562fe8870075dc773f3f494687a646c53a9efa304d15@18.136.151.139:30303
+      BOOTNODES: enode://9f3a7071bdd0f897c35e06118767dc2e060e8cf005679b06541a3e1c71cd3f757d53f0806db33917f14aa25fa0ab56da12351aba6b530280c43b144a0b97e789@18.136.151.139:30303
       NETSTATS_HOST: stats.testnet.tomochain.com
       NETSTATS_PORT: 443
       WS_SECRET: changeme
