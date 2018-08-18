@@ -1,0 +1,18 @@
+version: "3.4"
+
+services:
+
+  fullnode:
+    image: tomochain/infra-tomochain:devnet
+    tty: true
+    environment:
+      IDENTITY: changeme
+      BOOTNODES: enode://6afd409255adbfcef2f1a416f913fda8c7effbf0a6773693cb64f2c34423db9a25206a2447e1666411e4562fe8870075dc773f3f494687a646c53a9efa304d15@18.136.151.139:30303
+      NETSTATS_HOST: stats.testnet.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET: changeme
+    volumes:
+      - blockchain:/tomochain/data
+
+volumes:
+  blockchain:
