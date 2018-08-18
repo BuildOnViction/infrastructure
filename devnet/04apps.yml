@@ -61,8 +61,12 @@ services:
       REDIS_HOST: tomoscan_redis
       CLIENT_URL: https://scan.devnet.tomochain.com/
       WEB3_URI: https://devnet.tomochain.com
+      JWT_SECRET_FILE: /run/secrets/scan_jwt_secret
+      APP_SECRET_FILE: /run/secrets/scan_app_secret
       SENDGRID_API_KEY_FILE: /run/secrets/sendgrid_api_key
     secrets:
+      - scan_jwt_secret
+      - scan_app_secret
       - sendgrid_api_key
     deploy:
       placement:
@@ -112,4 +116,8 @@ secrets:
   netstats_ws_secret:
     external: true
   sendgrid_api_key:
+    external: true
+  scan_jwt_secret:
+    external: true
+  scan_app_secret:
     external: true
