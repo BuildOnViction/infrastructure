@@ -21,4 +21,4 @@ address="enode://$(bootnode -nodekey bootnode.key -writeaddress)@[$(hostname -i)
 
 echo "$address" > ./bootnodes/bootnodes
 
-bootnode -verbosity 6 -nodekey bootnode.key --addr :30301
+exec bootnode -verbosity 6 -nodekey bootnode.key --addr :30301
