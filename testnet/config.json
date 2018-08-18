@@ -1,0 +1,16 @@
+{
+  "environment": "live",
+  "debug": false,
+  "Captcha": {
+    "secret": "changeme"
+  },
+  "Ethereum": {
+    "etherToTransfer": 1,
+    "gasLimit": "0x7b0c",
+    "live": {
+      "rpc": "https://testnet.tomochain.com",
+      "account": "0xfe1c468eb19b6d15ecf18af0426df7c4746a8875",
+      "privateKey": "changeme"
+    }
+  }
+}

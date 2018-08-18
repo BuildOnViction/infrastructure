@@ -84,6 +84,15 @@ services:
         constraints:
           - node.role == manager
 
+  faucet:
+    image: tomochain/faucet:latest
+    volumes:
+      - ./config.json:/build/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
   tomomaster_db:
     image: mongo:3.6
     deploy:
