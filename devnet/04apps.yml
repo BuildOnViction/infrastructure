@@ -87,7 +87,7 @@ services:
   faucet:
     image: tomochain/faucet:latest
     volumes:
-      - ./config.json:/build/tomochain/data
+      - ./config.json:/build/config.json
     deploy:
       placement:
         constraints:
