@@ -2,17 +2,6 @@ version: "3.4"
 
 services:
 
-  shepherd:
-    image: mazzolino/shepherd:latest
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      SLEEP_TIME: "1m"
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
   netstats-server:
     image: tomochain/infra-netstats-server:devnet
     environment:
