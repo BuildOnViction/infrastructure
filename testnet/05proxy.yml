@@ -5,7 +5,8 @@ services:
   proxy:
     image: tomochain/infra-nginx:testnet
     ports:
-      - 80:80
+      - 30303:30303
+      - 30303:30303/udp
       - 443:443
     secrets:
       - proxy_cert_pem
