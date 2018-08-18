@@ -64,6 +64,8 @@ services:
       CLIENT_URL: https://scan.devnet.tomochain.com/
       WEB3_URI: https://devnet.tomochain.com
       SENDGRID_API_KEY_FILE: /run/secrets/sendgrid_api_key
+    secrets:
+      - sendgrid_api_key
     deploy:
       placement:
         constraints:
@@ -110,4 +112,6 @@ services:
 
 secrets:
   netstats_ws_secret:
+    external: true
+  sendgrid_api_key:
     external: true
