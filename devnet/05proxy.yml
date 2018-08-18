@@ -6,6 +6,7 @@ services:
     image: tomochain/infra-nginx:devnet
     ports:
       - 30303:30303
+      - 30303:30303/udp
       - 443:443
     secrets:
       - proxy_cert_pem
