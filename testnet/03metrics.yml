@@ -4,12 +4,13 @@ services:
 
   telegraf:
     image: tomochain/infra-telegraf:testnet
-    hostname: testnet.tomochain.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/rootfs/sys:ro
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
+    deploy:
+      mode: global
 
   influxdb:
     image: tomochain/infra-influxdb:devnet
