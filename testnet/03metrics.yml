@@ -2,15 +2,60 @@ version: "3.4"
 
 services:
 
-  telegraf:
+  telegraf-main:
     image: tomochain/infra-telegraf:testnet
+    hostname: testnet
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/rootfs/sys:ro
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
     deploy:
-      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+
+  telegraf-sun:
+    image: tomochain/infra-telegraf:testnet
+    hostname: sun
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.masternode == sun
+
+  telegraf-earth:
+    image: tomochain/infra-telegraf:testnet
+    hostname: earth
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.masternode == earth
+
+  telegraf-moon:
+    image: tomochain/infra-telegraf:testnet
+    hostname: moon
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.masternode == moon
 
   influxdb:
     image: tomochain/infra-influxdb:devnet
