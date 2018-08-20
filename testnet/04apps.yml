@@ -84,6 +84,8 @@ services:
 
   tomomaster_db:
     image: mongo:3.6
+    volumes:
+      - tomomaster_data:/data/db
     deploy:
       placement:
         constraints:
@@ -98,6 +100,8 @@ services:
 
   tomoscan_db:
     image: mongo:3.6
+    volumes:
+      - tomoscan_data:/data/db
     deploy:
       placement:
         constraints:
@@ -109,6 +113,11 @@ services:
       placement:
         constraints:
           - node.role == manager
+
+
+volumes:
+  tomoscan_data:
+  tomomaster_data:
 
 secrets:
   netstats_ws_secret:
