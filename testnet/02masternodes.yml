@@ -23,7 +23,7 @@ services:
       test: ["CMD", "bash", "./healthcheck.sh"]
       interval: 2m
       retries: 3
-      start_period: 60s
+      start_period: 2m
     deploy:
       placement:
         constraints:
@@ -51,7 +51,7 @@ services:
       test: ["CMD", "bash", "./healthcheck.sh"]
       interval: 2m
       retries: 3
-      start_period: 60s
+      start_period: 2m
     deploy:
       placement:
         constraints:
@@ -79,7 +79,7 @@ services:
       test: ["CMD", "bash", "./healthcheck.sh"]
       interval: 2m
       retries: 3
-      start_period: 60s
+      start_period: 2m
     deploy:
       placement:
         constraints:
