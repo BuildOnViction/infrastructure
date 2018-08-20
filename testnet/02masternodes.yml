@@ -19,9 +19,6 @@ services:
       - netstats_ws_secret
     volumes:
       - sun:/tomochain/data
-    healthcheck:
-      test: ["CMD", "bash", "./healthcheck.sh"]
-      interval: 2m
     deploy:
       placement:
         constraints:
@@ -45,9 +42,6 @@ services:
       - netstats_ws_secret
     volumes:
       - earth:/tomochain/data
-    healthcheck:
-      test: ["CMD", "bash", "./healthcheck.sh"]
-      interval: 2m
     deploy:
       placement:
         constraints:
@@ -71,9 +65,6 @@ services:
       - netstats_ws_secret
     volumes:
       - moon:/tomochain/data
-    healthcheck:
-      test: ["CMD", "bash", "./healthcheck.sh"]
-      interval: 2m
     deploy:
       placement:
         constraints:
