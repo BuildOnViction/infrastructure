@@ -22,6 +22,11 @@ services:
       NETSTATS_HOST: stats.testnet.tomochain.com
       NETSTATS_PORT: 443
       WS_SECRET: changeme
+    healthcheck:
+      test: ["CMD", "bash", "./healthcheck.sh"]
+      interval: 2m
+      retries: 3
+      start_period: 60s
     volumes:
       - blockchain:/tomochain/data
 
