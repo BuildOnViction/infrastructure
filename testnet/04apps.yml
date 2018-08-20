@@ -19,6 +19,7 @@ services:
       BC_RPC: 'http://masternode_moon:8545'
       EXPLORER_URL: 'https://scan.testnet.tomochain.com'
       DB_URI: 'mongodb://tomomaster_db:27017/governance'
+      GRAFANA_URL: 'https://grafana.testnet.tomochain.com'
     deploy:
       placement:
         constraints:
