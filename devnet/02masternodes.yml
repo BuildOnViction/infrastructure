@@ -13,8 +13,6 @@ services:
       NETSTATS_HOST: stats.devnet.tomochain.com
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
-    ports:
-      - 30303:30303
     secrets:
       - tomochain_password_sun
       - tomochain_pk_sun
