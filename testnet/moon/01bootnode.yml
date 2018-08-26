@@ -7,6 +7,7 @@ services:
     volumes:
       - bootnode:/tomochain
     ports:
+      - 30301:30301/udp
       - 30301:30301
     deploy:
       placement:

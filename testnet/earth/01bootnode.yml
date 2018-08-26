@@ -8,6 +8,7 @@ services:
       - bootnode:/tomochain
     ports:
       - 30301:30301
+      - 30301:30301/udp
     deploy:
       placement:
         constraints:
