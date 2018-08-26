@@ -15,6 +15,7 @@ services:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
     ports:
       - 30303:30303
+      - 30303:30303/udp
       - 8545:8545
       - 8546:8546
     secrets:
