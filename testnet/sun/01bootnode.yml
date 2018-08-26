@@ -7,8 +7,14 @@ services:
     volumes:
       - bootnode:/tomochain
     ports:
-      - 30301:30301/udp
-      - 30301:30301
+      - target: 30301
+        published: 30301
+        protocol: tcp
+        mode: host
+      - target: 30301
+        published: 30301
+        protocol: udp
+        mode: host
     deploy:
       placement:
         constraints:

@@ -15,8 +15,14 @@ services:
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
     ports:
-      - 30303:30303
-      - 30303:30303/udp
+      - target: 30303
+        published: 30303
+        protocol: tcp
+        mode: host
+      - target: 30303
+        published: 30303
+        protocol: udp
+        mode: host
       - 8545:8545
       - 8546:8546
     secrets:
