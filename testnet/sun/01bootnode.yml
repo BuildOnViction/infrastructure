@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+
+  bootnode:
+    image: tomochain/infra-bootnode:devnet
+    volumes:
+      - bootnode:/tomochain
+    ports:
+      - 30301:30301
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+volumes:
+  bootnode:

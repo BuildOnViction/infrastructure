@@ -1,0 +1,36 @@
+version: "3.4"
+
+services:
+
+  masternode_sun:
+    image: tomochain/infra-tomochain:devnet
+    tty: true
+    environment:
+      IDENTITY: sun
+      PASSWORD_FILE: /run/secrets/tomochain_password_sun
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_sun
+      BOOTNODES: enode://19f51a3c75fb89c103d9357dd3f1cb15beea5865db025d1521e1f36d55a77f034f43749651fb7dbf1083ecc2c84014c01e316f8359220a7314c9effcfaea7873@10.0.11.168:30301
+      NETSTATS_HOST: stats.testnet.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+    ports:
+      - 30303:30303
+      - 8545:8545
+      - 8546:8546
+    secrets:
+      - tomochain_password_sun
+      - tomochain_pk_sun
+      - netstats_ws_secret
+    volumes:
+      - sun:/tomochain/data
+
+secrets:
+  tomochain_password_sun:
+    external: true
+  tomochain_pk_sun:
+    external: true
+  netstats_ws_secret:
+    external: true
+
+volumes:
+  sun:
