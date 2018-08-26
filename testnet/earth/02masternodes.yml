@@ -2,6 +2,15 @@ version: "3.4"
 
 services:
 
+  telegraf:
+    image: tomochain/infra-telegraf:testnet
+    hostname: earth
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+
   masternode_earth:
     image: tomochain/infra-tomochain:devnet
     tty: true
