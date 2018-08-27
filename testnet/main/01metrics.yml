@@ -5,6 +5,8 @@ services:
   telegraf:
     image: tomochain/infra-telegraf:testnet
     hostname: testnet
+    environment:
+      METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/rootfs/sys:ro
