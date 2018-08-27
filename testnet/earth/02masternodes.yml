@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   telegraf:
-    image: tomochain/infra-telegraf:testnet
+    image: tomochain/infra-telegraf:devnet
     hostname: earth
     environment:
       METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
