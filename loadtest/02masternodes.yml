@@ -10,8 +10,8 @@ services:
       PASSWORD_FILE: /run/secrets/tomochain_password_earth
       PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_earth
       BOOTNODES: enode://11b2ca58233a95e03f44eee0d93f4076e84ed9f242e668b01db188d52d695319b782ffe55244f863093f5a6aa39189a7c301b007edbbf6a49e2bfcfbb7099f92@[10.0.0.8]:30301
-      NETSTATS_HOST: stats.testnet.tomochain.com
-      NETSTATS_PORT: 443
+      NETSTATS_HOST: http://52.220.195.222
+      NETSTATS_PORT: 3000
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
     secrets:
       - tomochain_password_earth
@@ -32,8 +32,8 @@ services:
       PASSWORD_FILE: /run/secrets/tomochain_password_moon
       PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_moon
       BOOTNODES: enode://11b2ca58233a95e03f44eee0d93f4076e84ed9f242e668b01db188d52d695319b782ffe55244f863093f5a6aa39189a7c301b007edbbf6a49e2bfcfbb7099f92@[10.0.0.8]:30301
-      NETSTATS_HOST: stats.testnet.tomochain.com
-      NETSTATS_PORT: 443
+      NETSTATS_HOST: http://52.220.195.222
+      NETSTATS_PORT: 3000
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
     secrets:
       - tomochain_password_moon
