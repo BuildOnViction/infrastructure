@@ -17,18 +17,9 @@ services:
         constraints:
           - node.role == manager
 
-  influxdb:
-    image: tomochain/infra-influxdb:devnet
-    volumes:
-      - influxdb:/var/lib/influxdb
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
   telegraf-tomoscan-db:
     image: tomochain/infra-telegraf:devnet
-    hostname: tomoscan-db
+    hostname: tomoscan
     environment:
       METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
     volumes:
@@ -40,7 +31,16 @@ services:
       placement:
         constraints:
           - node.role != manager
-          - node.labels.db == tomoscan
+          - node.labels.app == tomoscan
+
+  influxdb:
+    image: tomochain/infra-influxdb:devnet
+    volumes:
+      - influxdb:/var/lib/influxdb
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   grafana:
     image: tomochain/infra-grafana:devnet
