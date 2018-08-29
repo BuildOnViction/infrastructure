@@ -106,7 +106,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role != manager
+          - node.labels.db == tomoscan
 
   tomoscan_redis:
     image: redis:4-alpine
