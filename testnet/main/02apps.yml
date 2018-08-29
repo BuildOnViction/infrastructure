@@ -42,7 +42,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role != manager
+          - node.labels.db == tomoscan
 
   tomoscan_server:
     image: tomochain/tomoscan-server:latest
@@ -61,7 +62,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role != manager
+          - node.labels.db == tomoscan
 
   tomoscan_crawler:
     image: tomochain/tomoscan-server:latest
@@ -72,7 +74,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role != manager
+          - node.labels.db == tomoscan
 
   faucet:
     image: tomochain/faucet:latest
