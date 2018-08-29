@@ -26,6 +26,22 @@ services:
         constraints:
           - node.role == manager
 
+  telegraf-tomoscan-db:
+    image: tomochain/infra-telegraf:devnet
+    hostname: tomoscan-db
+    environment:
+      METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.db == tomoscan
+
   grafana:
     image: tomochain/infra-grafana:devnet
     environment:
