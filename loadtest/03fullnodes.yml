@@ -14,6 +14,7 @@ services:
       - netstats_ws_secret
     deploy:
       placement:
+        replicas: 0
         constraints:
           - node.role != manager
 
