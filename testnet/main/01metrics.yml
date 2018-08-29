@@ -17,7 +17,7 @@ services:
         constraints:
           - node.role == manager
 
-  telegraf-tomoscan-db:
+  telegraf-tomoscan:
     image: tomochain/infra-telegraf:devnet
     hostname: tomoscan
     environment:
