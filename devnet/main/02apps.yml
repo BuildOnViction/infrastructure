@@ -2,17 +2,6 @@ version: "3.4"
 
 services:
 
-  shepherd:
-    image: mazzolino/shepherd:latest
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      SLEEP_TIME: "1m"
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
   netstats-server:
     image: tomochain/infra-netstats-server:devnet
     environment:
@@ -27,7 +16,7 @@ services:
   tomomaster:
     image: tomochain/tomomaster:latest
     environment:
-      BC_RPC: 'http://masternode_moon:8545'
+      BC_RPC: 'https://devnet.tomochain.com:443'
       EXPLORER_URL: 'https://scan.devnet.tomochain.com'
       DB_URI: 'mongodb://tomomaster_db:27017/governance'
       GRAFANA_URL: 'https://grafana.devnet.tomochain.com'
@@ -61,7 +50,7 @@ services:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
       CLIENT_URL: https://scan.devnet.tomochain.com/
-      WEB3_URI: https://devnet.tomochain.com
+      WEB3_URI: https://devnet.tomochain.com:443
       JWT_SECRET_FILE: /run/secrets/scan_jwt_secret
       APP_SECRET_FILE: /run/secrets/scan_app_secret
       SENDGRID_API_KEY_FILE: /run/secrets/sendgrid_api_key
@@ -125,6 +114,7 @@ services:
       placement:
         constraints:
           - node.role == manager
+
 
 volumes:
   tomoscan_data:

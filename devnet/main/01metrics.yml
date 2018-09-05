@@ -4,7 +4,7 @@ services:
 
   telegraf:
     image: tomochain/infra-telegraf:devnet
-    hostname: devnet.tomochain.com
+    hostname: devnet
     environment:
       METRICS_ENDPOINT: https://metrics.devnet.tomochain.com
     volumes:
@@ -12,6 +12,26 @@ services:
       - /sys:/rootfs/sys:ro
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  telegraf-tomoscan:
+    image: tomochain/infra-telegraf:devnet
+    hostname: tomoscan
+    environment:
+      METRICS_ENDPOINT: https://metrics.devnet.tomochain.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.app == tomoscan
 
   influxdb:
     image: tomochain/infra-influxdb:devnet
