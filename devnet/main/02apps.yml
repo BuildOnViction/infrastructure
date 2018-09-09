@@ -50,7 +50,7 @@ services:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
       CLIENT_URL: https://scan.devnet.tomochain.com/
-      WEB3_URI: https://devnet.tomochain.com:443
+      WEB3_URI: https://devnet.tomochain.com
       JWT_SECRET_FILE: /run/secrets/scan_jwt_secret
       APP_SECRET_FILE: /run/secrets/scan_app_secret
       SENDGRID_API_KEY_FILE: /run/secrets/sendgrid_api_key
@@ -69,15 +69,7 @@ services:
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
-  faucet:
-    image: tomochain/faucet:latest
-    volumes:
-      - ./config.json:/build/config.json
+      WEB3_URI: https://devnet.tomochain.com
     deploy:
       placement:
         constraints:
