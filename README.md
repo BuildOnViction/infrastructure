@@ -1,8 +1,9 @@
 # infrastructure
 
-This repo holds the internal Tomochain infrastructure (Docker images, deployments, etc.)
+This repo holds the internal Tomochain infrastructure (Docker images, deployments, etc.).
 
-If you are searching to run a masternode, please head to the [masternode](https://github.com/tomochain/masternode) repo.
+You should normally not need any code from this repo.
+If you are willing to run a masternode, please head to the [documentation](https://docs.tomochain.com/get-started/run-node/).
 
 ## Networks
 
