@@ -17,6 +17,7 @@ services:
     image: tomochain/tomomaster:latest
     environment:
       BC_RPC: 'https://devnet.tomochain.com:443'
+      BC_NETWORK_ID: 90
       EXPLORER_URL: 'https://scan.devnet.tomochain.com'
       DB_URI: 'mongodb://tomomaster_db:27017/governance'
       GRAFANA_URL: 'https://grafana.devnet.tomochain.com'
@@ -30,6 +31,7 @@ services:
     command: run crawl
     environment:
       BC_RPC: 'https://devnet.tomochain.com'
+      BC_NETWORK_ID: 90
       DB_URI: 'mongodb://tomomaster_db:27017/governance'
       REDIS_HOST: 'tomomaster_redis'
     deploy:
