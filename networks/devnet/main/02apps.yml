@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
 
-  netstats-server:
+  netstats:
     image: tomochain/netstats:latest
     environment:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
