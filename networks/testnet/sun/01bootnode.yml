@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   bootnode:
-    image: tomochain/infra-bootnode:devnet
+    image: tomochain/bootnode:latest
     volumes:
       - bootnode:/tomochain
     ports:
