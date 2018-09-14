@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   telegraf:
-    image: tomochain/infra-telegraf:devnet
+    image: tomochain/telegraf:latest
     hostname: sun
     environment:
       METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
@@ -14,7 +14,7 @@ services:
       - /etc:/rootfs/etc:ro
 
   masternode_sun:
-    image: tomochain/infra-tomochain:devnet
+    image: tomochain/node:latest
     tty: true
     environment:
       IDENTITY: sun
