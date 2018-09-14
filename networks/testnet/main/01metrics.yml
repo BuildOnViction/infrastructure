@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   telegraf:
-    image: tomochain/infra-telegraf:devnet
+    image: tomochain/telegraf:latest
     hostname: testnet
     environment:
       METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
@@ -18,7 +18,7 @@ services:
           - node.role == manager
 
   telegraf-tomoscan:
-    image: tomochain/infra-telegraf:devnet
+    image: tomochain/telegraf:latest
     hostname: tomoscan
     environment:
       METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
@@ -34,7 +34,7 @@ services:
           - node.labels.app == tomoscan
 
   influxdb:
-    image: tomochain/infra-influxdb:devnet
+    image: tomochain/influxdb:latest
     volumes:
       - influxdb:/var/lib/influxdb
     deploy:
@@ -43,7 +43,7 @@ services:
           - node.role == manager
 
   grafana:
-    image: tomochain/infra-grafana:devnet
+    image: tomochain/grafana:latest
     environment:
       GF_PATH_PROVISIONING: /etc/grafana/provisioning
       GF_AUTH_ANONYMOUS_ENABLED: "true"
