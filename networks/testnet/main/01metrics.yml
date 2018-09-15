@@ -45,6 +45,7 @@ services:
   grafana:
     image: tomochain/grafana:latest
     environment:
+      GF_SERVER_ROOT_URL: https://grafana.testnet.tomochain.com
       GF_PATH_PROVISIONING: /etc/grafana/provisioning
       GF_AUTH_ANONYMOUS_ENABLED: "true"
       GF_DATABASE_HOST: grafana_db
