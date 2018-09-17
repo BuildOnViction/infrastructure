@@ -55,10 +55,12 @@ services:
       JWT_SECRET_FILE: /run/secrets/scan_jwt_secret
       APP_SECRET_FILE: /run/secrets/scan_app_secret
       SENDGRID_API_KEY_FILE: /run/secrets/sendgrid_api_key
+      RE_CAPTCHA_SECRET: /run/secrets/re_captcha_secret
     secrets:
       - scan_jwt_secret
       - scan_app_secret
       - sendgrid_api_key
+      - re_captcha_secret
     deploy:
       placement:
         constraints:
