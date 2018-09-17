@@ -24,9 +24,16 @@ echo "Existing Sendgrid api key: "
 unset input && read -s input \
 ; echo $input | docker secret create sendgrid_api_key -
 
+echo "Existing Recaptcha secret: "
+unset input && read -s input \
+; echo $input | docker secret create re_captcha_secret -
+
 echo "Existing jwt secret: "
 unset input && read -s input \
 ; echo $input | docker secret create scan_jwt_secret -
+echo "Existing Recaptcha secret: "
+unset input && read -s input \
+; echo $input | docker secret create re_captcha_secret -
 
 echo "Existing app secret: "
 unset input && read -s input \
