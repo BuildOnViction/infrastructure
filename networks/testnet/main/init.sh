@@ -31,9 +31,6 @@ unset input && read -s input \
 echo "Existing jwt secret: "
 unset input && read -s input \
 ; echo $input | docker secret create scan_jwt_secret -
-echo "Existing Recaptcha secret: "
-unset input && read -s input \
-; echo $input | docker secret create re_captcha_secret -
 
 echo "Existing app secret: "
 unset input && read -s input \
