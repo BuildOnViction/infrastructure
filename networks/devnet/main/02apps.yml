@@ -125,3 +125,5 @@ secrets:
     external: true
   scan_app_secret:
     external: true
+  re_captcha_secret:
+    external: true
