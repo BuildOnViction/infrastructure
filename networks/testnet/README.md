@@ -44,6 +44,7 @@ docker stack deploy -c 02... testnet
 - [TomoMaster](https://master.testnet.tomochain.com)
 - [TomoScan](https://scan.testnet.tomochain.com)
 - [Grafana](https://grafana.testnet.tomochain.com)
+- [Faucet](https://faucet.testnet.tomochain.com)
 
 ## Undeploy
 

@@ -2,43 +2,6 @@ version: "3.4"
 
 services:
 
-  netstats:
-    image: tomochain/netstats:latest
-    environment:
-      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
-    secrets:
-      - netstats_ws_secret
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
-  tomomaster:
-    image: tomochain/tomomaster:latest
-    environment:
-      BC_RPC: 'https://devnet.tomochain.com:443'
-      BC_NETWORK_ID: 90
-      EXPLORER_URL: 'https://scan.devnet.tomochain.com'
-      DB_URI: 'mongodb://tomomaster_db:27017/governance'
-      GRAFANA_URL: 'https://grafana.devnet.tomochain.com'
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
-  tomomaster_crawler:
-    image: tomochain/tomomaster:latest
-    command: run crawl
-    environment:
-      BC_RPC: 'https://devnet.tomochain.com'
-      BC_NETWORK_ID: 90
-      DB_URI: 'mongodb://tomomaster_db:27017/governance'
-      REDIS_HOST: 'tomomaster_redis'
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
   tomoscan:
     image: tomochain/tomoscan-client:latest
     deploy:
@@ -79,22 +42,6 @@ services:
         constraints:
           - node.role == manager
 
-  tomomaster_db:
-    image: mongo:3.6
-    volumes:
-      - tomomaster_data:/data/db
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
-  tomomaster_redis:
-    image: redis:4-alpine
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
   tomoscan_db:
     image: mongo:3.6
     volumes:
@@ -114,11 +61,8 @@ services:
 
 volumes:
   tomoscan_data:
-  tomomaster_data:
 
 secrets:
-  netstats_ws_secret:
-    external: true
   sendgrid_api_key:
     external: true
   scan_jwt_secret:
