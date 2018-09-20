@@ -1,0 +1,12 @@
+version: "3.4"
+
+services:
+
+  faucet:
+    image: tomochain/faucet:latest
+    volumes:
+      - ./config.json:/build/config.json
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
