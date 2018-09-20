@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   faucet:
-    image: tomochain/faucet:latest
+    image: tomochain/faucet:testnet
     volumes:
       - ./config.json:/build/config.json
     deploy:
