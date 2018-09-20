@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   tomoscan:
-    image: tomochain/tomoscan-client:latest
+    image: tomochain/tomoscan-client:testnet
     deploy:
       placement:
         constraints:
@@ -11,7 +11,7 @@ services:
           - node.labels.app == tomoscan
 
   tomoscan_server:
-    image: tomochain/tomoscan-server:latest
+    image: tomochain/tomoscan-server:testnet
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
@@ -33,7 +33,7 @@ services:
           - node.labels.app == tomoscan
 
   tomoscan_crawler:
-    image: tomochain/tomoscan-server:latest
+    image: tomochain/tomoscan-server:testnet
     command: run crawl
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer

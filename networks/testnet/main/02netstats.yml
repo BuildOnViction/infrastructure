@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   netstats:
-    image: tomochain/netstats:latest
+    image: tomochain/netstats:testnet
     environment:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
     secrets:
