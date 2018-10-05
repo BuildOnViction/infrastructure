@@ -38,7 +38,7 @@ services:
   tomomaster_redis:
     image: redis:4-alpine
     volumes:
-      - tomomaster_redis:/data
+      - tomomaster_data_redis:/data
     deploy:
       placement:
         constraints:
@@ -46,4 +46,4 @@ services:
 
 volumes:
   tomomaster_data:
-  tomomaster_redis:
+  tomomaster_data_redis:
