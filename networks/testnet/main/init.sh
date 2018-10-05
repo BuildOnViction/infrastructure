@@ -36,6 +36,10 @@ echo "Existing app secret: "
 unset input && read -s input \
 ; echo $input | docker secret create scan_app_secret -
 
+echo "Existing slack webhook url: "
+unset input && read -s input \
+; echo $input | docker secret create slack_webhook_url -
+
 
 echo -e "\n[ proxy ]\n"
 
