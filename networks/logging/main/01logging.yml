@@ -30,7 +30,7 @@ services:
     environment:
       - GRAYLOG_PASSWORD_SECRET= #changeme
       - GRAYLOG_ROOT_PASSWORD_SHA2=f03b7fe7044aad195ce47986828064d21e99dd82c1c02c869b07bd445e7869ae
-      - GRAYLOG_WEB_ENDPOINT_URI=http://127.0.0.1:9000/api
+      - GRAYLOG_WEB_ENDPOINT_URI=http://13.251.123.159:9000/api
     ports:
       - 9000:9000
       # # Syslog TCP
