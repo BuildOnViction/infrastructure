@@ -1,0 +1,48 @@
+version: "3.4"
+
+services:
+  graylog_db:
+    image: mongo:3.6
+    volumes:
+      - graylog_data:/data/db
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.3
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=localhost
+      - network.host=0.0.0.0
+      # https://www.elastic.co/guide/en/elasticsearch/reference/5.6/security-settings.html#general-security-settings
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    # ulimits:
+    #   memlock:
+    #     soft: -1
+    #     hard: -1
+    # mem_limit: 1g
+
+  graylog:
+    image: graylog/graylog:2.4
+    volumes:
+      - graylog_journal:/usr/share/graylog/data/journal
+    environment:
+      - GRAYLOG_PASSWORD_SECRET=changeme
+      - GRAYLOG_ROOT_PASSWORD_SHA2=changeme
+      - GRAYLOG_WEB_ENDPOINT_URI=http://127.0.0.1:9000/api
+    ports:
+      - 9000:9000
+      # # Syslog TCP
+      # - 514:514
+      # # Syslog UDP
+      # - 514:514/udp
+      # # GELF TCP
+      # - 12201:12201
+      # GELF UDP
+      - 12201:12201/udp
+
+volumes:
+  graylog_data:
+  elastic_data:
+  graylog_journal:
