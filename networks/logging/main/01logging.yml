@@ -16,7 +16,7 @@ services:
       - network.host=0.0.0.0
       # https://www.elastic.co/guide/en/elasticsearch/reference/5.6/security-settings.html#general-security-settings
       - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
     # ulimits:
     #   memlock:
     #     soft: -1
@@ -24,25 +24,28 @@ services:
     # mem_limit: 1g
 
   graylog:
-    image: graylog/graylog:2.4
+    image: tomochain/graylog:latest
     volumes:
       - graylog_journal:/usr/share/graylog/data/journal
     environment:
-      - GRAYLOG_PASSWORD_SECRET= #changeme
-      - GRAYLOG_ROOT_PASSWORD_SHA2=f03b7fe7044aad195ce47986828064d21e99dd82c1c02c869b07bd445e7869ae
-      - GRAYLOG_WEB_ENDPOINT_URI=http://13.251.123.159:9000/api
+      GRAYLOG_WEB_ENDPOINT_URI: https://logging.testnet.tomochain.com/api
+      GRAYLOG_PASSWORD_SECRET_FILE: /run/secrets/
+      GRAYLOG_ROOT_PASSWORD_SHA2_FILE:
+    secrets:
+      - graylog_password_secret
+      - graylog_root_password_sha2
     ports:
-      - 9000:9000
-      # # Syslog TCP
-      # - 514:514
-      # # Syslog UDP
-      # - 514:514/udp
-      # # GELF TCP
-      # - 12201:12201
-      # GELF UDP
+      - 443:9000
       - 12201:12201/udp
 
 volumes:
   graylog_data:
   elastic_data:
   graylog_journal:
+
+
+secrets:
+  graylog_password_secret:
+    external: true
+  graylog_root_password_sha2:
+    external: true
