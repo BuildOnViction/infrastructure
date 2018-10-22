@@ -42,7 +42,7 @@ services:
         constraints:
           - node.role == manager
 
-  tomoscan_txs:
+  tomoscan_pending_txs:
     image: tomochain/tomoscan-server:latest
     command: run subscribe-pending-tx
     environment:
