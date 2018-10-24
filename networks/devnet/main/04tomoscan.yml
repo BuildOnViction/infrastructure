@@ -42,6 +42,19 @@ services:
         constraints:
           - node.role == manager
 
+  tomoscan_pending_txs:
+    image: tomochain/tomoscan-server:latest
+    command: run subscribe-pending-tx
+    environment:
+      MONGODB_URI: mongodb://tomoscan_db:27017/explorer
+      REDIS_HOST: tomoscan_redis
+      WEB3_URI: https://devnet.tomochain.com
+      WEB3_WS_URI: https://devnet.tomochain.com/ws
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
   tomoscan_db:
     image: mongo:3.6
     volumes:
