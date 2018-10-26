@@ -15,7 +15,6 @@ services:
 
   masternode_moon:
     image: tomochain/node:latest
-    tty: true
     environment:
       IDENTITY: moon
       PASSWORD_FILE: /run/secrets/tomochain_password_moon

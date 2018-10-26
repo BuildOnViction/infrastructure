@@ -15,7 +15,6 @@ services:
 
   masternode_earth:
     image: tomochain/node:testnet
-    tty: true
     environment:
       IDENTITY: earth
       PASSWORD_FILE: /run/secrets/tomochain_password_earth
