@@ -6,7 +6,7 @@ echo -e "\n[ graylog ]\n"
 
 echo "New Greylog salt (password secret): "
 unset input && read -s input \
-; echo $input | docker secret create graylog_password_secret - \
+; echo $input | docker secret create graylog_password_secret -
 echo "New Greylog root (admin) password: "
 unset input && read -s input \
 ; echo $input \
