@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 if [[ ! -z $GRAYLOG_PASSWORD_SECRET_FILE ]]; then
   export GRAYLOG_PASSWORD_SECRET=$(cat $GRAYLOG_PASSWORD_SECRET_FILE)
