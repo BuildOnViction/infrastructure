@@ -38,6 +38,18 @@ services:
         constraints:
           - node.role == manager
 
+  tomomaster_crawler_block_signer:
+    image: tomochain/tomomaster:testnet
+    command: run crawl-block-signer
+    environment:
+      BC_RPC: 'https://testnet.tomochain.com'
+      DB_URI: 'mongodb://tomomaster_db:27017/governance'
+      REDIS_HOST: 'tomomaster_redis'
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
   tomomaster_db:
     image: mongo:3.6
     volumes:
