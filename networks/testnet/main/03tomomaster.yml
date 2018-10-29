@@ -26,6 +26,18 @@ services:
         constraints:
           - node.role == manager
 
+  tomomaster_crawler_reward:
+    image: tomochain/tomomaster:testnet
+    command: run crawl-reward
+    environment:
+      BC_RPC: 'https://testnet.tomochain.com'
+      DB_URI: 'mongodb://tomomaster_db:27017/governance'
+      REDIS_HOST: 'tomomaster_redis'
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
   tomomaster_db:
     image: mongo:3.6
     volumes:
