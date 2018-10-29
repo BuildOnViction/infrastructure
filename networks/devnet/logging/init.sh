@@ -10,7 +10,7 @@ unset input && read -s input \
 echo "New Greylog root (admin) password: "
 unset input && read -s input \
 ; echo $input \
-| shasum -a 256 2> /dev/null | cut -d' ' -f1 | docker secret create graylog_root_password_sha2 -
+| tr -d '\n' | shasum -a 256 2> /dev/null | cut -d' ' -f1 | docker secret create graylog_root_password_sha2 -
 
 echo -e "\n[ proxy ]\n"
 
