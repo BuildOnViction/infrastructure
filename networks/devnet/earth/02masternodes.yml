@@ -14,7 +14,7 @@ services:
       - /etc:/rootfs/etc:ro
 
   masternode_earth:
-    image: tomochain/node:latest
+    image: tomochain/node:testnet
     environment:
       IDENTITY: earth
       PASSWORD_FILE: /run/secrets/tomochain_password_earth

@@ -14,7 +14,7 @@ services:
       - /etc:/rootfs/etc:ro
 
   masternode_sun:
-    image: tomochain/node:latest
+    image: tomochain/node:testnet
     environment:
       IDENTITY: sun
       PASSWORD_FILE: /run/secrets/tomochain_password_sun

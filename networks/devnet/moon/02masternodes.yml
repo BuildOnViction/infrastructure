@@ -14,7 +14,7 @@ services:
       - /etc:/rootfs/etc:ro
 
   masternode_moon:
-    image: tomochain/node:latest
+    image: tomochain/node:testnet
     environment:
       IDENTITY: moon
       PASSWORD_FILE: /run/secrets/tomochain_password_moon
