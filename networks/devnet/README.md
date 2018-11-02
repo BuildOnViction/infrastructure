@@ -1,4 +1,4 @@
-# Devnet
+# 🏗️ Devnet
 
 This is the devnet network of the Tomochain infrastructure.
 
@@ -29,20 +29,20 @@ For each swarm:
 
 Clone the repository on the manager node and checkout the develop branch.
 
-```
+```bash
 git clone https://github.com/tomochain/infrastructure.git
 cd infrastructure/networks/devnet/[swarm name]
 ```
 
 Enable swarm mode.
 
-```
+```bash
 docker swarm init
 ```
 
 Disable scheduling containers on the swarm master.
 
-```
+```bash
 docker node update --availability drain [manager node name]
 ```
 
@@ -50,13 +50,13 @@ Connect the other worker nodes and setup their names and roles.
 
 Set the docker secrets.
 
-```
+```bash
 ./init.sh
 ```
 
 Create the swarm services by deploying each stack files.
 
-```
+```bash
 docker stack deploy -c 00... devnet
 docker stack deploy -c 01... devnet
 ...
@@ -74,7 +74,7 @@ docker stack deploy -c 01... devnet
 
 In case you want to reset a swarm, just run that on the manager:
 
-```
+```bash
 docker stack rm devnet
 docker container prune
 docker volume prune
