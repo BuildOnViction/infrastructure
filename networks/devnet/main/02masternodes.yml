@@ -2,39 +2,6 @@ version: "3.4"
 
 services:
 
-  telegraf_sun:
-    image: tomochain/telegraf:latest
-    hostname: sun
-    environment:
-      METRICS_ENDPOINT: https://metrics.devnet.tomochain.com
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys:/rootfs/sys:ro
-      - /proc:/rootfs/proc:ro
-      - /etc:/rootfs/etc:ro
-
-  telegraf_moon:
-    image: tomochain/telegraf:latest
-    hostname: moon
-    environment:
-      METRICS_ENDPOINT: https://metrics.devnet.tomochain.com
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys:/rootfs/sys:ro
-      - /proc:/rootfs/proc:ro
-      - /etc:/rootfs/etc:ro
-
-  telegraf_earth:
-    image: tomochain/telegraf:latest
-    hostname: earth
-    environment:
-      METRICS_ENDPOINT: https://metrics.devnet.tomochain.com
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys:/rootfs/sys:ro
-      - /proc:/rootfs/proc:ro
-      - /etc:/rootfs/etc:ro
-
   masternode_sun:
     image: tomochain/node:testnet
     environment:
