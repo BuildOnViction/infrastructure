@@ -49,7 +49,7 @@ services:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
       WEB3_URI: https://devnet.tomochain.com
-      WEB3_WS_URI: https://devnet.tomochain.com/ws
+      WEB3_WS_URI: wss://devnet.tomochain.com/ws
     deploy:
       placement:
         constraints:
