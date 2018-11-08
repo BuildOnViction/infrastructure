@@ -11,7 +11,11 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
 
 secrets:
   netstats_ws_secret:

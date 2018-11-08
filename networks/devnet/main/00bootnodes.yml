@@ -18,7 +18,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == masternode
+          - node.hostname == sun.devnet.tomochain.com
 
   bootnode-moon:
     image: tomochain/bootnode:testnet
@@ -36,7 +37,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == masternode
+          - node.hostname == moon.devnet.tomochain.com
 
   bootnode-earth:
     image: tomochain/bootnode:testnet
@@ -54,7 +56,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == masternode
+          - node.hostname == earth.devnet.tomochain.com
 
 volumes:
   bootnode-sun:

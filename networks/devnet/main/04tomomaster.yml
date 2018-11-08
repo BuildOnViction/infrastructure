@@ -13,7 +13,11 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
 
   tomomaster_crawler:
     image: tomochain/tomomaster:latest
@@ -26,7 +30,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
 
   tomomaster_db:
     image: mongo:3.6
@@ -35,14 +39,14 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
 
   tomomaster_redis:
     image: redis:4-alpine
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
 
 volumes:
   tomomaster_data:

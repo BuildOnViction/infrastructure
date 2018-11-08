@@ -7,7 +7,11 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
 
   tomoscan_server:
     image: tomochain/tomoscan-server:latest
@@ -28,7 +32,11 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
 
   tomoscan_crawler:
     image: tomochain/tomoscan-server:latest
@@ -40,7 +48,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
 
   tomoscan_pending_txs:
     image: tomochain/tomoscan-server:latest
@@ -53,7 +61,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
 
   tomoscan_db:
     image: mongo:3.6
@@ -62,14 +70,14 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
 
   tomoscan_redis:
     image: redis:4-alpine
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
 
 
 volumes:

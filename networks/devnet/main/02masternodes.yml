@@ -23,14 +23,17 @@ services:
         published: 30303
         protocol: udp
         mode: host
-      - 8545:8545
-      - 8546:8546
     secrets:
       - tomochain_password_sun
       - tomochain_pk_sun
       - netstats_ws_secret
     volumes:
       - masternode-sun:/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.type == masternode
+          - node.hostname == sun.devnet.tomochain.com
 
   masternode_moon:
     image: tomochain/node:testnet
@@ -53,14 +56,17 @@ services:
         published: 30303
         protocol: udp
         mode: host
-      - 8545:8545
-      - 8546:8546
     secrets:
       - tomochain_password_moon
       - tomochain_pk_moon
       - netstats_ws_secret
     volumes:
       - masternode-moon:/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.type == masternode
+          - node.hostname == moon.devnet.tomochain.com
 
   masternode_earth:
     image: tomochain/node:testnet
@@ -83,14 +89,17 @@ services:
         published: 30303
         protocol: udp
         mode: host
-      - 8545:8545
-      - 8546:8546
     secrets:
       - tomochain_password_earth
       - tomochain_pk_earth
       - netstats_ws_secret
     volumes:
       - masternode-earth:/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.type == masternode
+          - node.hostname == earth.devnet.tomochain.com
 
 secrets:
   tomochain_password_sun:

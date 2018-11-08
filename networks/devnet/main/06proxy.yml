@@ -14,7 +14,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - engine.labels.type == apps
 
 secrets:
   proxy_cert_pem:
