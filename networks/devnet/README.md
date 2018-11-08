@@ -46,6 +46,12 @@ Disable scheduling containers on the swarm master.
 docker node update --availability drain [manager node name]
 ```
 
+Give the appropriate tags to the nodes.
+
+```bash
+docker node update --label-add <key>=<value> <node-id>
+```
+
 Connect the other worker nodes and setup their names and roles.
 
 Set the docker secrets.
