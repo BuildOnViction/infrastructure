@@ -16,8 +16,8 @@ services:
         protocol: udp
         mode: host
     deploy:
+      replicas: 3
       placement:
-        replicas: 3
         constraints:
           - engine.labels.type == masternode
           - node.hostname == sun.devnet.tomochain.com
