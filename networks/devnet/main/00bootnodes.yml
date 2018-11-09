@@ -20,7 +20,6 @@ services:
       placement:
         constraints:
           - engine.labels.type == masternode
-          - node.hostname == sun.devnet.tomochain.com
 
 volumes:
   bootnode:
