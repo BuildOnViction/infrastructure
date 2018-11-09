@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
 
-  bootnode-sun:
+  bootnode:
     image: tomochain/bootnode:testnet
     volumes:
       - bootnode:/tomochain
