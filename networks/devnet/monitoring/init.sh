@@ -2,6 +2,16 @@
 
 echo "Please fill the following required values:"
 
+echo -e "\n[ metrics ]\n"
+
+echo "New Grafana db password: "
+unset input && read -s input \
+; echo $input | docker secret create metrics_gf_database_password - \
+; echo $input | docker secret create metrics_postgres_password -
+echo "New Grafana admin password: "
+unset input && read -s input \
+; echo $input | docker secret create metrics_gf_security_admin_password -
+
 echo -e "\n[ graylog ]\n"
 
 echo "New Greylog salt (password secret): "

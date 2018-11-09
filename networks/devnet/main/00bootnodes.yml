@@ -1,0 +1,65 @@
+version: "3.4"
+
+services:
+
+  bootnode-sun:
+    image: tomochain/bootnode:testnet
+    volumes:
+      - bootnode:/tomochain
+    ports:
+      - target: 30301
+        published: 30301
+        protocol: tcp
+        mode: host
+      - target: 30301
+        published: 30301
+        protocol: udp
+        mode: host
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.type == masternode
+          - node.hostname == sun.devnet.tomochain.com
+
+  bootnode-moon:
+    image: tomochain/bootnode:testnet
+    volumes:
+      - bootnode:/tomochain
+    ports:
+      - target: 30301
+        published: 30301
+        protocol: tcp
+        mode: host
+      - target: 30301
+        published: 30301
+        protocol: udp
+        mode: host
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.type == masternode
+          - node.hostname == moon.devnet.tomochain.com
+
+  bootnode-earth:
+    image: tomochain/bootnode:testnet
+    volumes:
+      - bootnode:/tomochain
+    ports:
+      - target: 30301
+        published: 30301
+        protocol: tcp
+        mode: host
+      - target: 30301
+        published: 30301
+        protocol: udp
+        mode: host
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.type == masternode
+          - node.hostname == earth.devnet.tomochain.com
+
+volumes:
+  bootnode-sun:
+  bootnode-moon:
+  bootnode-earth:
