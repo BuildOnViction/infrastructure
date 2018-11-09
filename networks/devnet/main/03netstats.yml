@@ -11,7 +11,7 @@ services:
     deploy:
       placement:
         constraints:
-          - engine.labels.type == apps
+          - node.labels.type == apps
       update_config:
         parallelism: 1
         delay: 10s

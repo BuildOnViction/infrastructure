@@ -19,7 +19,7 @@ services:
       replicas: 3
       placement:
         constraints:
-          - engine.labels.type == masternode
+          - node.labels.type == masternode
 
 volumes:
   bootnode:

@@ -13,7 +13,7 @@ services:
     deploy:
       placement:
         constraints:
-          - engine.labels.type == apps
+          - node.labels.type == apps
       update_config:
         parallelism: 1
         delay: 10s
@@ -30,7 +30,7 @@ services:
     deploy:
       placement:
         constraints:
-          - engine.labels.type == apps
+          - node.labels.type == apps
 
   tomomaster_db:
     image: mongo:3.6
@@ -39,14 +39,14 @@ services:
     deploy:
       placement:
         constraints:
-          - engine.labels.type == apps
+          - node.labels.type == apps
 
   tomomaster_redis:
     image: redis:4-alpine
     deploy:
       placement:
         constraints:
-          - engine.labels.type == apps
+          - node.labels.type == apps
 
 volumes:
   tomomaster_data:

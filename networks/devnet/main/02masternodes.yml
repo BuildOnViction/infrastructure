@@ -40,7 +40,7 @@ services:
     deploy:
       placement:
         constraints:
-          - engine.labels.type == masternode
+          - node.labels.type == masternode
           - node.hostname == sun.devnet.tomochain.com
 
   masternode_moon:
@@ -81,7 +81,7 @@ services:
     deploy:
       placement:
         constraints:
-          - engine.labels.type == masternode
+          - node.labels.type == masternode
           - node.hostname == moon.devnet.tomochain.com
 
   masternode_earth:
@@ -122,7 +122,7 @@ services:
     deploy:
       placement:
         constraints:
-          - engine.labels.type == masternode
+          - node.labels.type == masternode
           - node.hostname == earth.devnet.tomochain.com
 
 secrets:
