@@ -14,7 +14,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.proxy
+          - node.labels.role == proxy
 
 secrets:
   proxy_cert_pem:
