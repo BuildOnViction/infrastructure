@@ -14,7 +14,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.labels.type == apps
+          - node.labels.proxy
 
 secrets:
   proxy_cert_pem:
