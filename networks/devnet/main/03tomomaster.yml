@@ -8,6 +8,8 @@ services:
       BC_RPC: 'https://devnet.tomochain.com:443'
       BC_NETWORK_ID: 90
       EXPLORER_URL: 'https://scan.devnet.tomochain.com'
+      TOMOSCAN_URL: 'https://scan.devnet.tomochain.com'
+      BASE_URL: 'https://master.devnet.tomochain.com'
       DB_URI: 'mongodb://tomomaster_db:27017/governance'
       GRAFANA_URL: 'https://grafana.devnet.tomochain.com'
     deploy:
