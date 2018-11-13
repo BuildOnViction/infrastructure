@@ -19,6 +19,8 @@ services:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
       CLIENT_URL: https://scan.devnet.tomochain.com/
+      TOMOMATER_URL: http://tomomaster:3001
+      BASE_URL: https://scan.devnet.tomochain.com
       WEB3_URI: https://devnet.tomochain.com
       JWT_SECRET_FILE: /run/secrets/scan_jwt_secret
       APP_SECRET_FILE: /run/secrets/scan_app_secret
