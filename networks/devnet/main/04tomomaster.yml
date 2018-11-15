@@ -5,7 +5,7 @@ services:
   tomomaster:
     image: tomochain/tomomaster:latest
     environment:
-      BC_RPC: 'http://blockchain-proxy:8545'
+      BC_RPC: 'https://rpc.devnet.tomochain.com'
       BC_WS: 'ws://blockchain-proxy:8546'
       BC_NETWORK_ID: 90
       TOMOSCAN_SITE_URL: 'https://scan.devnet.tomochain.com'
