@@ -27,6 +27,7 @@ services:
     command: run crawl
     environment:
       BC_RPC: 'http://blockchain-proxy:8545'
+      BC_WS: 'ws://blockchain-proxy:8546'
       BC_NETWORK_ID: 90
       DB_URI: 'mongodb://tomomaster_db:27017/governance'
       REDIS_HOST: 'tomomaster_redis'
