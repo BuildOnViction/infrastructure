@@ -21,7 +21,7 @@ services:
       CLIENT_URL: https://scan.devnet.tomochain.com/
       TOMOMASTER_API_URL: http://tomomaster:3001
       BASE_URL: https://scan.devnet.tomochain.com
-      WEB3_URI: https://devnet.tomochain.com
+      WEB3_URI: http://blockchain-proxy:8545
       JWT_SECRET_FILE: /run/secrets/scan_jwt_secret
       APP_SECRET_FILE: /run/secrets/scan_app_secret
       SENDGRID_API_KEY_FILE: /run/secrets/sendgrid_api_key
@@ -46,7 +46,7 @@ services:
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
-      WEB3_URI: https://devnet.tomochain.com
+      WEB3_URI: http://blockchain-proxy:8545
     deploy:
       placement:
         constraints:
@@ -58,8 +58,8 @@ services:
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
-      WEB3_URI: https://devnet.tomochain.com
-      WEB3_WS_URI: wss://ws.devnet.tomochain.com
+      WEB3_URI: http://blockchain-proxy:8545
+      WEB3_WS_URI: ws://blockchain-proxy:8546
     deploy:
       placement:
         constraints:

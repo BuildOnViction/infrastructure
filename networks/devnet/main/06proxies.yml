@@ -2,15 +2,24 @@ version: "3.4"
 
 services:
 
-  proxy:
+  https-proxy:
     image: tomochain/nginx:latest
     ports:
       - 443:443
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./res/https-proxy/nginx.conf:/etc/nginx/nginx.conf
     secrets:
       - proxy_cert_pem
       - proxy_cert_private_key
+    deploy:
+      placement:
+        constraints:
+          - node.labels.role == proxy
+
+  blockchain-proxy:
+    image: tomochain/nginx:latest
+    volumes:
+      - ./res/https-proxy/nginx.conf:/etc/nginx/nginx.conf
     deploy:
       placement:
         constraints:
