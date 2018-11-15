@@ -19,7 +19,7 @@ services:
   blockchain-proxy:
     image: tomochain/nginx:latest
     volumes:
-      - ./res/https-proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./res/blockchain-proxy/nginx.conf:/etc/nginx/nginx.conf
     deploy:
       placement:
         constraints:
