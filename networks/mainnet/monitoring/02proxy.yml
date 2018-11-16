@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+
+  proxy:
+    image: tomochain/nginx:latest
+    command: "nginx -c /run/secrets/nginx_conf -g 'daemon off;'"
+    ports:
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    secrets:
+      - nginx_conf
+      - proxy_cert_pem
+      - proxy_cert_private_key
+    deploy:
+      placement:
+        constraints:
+          - node.project == metrics
+
+secrets:
+  nginx_conf:
+    external: true
+  proxy_cert_pem:
+    external: true
+  proxy_cert_private_key:
+    external: true
