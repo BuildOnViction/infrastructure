@@ -16,7 +16,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.project == metrics
+          - node.labels.project == metrics
 
 secrets:
   nginx_conf:
