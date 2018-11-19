@@ -5,14 +5,7 @@ services:
   tomomaster:
     image: tomochain/tomomaster:latest
     environment:
-      BC_RPC: 'https://rpc.devnet.tomochain.com'
-      BC_WS: 'wss://ws.devnet.tomochain.com'
-      BC_NETWORK_ID: 90
-      TOMOSCAN_SITE_URL: 'https://scan.devnet.tomochain.com'
-      TOMOSCAN_API_URL: 'http://tomoscan_server:3333'
-      BASE_URL: 'https://master.devnet.tomochain.com'
-      DB_URI: 'mongodb://tomomaster_db:27017/governance'
-      GRAFANA_URL: 'https://grafana.devnet.tomochain.com'
+      NODE_ENV: 'devnet'
     deploy:
       placement:
         constraints:
@@ -26,11 +19,7 @@ services:
     image: tomochain/tomomaster:latest
     command: run crawl
     environment:
-      BC_RPC: 'http://blockchain-proxy:8545'
-      BC_WS: 'ws://blockchain-proxy:8546'
-      BC_NETWORK_ID: 90
-      DB_URI: 'mongodb://tomomaster_db:27017/governance'
-      REDIS_HOST: 'tomomaster_redis'
+      NODE_ENV: 'devnet_crawler'
     deploy:
       placement:
         constraints:
