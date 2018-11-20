@@ -31,7 +31,7 @@ services:
     volumes:
       - graylog_journal:/usr/share/graylog/data/journal
     environment:
-      GRAYLOG_WEB_ENDPOINT_URI: https://graylog.devnet.tomochain.com/api
+      GRAYLOG_WEB_ENDPOINT_URI: https://graylog.tomochain.com/api
       GRAYLOG_PASSWORD_SECRET_FILE: /run/secrets/graylog_password_secret
       GRAYLOG_ROOT_PASSWORD_SHA2_FILE: /run/secrets/graylog_root_password_sha2
     secrets:
