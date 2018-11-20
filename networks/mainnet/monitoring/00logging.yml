@@ -1,7 +1,7 @@
 version: "3.4"
 
 services:
-  graylog_db:
+  mongo:
     image: mongo:3.6
     volumes:
       - graylog_data:/data/db
