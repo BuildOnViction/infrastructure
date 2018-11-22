@@ -19,7 +19,7 @@ services:
       replicas: 3
       placement:
         constraints:
-          - node.labels.project == masternode
+          - node.labels.bootnode == true
 
 volumes:
   bootnode:
