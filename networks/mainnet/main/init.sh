@@ -25,24 +25,24 @@ unset input && read -s input \
 
 echo -e "\n[ tomochain ]\n"
 
-echo "New account password for node 'sun': "
+echo "New account password for node 'tomochain01': "
 unset input && read -s input \
-; echo $input | docker secret create tomochain_password_sun -
-echo "Existing private key for node 'sun': "
+; echo $input | docker secret create tomochain_password_tomochain01 -
+echo "Existing private key for node 'tomochain01': "
 unset input && read -s input \
-; echo $input | docker secret create tomochain_pk_sun -
-echo "New account password for node 'moon': "
+; echo $input | docker secret create tomochain_pk_tomochain01 -
+echo "New account password for node 'tomochain02': "
 unset input && read -s input \
-; echo $input | docker secret create tomochain_password_moon -
-echo "Existing private key for node 'moon': "
+; echo $input | docker secret create tomochain_password_tomochain02 -
+echo "Existing private key for node 'tomochain02': "
 unset input && read -s input \
-; echo $input | docker secret create tomochain_pk_moon -
-echo "New account password for node 'earth': "
+; echo $input | docker secret create tomochain_pk_tomochain02 -
+echo "New account password for node 'tomochain03': "
 unset input && read -s input \
-; echo $input | docker secret create tomochain_password_earth -
-echo "Existing private key for node 'earth': "
+; echo $input | docker secret create tomochain_password_tomochain03 -
+echo "Existing private key for node 'tomochain03': "
 unset input && read -s input \
-; echo $input | docker secret create tomochain_pk_earth -
+; echo $input | docker secret create tomochain_pk_tomochain03 -
 
 echo -e "\n[ loadbalancer ]\n"
 
