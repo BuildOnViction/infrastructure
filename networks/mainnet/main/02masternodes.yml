@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   masternode_tomochain01:
-    image: tomochain/node:testnet
+    image: tomochain/node:stable
     environment:
       IDENTITY: TomoChain01
       PASSWORD_FILE: /run/secrets/tomochain_password_tomochain01
@@ -44,7 +44,7 @@ services:
           - node.labels.masternode == tomochain01
 
   masternode_tomochain02:
-    image: tomochain/node:testnet
+    image: tomochain/node:stable
     environment:
       IDENTITY: TomoChain02
       PASSWORD_FILE: /run/secrets/tomochain_password_tomochain02
@@ -85,7 +85,7 @@ services:
           - node.labels.masternode == tomochain02
 
   masternode_tomochain03:
-    image: tomochain/node:testnet
+    image: tomochain/node:stable
     environment:
       IDENTITY: TomoChain03
       PASSWORD_FILE: /run/secrets/tomochain_password_tomochain03
