@@ -72,7 +72,7 @@ services:
   tomoscan_db:
     image: mongo:3.6
     volumes:
-      - tomoscan_data:/data/db
+      - sgp1-vol-mainnet-tomoscan-db:/data/db
     deploy:
       placement:
         constraints:
@@ -87,7 +87,8 @@ services:
 
 
 volumes:
-  tomoscan_data:
+  sgp1-vol-mainnet-tomoscan-db:
+    external: true
 
 secrets:
   sendgrid_api_key:
