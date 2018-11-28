@@ -30,7 +30,7 @@ services:
   tomomaster_db:
     image: mongo:3.6
     volumes:
-      - tomomaster_data:/data/db
+      - sgp1-vol-mainnet-tomomaster-db:/data/db
     deploy:
       placement:
         constraints:
@@ -44,4 +44,5 @@ services:
           - node.labels.project == tomomaster
 
 volumes:
-  tomomaster_data:
+  sgp1-vol-mainnet-tomomaster-db:
+    external: true
