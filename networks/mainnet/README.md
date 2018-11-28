@@ -41,6 +41,12 @@ Enable swarm mode.
 docker swarm init
 ```
 
+Install  the rexray storage plugin.
+
+```bash
+docker plugin install rexray/dobs DOBS_REGION=$REGION DOBS_TOKEN=$TOKEN
+```
+
 Disable scheduling containers on the swarm master.
 
 ```bash
