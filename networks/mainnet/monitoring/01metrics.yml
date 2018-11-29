@@ -18,7 +18,7 @@ services:
   influxdb:
     image: tomochain/influxdb:latest
     volumes:
-      - influxdb:/var/lib/influxdb
+      - sgp1-vol-mainnet-grafana-influx:/var/lib/influxdb
     ports:
       - 3003:8086
     deploy:
@@ -53,7 +53,7 @@ services:
     secrets:
       - metrics_postgres_password
     volumes:
-      - grafana_db:/var/lib/postgresql/data
+      - sgp1-vol-mainnet-grafana-db:/var/lib/postgresql/data
     deploy:
       placement:
         constraints:
@@ -68,5 +68,7 @@ secrets:
     external: true
 
 volumes:
-  influxdb:
-  grafana_db:
+  sgp1-vol-mainnet-grafana-influx:
+    external: true
+  sgp1-vol-mainnet-grafana-db:
+    external: true
