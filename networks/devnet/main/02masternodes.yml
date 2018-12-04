@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   masternode_sun:
-    image: tomochain/node:testnet
+    image: tomochain/node:devnet
     environment:
       IDENTITY: sun
       PASSWORD_FILE: /run/secrets/tomochain_password_sun
@@ -44,7 +44,7 @@ services:
           - node.hostname == sgp1-main-worker-sun
 
   masternode_moon:
-    image: tomochain/node:testnet
+    image: tomochain/node:devnet
     environment:
       IDENTITY: moon
       PASSWORD_FILE: /run/secrets/tomochain_password_moon
@@ -85,7 +85,7 @@ services:
           - node.hostname == sgp1-main-worker-moon
 
   masternode_earth:
-    image: tomochain/node:testnet
+    image: tomochain/node:devnet
     environment:
       IDENTITY: earth
       PASSWORD_FILE: /run/secrets/tomochain_password_earth
