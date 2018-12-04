@@ -6,6 +6,8 @@ services:
     image: tomochain/tomoscan-client:latest
     ports:
       - 3002:3000
+    environment:
+      API_URL: http://tomoscan_server:3333
     deploy:
       placement:
         constraints:
