@@ -4,7 +4,7 @@ services:
 
   telegraf:
     image: tomochain/telegraf:latest
-    hostname: {{.Node.Hostname}}
+    hostname: '{{.Node.Hostname}}'
     environment:
       METRICS_ENDPOINT: http://influxdb:8086
     volumes:
