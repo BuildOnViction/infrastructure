@@ -1,4 +1,4 @@
-FROM telegraf:1.7-alpine
+FROM telegraf:1.7
 
 LABEL maintainer="etienne@tomochain.com"
 
