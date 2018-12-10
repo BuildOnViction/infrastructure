@@ -14,6 +14,7 @@ services:
       NETSTATS_HOST: stats.devnet.tomochain.com
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+      ANNOUNCE_TXS: true
     ports:
       - target: 30303
         published: 30303
@@ -55,6 +56,7 @@ services:
       NETSTATS_HOST: stats.devnet.tomochain.com
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+      ANNOUNCE_TXS: true
     ports:
       - target: 30303
         published: 30303
@@ -96,6 +98,7 @@ services:
       NETSTATS_HOST: stats.devnet.tomochain.com
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+      ANNOUNCE_TXS: true
     ports:
       - target: 30303
         published: 30303
