@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   tomoscan:
-    image: tomochain/tomoscan-client:latest
+    image: tomochain/tomoscan-client:stable
     ports:
       - 3002:3000
     environment:
@@ -18,7 +18,7 @@ services:
         order: start-first
 
   tomoscan_server:
-    image: tomochain/tomoscan-server:latest
+    image: tomochain/tomoscan-server:stable
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
@@ -47,7 +47,7 @@ services:
         order: start-first
 
   tomoscan_crawler:
-    image: tomochain/tomoscan-server:latest
+    image: tomochain/tomoscan-server:stable
     command: run crawl
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
@@ -59,7 +59,7 @@ services:
           - node.labels.project == tomoscan
 
   tomoscan_pending_txs:
-    image: tomochain/tomoscan-server:latest
+    image: tomochain/tomoscan-server:stable
     command: run subscribe-pending-tx
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer

@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   bootnode:
-    image: tomochain/bootnode:latest
+    image: tomochain/bootnode:stable
     volumes:
       - bootnode:/tomochain
     ports:

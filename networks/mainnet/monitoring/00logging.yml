@@ -27,7 +27,7 @@ services:
           - node.labels.project == logging
 
   graylog:
-    image: tomochain/graylog:latest
+    image: tomochain/graylog:stable
     volumes:
       - sgp1-vol-mainnet-graylog-journal:/usr/share/graylog/data/journal
     environment:

@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   proxy:
-    image: tomochain/nginx:latest
+    image: tomochain/nginx:stable
     command: "nginx -c /run/secrets/nginx_conf -g 'daemon off;'"
     ports:
       - 443:443

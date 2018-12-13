@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   blockchain-proxy:
-    image: tomochain/nginx:latest
+    image: tomochain/nginx:stable
     command: "nginx -c /run/secrets/nginx_conf_blockchain-proxy -g 'daemon off;'"
     secrets:
       - nginx_conf_blockchain-proxy

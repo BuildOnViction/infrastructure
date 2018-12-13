@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   telegraf:
-    image: tomochain/telegraf:latest
+    image: tomochain/telegraf:stable
     hostname: '{{.Node.Hostname}}'
     environment:
       METRICS_ENDPOINT: http://influxdb:8086
@@ -16,7 +16,7 @@ services:
       mode: global
 
   influxdb:
-    image: tomochain/influxdb:latest
+    image: tomochain/influxdb:stable
     volumes:
       - sgp1-vol-mainnet-grafana-influx:/var/lib/influxdb
     ports:
@@ -27,7 +27,7 @@ services:
           - node.labels.project == metrics
 
   grafana:
-    image: tomochain/grafana:latest
+    image: tomochain/grafana:stable
     environment:
       GF_PATH_PROVISIONING: /etc/grafana/provisioning
       GF_AUTH_ANONYMOUS_ENABLED: "true"
