@@ -3,24 +3,19 @@ version: "3.4"
 services:
 
   tomomaster:
-    image: tomochain/tomomaster:latest
+    image: tomochain/tomomaster:testnet
     environment:
-      BC_RPC: 'https://testnet.tomochain.com:443'
-      EXPLORER_URL: 'https://scan.testnet.tomochain.com'
-      DB_URI: 'mongodb://tomomaster_db:27017/governance'
-      GRAFANA_URL: 'https://grafana.testnet.tomochain.com'
+      NODE_ENV: 'testnet'
     deploy:
       placement:
         constraints:
           - node.role == manager
 
   tomomaster_crawler:
-    image: tomochain/tomomaster:latest
+    image: tomochain/tomomaster:testnet
     command: run crawl
     environment:
-      BC_RPC: 'https://testnet.tomochain.com'
-      DB_URI: 'mongodb://tomomaster_db:27017/governance'
-      REDIS_HOST: 'tomomaster_redis'
+      NODE_ENV: 'testnet_crawler'
     deploy:
       placement:
         constraints:
@@ -30,13 +25,6 @@ services:
     image: mongo:3.6
     volumes:
       - tomomaster_data:/data/db
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
-  tomomaster_redis:
-    image: redis:4-alpine
     deploy:
       placement:
         constraints:

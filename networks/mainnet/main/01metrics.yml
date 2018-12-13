@@ -1,0 +1,16 @@
+version: "3.4"
+
+services:
+
+  telegraf:
+    image: tomochain/telegraf:latest
+    hostname: '{{.Node.Hostname}}'
+    environment:
+      METRICS_ENDPOINT: https://metrics.tomochain.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+    deploy:
+      mode: global

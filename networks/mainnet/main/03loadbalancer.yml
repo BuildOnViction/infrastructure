@@ -1,0 +1,16 @@
+version: "3.4"
+
+services:
+
+  blockchain-proxy:
+    image: tomochain/nginx:latest
+    command: "nginx -c /run/secrets/nginx_conf_blockchain-proxy -g 'daemon off;'"
+    secrets:
+      - nginx_conf_blockchain-proxy
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == stats
+secrets:
+  nginx_conf_blockchain-proxy:
+    external: true

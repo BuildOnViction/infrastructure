@@ -1,0 +1,48 @@
+version: "3.4"
+
+services:
+
+  tomomaster:
+    image: tomochain/tomomaster:stable
+    environment:
+      NODE_ENV: 'mainnet'
+    ports:
+      - 3001:3001
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == tomomaster
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+
+  tomomaster_crawler:
+    image: tomochain/tomomaster:stable
+    command: run crawl
+    environment:
+      NODE_ENV: 'mainnet_crawler'
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == tomomaster
+
+  tomomaster_db:
+    image: mongo:3.6
+    volumes:
+      - sgp1-vol-mainnet-tomomaster-db:/data/db
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == tomomaster
+
+  tomomaster_redis:
+    image: redis:4-alpine
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == tomomaster
+
+volumes:
+  sgp1-vol-mainnet-tomomaster-db:
+    external: true

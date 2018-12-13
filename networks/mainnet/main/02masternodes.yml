@@ -1,0 +1,153 @@
+version: "3.4"
+
+services:
+
+  masternode_tomochain01:
+    image: tomochain/node:stable
+    environment:
+      IDENTITY: TomoChain01
+      PASSWORD_FILE: /run/secrets/tomochain_password_tomochain01
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_tomochain01
+      BOOTNODES: enode://97f0ca95a653e3c44d5df2674e19e9324ea4bf4d47a46b1d8560f3ed4ea328f725acec3fcfcb37eb11706cf07da669e9688b091f1543f89b2425700a68bc8876@104.248.98.78:30301,enode://b72927f349f3a27b789d0ca615ffe3526f361665b496c80e7cc19dace78bd94785fdadc270054ab727dbb172d9e3113694600dd31b2558dd77ad85a869032dea@188.166.207.189:30301,enode://c8f2f0643527d4efffb8cb10ef9b6da4310c5ac9f2e988a7f85363e81d42f1793f64a9aa127dbaff56b1e8011f90fe9ff57fa02a36f73220da5ff81d8b8df351@104.248.98.60:30301
+      NETWORK_ID: 88
+      VERBOSITY: 4
+      NETSTATS_HOST: stats.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+      ANNOUNCE_TXS: true
+    ports:
+      - target: 30303
+        published: 30303
+        protocol: tcp
+        mode: host
+      - target: 30303
+        published: 30303
+        protocol: udp
+        mode: host
+      - target: 8545
+        published: 8545
+        protocol: tcp
+        mode: host
+      - target: 8546
+        published: 8546
+        protocol: tcp
+        mode: host
+    secrets:
+      - tomochain_password_tomochain01
+      - tomochain_pk_tomochain01
+      - netstats_ws_secret
+    volumes:
+      - sgp1-vol-mainnet-masternode01-chaindata:/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == masternode
+          - node.labels.masternode == tomochain01
+
+  masternode_tomochain02:
+    image: tomochain/node:stable
+    environment:
+      IDENTITY: TomoChain02
+      PASSWORD_FILE: /run/secrets/tomochain_password_tomochain02
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_tomochain02
+      BOOTNODES: enode://97f0ca95a653e3c44d5df2674e19e9324ea4bf4d47a46b1d8560f3ed4ea328f725acec3fcfcb37eb11706cf07da669e9688b091f1543f89b2425700a68bc8876@104.248.98.78:30301,enode://b72927f349f3a27b789d0ca615ffe3526f361665b496c80e7cc19dace78bd94785fdadc270054ab727dbb172d9e3113694600dd31b2558dd77ad85a869032dea@188.166.207.189:30301,enode://c8f2f0643527d4efffb8cb10ef9b6da4310c5ac9f2e988a7f85363e81d42f1793f64a9aa127dbaff56b1e8011f90fe9ff57fa02a36f73220da5ff81d8b8df351@104.248.98.60:30301
+      NETWORK_ID: 88
+      VERBOSITY: 4
+      NETSTATS_HOST: stats.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+      ANNOUNCE_TXS: true
+    ports:
+      - target: 30303
+        published: 30303
+        protocol: tcp
+        mode: host
+      - target: 30303
+        published: 30303
+        protocol: udp
+        mode: host
+      - target: 8545
+        published: 8545
+        protocol: tcp
+        mode: host
+      - target: 8546
+        published: 8546
+        protocol: tcp
+        mode: host
+    secrets:
+      - tomochain_password_tomochain02
+      - tomochain_pk_tomochain02
+      - netstats_ws_secret
+    volumes:
+      - sgp1-vol-mainnet-masternode02-chaindata:/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == masternode
+          - node.labels.masternode == tomochain02
+
+  masternode_tomochain03:
+    image: tomochain/node:stable
+    environment:
+      IDENTITY: TomoChain03
+      PASSWORD_FILE: /run/secrets/tomochain_password_tomochain03
+      PRIVATE_KEY_FILE: /run/secrets/tomochain_pk_tomochain03
+      BOOTNODES: enode://97f0ca95a653e3c44d5df2674e19e9324ea4bf4d47a46b1d8560f3ed4ea328f725acec3fcfcb37eb11706cf07da669e9688b091f1543f89b2425700a68bc8876@104.248.98.78:30301,enode://b72927f349f3a27b789d0ca615ffe3526f361665b496c80e7cc19dace78bd94785fdadc270054ab727dbb172d9e3113694600dd31b2558dd77ad85a869032dea@188.166.207.189:30301,enode://c8f2f0643527d4efffb8cb10ef9b6da4310c5ac9f2e988a7f85363e81d42f1793f64a9aa127dbaff56b1e8011f90fe9ff57fa02a36f73220da5ff81d8b8df351@104.248.98.60:30301
+      NETWORK_ID: 88
+      VERBOSITY: 4
+      NETSTATS_HOST: stats.tomochain.com
+      NETSTATS_PORT: 443
+      WS_SECRET_FILE: /run/secrets/netstats_ws_secret
+      ANNOUNCE_TXS: true
+    ports:
+      - target: 30303
+        published: 30303
+        protocol: tcp
+        mode: host
+      - target: 30303
+        published: 30303
+        protocol: udp
+        mode: host
+      - target: 8545
+        published: 8545
+        protocol: tcp
+        mode: host
+      - target: 8546
+        published: 8546
+        protocol: tcp
+        mode: host
+    secrets:
+      - tomochain_password_tomochain03
+      - tomochain_pk_tomochain03
+      - netstats_ws_secret
+    volumes:
+      - sgp1-vol-mainnet-masternode03-chaindata:/tomochain/data
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == masternode
+          - node.labels.masternode == tomochain03
+
+secrets:
+  tomochain_password_tomochain01:
+    external: true
+  tomochain_pk_tomochain01:
+    external: true
+  tomochain_password_tomochain02:
+    external: true
+  tomochain_pk_tomochain02:
+    external: true
+  tomochain_password_tomochain03:
+    external: true
+  tomochain_pk_tomochain03:
+    external: true
+  netstats_ws_secret:
+    external: true
+
+volumes:
+  sgp1-vol-mainnet-masternode01-chaindata:
+    external: true
+  sgp1-vol-mainnet-masternode02-chaindata:
+    external: true
+  sgp1-vol-mainnet-masternode03-chaindata:
+    external: true

@@ -1,0 +1,74 @@
+version: "3.4"
+
+services:
+
+  telegraf:
+    image: tomochain/telegraf:latest
+    hostname: '{{.Node.Hostname}}'
+    environment:
+      METRICS_ENDPOINT: http://influxdb:8086
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+    deploy:
+      mode: global
+
+  influxdb:
+    image: tomochain/influxdb:latest
+    volumes:
+      - sgp1-vol-mainnet-grafana-influx:/var/lib/influxdb
+    ports:
+      - 3003:8086
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == metrics
+
+  grafana:
+    image: tomochain/grafana:latest
+    environment:
+      GF_PATH_PROVISIONING: /etc/grafana/provisioning
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_DATABASE_HOST: grafana_db
+      GF_DATABASE_TYPE: postgres
+      GF_DATABASE_NAME: grafana
+      GF_DATABASE_USER: postgres
+      GF_DATABASE_PASSWORD__FILE: /run/secrets/metrics_gf_database_password
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/metrics_gf_security_admin_password
+    secrets:
+      - metrics_gf_database_password
+      - metrics_gf_security_admin_password
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == metrics
+
+  grafana_db:
+    image: postgres:10.4-alpine
+    environment:
+      POSTGRES_DB: grafana
+      POSTGRES_PASSWORD_FILE: /run/secrets/metrics_postgres_password
+    secrets:
+      - metrics_postgres_password
+    volumes:
+      - sgp1-vol-mainnet-grafana-db:/var/lib/postgresql/data
+    deploy:
+      placement:
+        constraints:
+          - node.labels.project == metrics
+
+secrets:
+  metrics_postgres_password:
+    external: true
+  metrics_gf_database_password:
+    external: true
+  metrics_gf_security_admin_password:
+    external: true
+
+volumes:
+  sgp1-vol-mainnet-grafana-influx:
+    external: true
+  sgp1-vol-mainnet-grafana-db:
+    external: true

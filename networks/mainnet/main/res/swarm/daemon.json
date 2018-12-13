@@ -1,0 +1,6 @@
+{
+  "log-driver": "gelf",
+  "log-opts": {
+    "gelf-address": "udp://139.59.217.162:12201"
+  }
+}

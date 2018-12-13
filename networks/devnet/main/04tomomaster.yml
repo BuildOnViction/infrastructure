@@ -1,0 +1,45 @@
+version: "3.4"
+
+services:
+
+  tomomaster:
+    image: tomochain/tomomaster:latest
+    environment:
+      NODE_ENV: 'devnet'
+    deploy:
+      placement:
+        constraints:
+          - node.labels.type == apps
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+
+  tomomaster_crawler:
+    image: tomochain/tomomaster:latest
+    command: run crawl
+    environment:
+      NODE_ENV: 'devnet_crawler'
+    deploy:
+      placement:
+        constraints:
+          - node.labels.type == apps
+
+  tomomaster_db:
+    image: mongo:3.6
+    volumes:
+      - tomomaster_data:/data/db
+    deploy:
+      placement:
+        constraints:
+          - node.labels.type == apps
+
+  tomomaster_redis:
+    image: redis:4-alpine
+    deploy:
+      placement:
+        constraints:
+          - node.labels.type == apps
+
+volumes:
+  tomomaster_data:

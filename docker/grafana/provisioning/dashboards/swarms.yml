@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: swarms
+    orgId: 2
+    folder: 'docker'
+    type: file
+    disableDeletion: false
+    editable: false
+    options:
+      path: /var/lib/grafana/dashboards
