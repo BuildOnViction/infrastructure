@@ -21,7 +21,7 @@ services:
       APP_SECRET_FILE: /run/secrets/scan_app_secret
       SENDGRID_API_KEY_FILE: /run/secrets/sendgrid_api_key
       RE_CAPTCHA_SECRET_FILE: /run/secrets/re_captcha_secret
-      NODE_ENV: 'tesetnet'
+      NODE_ENV: 'testnet'
     secrets:
       - scan_jwt_secret
       - scan_app_secret
@@ -40,7 +40,7 @@ services:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
       SLACK_WEBHOOK_URL_FILE: /run/secrets/slack_webhook_url
-      NODE_ENV: 'tesetnet'
+      NODE_ENV: 'testnet'
     secrets:
       - slack_webhook_url
     deploy:
