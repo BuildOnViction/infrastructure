@@ -43,6 +43,18 @@ unset input && read -s input \
 echo "Existing private key for node 'tomochain03': "
 unset input && read -s input \
 ; echo $input | docker secret create tomochain_pk_tomochain03 -
+echo "New account password for node 'tomochain04': "
+unset input && read -s input \
+; echo $input | docker secret create tomochain_password_tomochain04 -
+echo "Existing private key for node 'tomochain04': "
+unset input && read -s input \
+; echo $input | docker secret create tomochain_pk_tomochain04 -
+echo "New account password for node 'tomochain05': "
+unset input && read -s input \
+; echo $input | docker secret create tomochain_password_tomochain05 -
+echo "Existing private key for node 'tomochain05': "
+unset input && read -s input \
+; echo $input | docker secret create tomochain_pk_tomochain05 -
 
 echo -e "\n[ loadbalancer ]\n"
 
