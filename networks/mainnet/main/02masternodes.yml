@@ -225,7 +225,11 @@ secrets:
     external: true
   tomochain_pk_tomochain03:
     external: true
+  tomochain_password_tomochain04:
+    external: true
   tomochain_pk_tomochain04:
+    external: true
+  tomochain_password_tomochain05:
     external: true
   tomochain_pk_tomochain05:
     external: true
