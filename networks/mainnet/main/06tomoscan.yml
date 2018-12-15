@@ -54,6 +54,7 @@ services:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
       WEB3_URI: http://blockchain-proxy:8545
+      WEB3_WS_URI: ws://blockchain-proxy:8546
       NODE_ENV: 'mainnet'
     deploy:
       placement:
