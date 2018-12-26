@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
 
-  tomoscan01:
+  fullnode_tomoscan01:
     image: tomochain/node:stable
     environment:
       IDENTITY: tomoscan01
