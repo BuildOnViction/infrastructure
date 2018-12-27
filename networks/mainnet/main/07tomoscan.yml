@@ -62,7 +62,7 @@ services:
       placement:
         constraints:
           - node.labels.project == tomoscan
-          - node.labels.tomoscan == main
+          - node.labels.tomoscan == crawl
 
   tomoscan_pending_txs:
     image: tomochain/tomoscan-server:stable
