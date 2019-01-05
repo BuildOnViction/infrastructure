@@ -4,7 +4,7 @@ services:
 
   telegraf:
     image: tomochain/telegraf:testnet
-    hostname: testnet
+    hostname: '{{.Node.Hostname}}'
     environment:
       METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
     volumes:
@@ -13,25 +13,7 @@ services:
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
     deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
-  telegraf-tomoscan:
-    image: tomochain/telegraf:testnet
-    hostname: tomoscan
-    environment:
-      METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys:/rootfs/sys:ro
-      - /proc:/rootfs/proc:ro
-      - /etc:/rootfs/etc:ro
-    deploy:
-      placement:
-        constraints:
-          - node.role != manager
-          - node.labels.app == tomoscan
+      mode: global
 
   influxdb:
     image: tomochain/influxdb:testnet

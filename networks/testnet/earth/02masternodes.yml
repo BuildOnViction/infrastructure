@@ -4,7 +4,7 @@ services:
 
   telegraf:
     image: tomochain/telegraf:testnet
-    hostname: earth
+    hostname: '{{.Node.Hostname}}'
     environment:
       METRICS_ENDPOINT: https://metrics.testnet.tomochain.com
     volumes:
@@ -12,6 +12,8 @@ services:
       - /sys:/rootfs/sys:ro
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
+    deploy:
+      mode: global
 
   masternode_earth:
     image: tomochain/node:testnet
