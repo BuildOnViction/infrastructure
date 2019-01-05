@@ -12,6 +12,8 @@ services:
       - /sys:/rootfs/sys:ro
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
+    deploy:
+      mode: global
 
   masternode_moon:
     image: tomochain/node:latest
