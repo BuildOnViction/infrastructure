@@ -87,3 +87,5 @@ secrets:
 volumes:
   sgp1-vol-mainnet-tomoscan01-chaindata:
     external: true
+  sgp1-vol-mainnet-tomoscan02-chaindata:
+    external: true
