@@ -27,6 +27,7 @@ services:
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
       ANNOUNCE_TXS: 'true'
+      TOMO_TESTNET: 'true'
     ports:
       - target: 30303
         published: 30303
