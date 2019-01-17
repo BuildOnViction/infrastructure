@@ -1,4 +1,4 @@
-FROM graylog/graylog:2.4
+FROM graylog/graylog:2.5
 
 LABEL maintainer="etienne@tomochain.com"
 
