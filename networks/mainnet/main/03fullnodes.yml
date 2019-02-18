@@ -14,6 +14,7 @@ services:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
       STORE_REWARD: 'true'
       ANNOUNCE_TXS: 'true'
+      DEBUG_MODE: 'true'
     ports:
       - target: 30303
         published: 30303
@@ -53,6 +54,7 @@ services:
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
       STORE_REWARD: 'true'
       ANNOUNCE_TXS: 'true'
+      DEBUG_MODE: 'true'
     ports:
       - target: 30303
         published: 30303
