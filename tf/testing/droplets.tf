@@ -1,10 +1,14 @@
-# resource "digitalocean_droplet" "stats" {
-#   count = "${var.droplet_count}"
-#   image = "${var.image}"
-#   name = "${var.region}-${var.env}-droplet-${var.name}-${count.index}"
-#   region = "${var.region}"
-#   size = "${var.size}"
-#   ssh_keys = "${var.keys}"
-#   private_networking = "${var.private_networking}"
-#   resize_disk = "${var.resize_disk}"
-# }
+resource "digitalocean_droplet" "stats" {
+  count = 1
+  image = "ubuntu-18-04-x64"
+  name = "${var.region}-dl-testing-stats-${count.index}"
+  region = "${var.region}"
+  size = "s-1vcpu-1gb"
+  ssh_keys = [23511610, 23778766]
+  private_networking = false
+  resize_disk = false
+  tags = [
+    "${digitalocean_tag.stats.name}",
+    "${digitalocean_tag.testing.name}",
+  ]
+}
