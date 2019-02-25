@@ -11,6 +11,7 @@
     "image": "ubuntu-18-04-x64",
     "size": "s-1vcpu-1gb",
     "private_networking": true,
+    "snapshot_name": "packer-docker-18-04-{{timestamp}}",
     "ssh_username": "root"
   }],
   "provisioners": [{
