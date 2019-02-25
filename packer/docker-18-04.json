@@ -1,0 +1,29 @@
+{
+  "variables": {
+    "do_api_token": "{{env `DO_API_TOKEN`}}",
+    "do_region": "sgp1"
+  },
+  "sensitive-variables": ["do_api_token"],
+  "builders": [{
+    "type": "digitalocean",
+    "api_token": "{{user `do_api_token`}}",
+    "region": "{{user `do_region`}}",
+    "image": "ubuntu-18-04-x64",
+    "size": "s-1vcpu-1gb",
+    "private_networking": true,
+    "ssh_username": "root"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sudo apt update -y",
+      "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
+      "sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\"",
+      "sudo apt update -y",
+      "sudo apt install -y docker-ce",
+      "curl -Ss https://my-netdata.io/kickstart.sh -o netdata.sh",
+      "bash netdata.sh --dont-wait --dont-start-it",
+      "rm netdata.sh"
+    ]
+  }]
+}
