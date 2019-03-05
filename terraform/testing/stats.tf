@@ -2,7 +2,7 @@ resource "kubernetes_deployment" "stats" {
   metadata {
     name = "stats-deployment-test"
     labels {
-      app = "stats"
+      app = "stats-deployment-test"
     }
   }
 
@@ -24,8 +24,8 @@ resource "kubernetes_deployment" "stats" {
 
       spec {
         container {
-          image = "nginx"
-          name  = "nging-test"
+          image = "tomochain/netstats"
+          name  = "stats-deployment-test"
         }
       }
     }
@@ -41,8 +41,8 @@ resource "kubernetes_service" "stats" {
       app = "${kubernetes_deployment.stats.metadata.0.labels.app}"
     }
     port {
-      port = 8080
-      target_port = 80
+      port = 80
+      target_port = 3000
     }
 
     type = "LoadBalancer"
