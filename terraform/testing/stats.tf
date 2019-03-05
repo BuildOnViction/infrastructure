@@ -1,6 +1,7 @@
 resource "kubernetes_deployment" "stats" {
   metadata {
-    name = "stats-deployment-test"
+    name = "stats-deployment"
+
     labels {
       app = "stats-deployment-test"
     }
@@ -36,12 +37,14 @@ resource "kubernetes_service" "stats" {
   metadata {
     name = "stats-service-test"
   }
+
   spec {
     selector {
       app = "${kubernetes_deployment.stats.metadata.0.labels.app}"
     }
+
     port {
-      port = 80
+      port        = 80
       target_port = 3000
     }
 
