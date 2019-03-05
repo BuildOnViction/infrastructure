@@ -1,10 +1,6 @@
 resource "kubernetes_deployment" "stats" {
   metadata {
     name = "stats-deployment"
-
-    labels {
-      app = "stats-deployment-test"
-    }
   }
 
   spec {
@@ -12,21 +8,21 @@ resource "kubernetes_deployment" "stats" {
 
     selector {
       match_labels {
-        app = "stats-deployment-test"
+        app = "stats"
       }
     }
 
     template {
       metadata {
         labels {
-          app = "stats-deployment-test"
+          app = "stats"
         }
       }
 
       spec {
         container {
           image = "tomochain/netstats"
-          name  = "stats-deployment-test"
+          name  = "stats"
         }
       }
     }
@@ -35,7 +31,7 @@ resource "kubernetes_deployment" "stats" {
 
 resource "kubernetes_service" "stats" {
   metadata {
-    name = "stats-service-test"
+    name = "stats-service"
   }
 
   spec {
