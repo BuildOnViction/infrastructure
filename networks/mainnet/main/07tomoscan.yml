@@ -28,6 +28,7 @@ services:
       BASE_URL: https://scan.tomochain.com
       JWT_SECRET_FILE: /run/secrets/scan_jwt_secret
       APP_SECRET_FILE: /run/secrets/scan_app_secret
+      SLACK_WEBHOOK_URL_FILE: /run/secrets/slack_webhook_url
       SENDGRID_API_KEY_FILE: /run/secrets/sendgrid_api_key
       RE_CAPTCHA_SECRET_FILE: /run/secrets/re_captcha_secret
       NODE_ENV: 'mainnet'
@@ -103,6 +104,8 @@ secrets:
   scan_jwt_secret:
     external: true
   scan_app_secret:
+    external: true
+  slack_webhook_url:
     external: true
   re_captcha_secret:
     external: true
