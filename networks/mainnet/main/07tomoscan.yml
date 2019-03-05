@@ -37,6 +37,7 @@ services:
     secrets:
       - scan_jwt_secret
       - scan_app_secret
+      - slack_webhook_url
       - sendgrid_api_key
       - re_captcha_secret
     deploy:
