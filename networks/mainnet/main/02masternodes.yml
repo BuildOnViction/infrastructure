@@ -57,6 +57,7 @@ services:
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
       ANNOUNCE_TXS: 'true'
+      MAXPEERS: 200
     ports:
       - target: 30303
         published: 30303
@@ -141,6 +142,7 @@ services:
       NETSTATS_PORT: 443
       WS_SECRET_FILE: /run/secrets/netstats_ws_secret
       ANNOUNCE_TXS: 'true'
+      MAXPEERS: 200
     ports:
       - target: 30303
         published: 30303
