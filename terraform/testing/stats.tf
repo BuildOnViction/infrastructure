@@ -1,6 +1,7 @@
 resource "kubernetes_deployment" "stats" {
   metadata {
     name = "stats-deployment"
+
     labels {
       app = "stats"
     }
@@ -26,6 +27,7 @@ resource "kubernetes_deployment" "stats" {
         container {
           image = "tomochain/netstats"
           name  = "stats"
+
           env {
             name  = "WS_SECRET"
             value = "test"

@@ -5,7 +5,7 @@ resource "digitalocean_kubernetes_cluster" "testing" {
 
   node_pool {
     name       = "workers"
-    size       = "s-1vcpu-2gb"
+    size       = "s-4vcpu-8gb"
     node_count = 3
   }
 }
