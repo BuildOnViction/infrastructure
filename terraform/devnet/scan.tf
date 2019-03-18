@@ -171,7 +171,7 @@ resource "kubernetes_deployment" "scan-crawler" {
         container {
           image   = "tomochain/tomoscan-server"
           name    = "scan-crawler"
-          args = ["run crawl"]
+          args = ["run", "crawl"]
 
           env {
             name  = "MONGODB_URI"
