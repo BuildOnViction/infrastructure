@@ -169,9 +169,9 @@ resource "kubernetes_deployment" "scan-crawler" {
 
       spec {
         container {
-          image   = "tomochain/tomoscan-server"
-          name    = "scan-crawler"
-          args = ["run", "crawl"]
+          image = "tomochain/tomoscan-server"
+          name  = "scan-crawler"
+          args  = ["run", "crawl"]
 
           env {
             name  = "MONGODB_URI"
@@ -249,7 +249,7 @@ resource "kubernetes_service" "scan-redis" {
 
 resource "kubernetes_stateful_set" "scan-db" {
   metadata {
-    name = "scan-db-deployment"
+    name = "scan-db-statefulset"
 
     labels {
       app = "scan-db"
@@ -278,24 +278,32 @@ resource "kubernetes_stateful_set" "scan-db" {
         container {
           image = "mongo:3.6"
           name  = "scan-db"
+
+          volume_mount {
+            name       = "scan-db-volume"
+            mount_path = "/data/db"
+            read_only  = false
+          }
         }
       }
     }
-  }
-}
 
-resource "kubernetes_persistent_volume_claim" "scan-db-volume" {
-  metadata {
-    name = "scan-db-volume"
-  }
-  spec {
-    access_modes = ["ReadWriteOnce"]
-    resources {
-      requests {
-        storage = "100Gi"
+    volume_claim_template {
+      metadata {
+        name = "scan-db-volume"
+      }
+
+      spec {
+        access_modes       = ["ReadWriteOnce"]
+        storage_class_name = "do-block-storage"
+
+        resources {
+          requests {
+            storage = "100Gi"
+          }
+        }
       }
     }
-    storage_class_name = "do-block-storage"
   }
 }
 
