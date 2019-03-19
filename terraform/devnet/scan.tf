@@ -284,6 +284,21 @@ resource "kubernetes_stateful_set" "scan-db" {
   }
 }
 
+resource "kubernetes_persistent_volume_claim" "scan-db-volume" {
+  metadata {
+    name = "scan-db-volume"
+  }
+  spec {
+    access_modes = ["ReadWriteOnce"]
+    resources {
+      requests {
+        storage = "100Gi"
+      }
+    }
+    storage_class_name = "do-block-storage"
+  }
+}
+
 resource "kubernetes_service" "scan-db" {
   metadata {
     name = "scan-db"
