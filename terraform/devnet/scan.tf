@@ -25,7 +25,7 @@ resource "kubernetes_deployment" "scan-client" {
 
       spec {
         container {
-          image = "tomochain/tomoscan-client"
+          image = "tomochain/tomoscan-client:latest"
           name  = "scan-client"
 
           env {
@@ -65,7 +65,7 @@ resource "kubernetes_deployment" "scan-server" {
 
       spec {
         container {
-          image = "tomochain/tomoscan-server"
+          image = "tomochain/tomoscan-server:latest"
           name  = "scan-server"
 
           env {
@@ -169,7 +169,7 @@ resource "kubernetes_deployment" "scan-crawler" {
 
       spec {
         container {
-          image = "tomochain/tomoscan-server"
+          image = "tomochain/tomoscan-server:latest"
           name  = "scan-crawler"
           args  = ["run", "crawl"]
 
