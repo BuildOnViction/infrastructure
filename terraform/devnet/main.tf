@@ -13,3 +13,9 @@ provider "kubernetes" {
 module "tomomaster" {
   source = "../modules/tomomaster"
 }
+
+module "tomoscan" {
+  source = "../modules/tomoscan"
+
+  crawler_replicas = 3
+}

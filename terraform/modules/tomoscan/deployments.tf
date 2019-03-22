@@ -25,7 +25,7 @@ resource "kubernetes_deployment" "scan-client" {
 
       spec {
         container {
-          image = "tomochain/tomoscan-client:latest"
+          image = "tomochain/tomoscan-client:${var.client_image_tag}"
           name  = "scan-client"
 
           env {
@@ -65,7 +65,7 @@ resource "kubernetes_deployment" "scan-server" {
 
       spec {
         container {
-          image = "tomochain/tomoscan-server:latest"
+          image = "tomochain/tomoscan-server:${var.server_image_tag}"
           name  = "scan-server"
 
           env {
@@ -80,17 +80,17 @@ resource "kubernetes_deployment" "scan-server" {
 
           env {
             name  = "CLIENT_URL"
-            value = "https://scan.devnet.tomochain.com/"
+            value = "${var.scan_public_url}"
           }
 
           env {
             name  = "TOMOMASTER_API_URL"
-            value = "http://tomomaster:3001"
+            value = "${var.master_api_url}"
           }
 
           env {
             name  = "BASE_URL"
-            value = "https://scan.devnet.tomochain.com"
+            value = "${var.scan_public_url}"
           }
 
           env {
@@ -115,29 +115,10 @@ resource "kubernetes_deployment" "scan-server" {
 
           env {
             name  = "NODE_ENV"
-            value = "devnet"
+            value = "${var.env}"
           }
         }
       }
-    }
-  }
-}
-
-resource "kubernetes_service" "scan-server" {
-  metadata {
-    name = "scan-server"
-  }
-
-  spec {
-    selector {
-      app = "${kubernetes_deployment.scan-server.metadata.0.labels.app}"
-    }
-
-    session_affinity = "ClientIP"
-
-    port {
-      port        = 3333
-      target_port = 3333
     }
   }
 }
@@ -152,7 +133,7 @@ resource "kubernetes_deployment" "scan-crawler" {
   }
 
   spec {
-    replicas = 3
+    replicas = "${var.crawler_replicas}"
 
     selector {
       match_labels {
@@ -169,7 +150,7 @@ resource "kubernetes_deployment" "scan-crawler" {
 
       spec {
         container {
-          image = "tomochain/tomoscan-server:latest"
+          image = "tomochain/tomoscan-server:${var.crawler_image_tag}"
           name  = "scan-crawler"
           args  = ["run", "crawl"]
 
@@ -225,122 +206,5 @@ resource "kubernetes_deployment" "scan-redis" {
         }
       }
     }
-  }
-}
-
-resource "kubernetes_service" "scan-redis" {
-  metadata {
-    name = "scan-redis"
-  }
-
-  spec {
-    selector {
-      app = "${kubernetes_deployment.scan-redis.metadata.0.labels.app}"
-    }
-
-    session_affinity = "ClientIP"
-
-    port {
-      port        = 6379
-      target_port = 6379
-    }
-  }
-}
-
-resource "kubernetes_stateful_set" "scan-db" {
-  metadata {
-    name = "scan-db-statefulset"
-
-    labels {
-      app = "scan-db"
-    }
-  }
-
-  spec {
-    replicas = 1
-
-    service_name = "scan-db"
-
-    selector {
-      match_labels {
-        app = "scan-db"
-      }
-    }
-
-    template {
-      metadata {
-        labels {
-          app = "scan-db"
-        }
-      }
-
-      spec {
-        container {
-          image = "mongo:3.6"
-          name  = "scan-db"
-
-          volume_mount {
-            name       = "scan-db-volume"
-            mount_path = "/data/db"
-            read_only  = false
-          }
-        }
-      }
-    }
-
-    volume_claim_template {
-      metadata {
-        name = "scan-db-volume"
-      }
-
-      spec {
-        access_modes       = ["ReadWriteOnce"]
-        storage_class_name = "do-block-storage"
-
-        resources {
-          requests {
-            storage = "100Gi"
-          }
-        }
-      }
-    }
-  }
-}
-
-resource "kubernetes_service" "scan-db" {
-  metadata {
-    name = "scan-db"
-  }
-
-  spec {
-    selector {
-      app = "${kubernetes_stateful_set.scan-db.metadata.0.labels.app}"
-    }
-
-    session_affinity = "ClientIP"
-
-    port {
-      port        = 27017
-      target_port = 27017
-    }
-  }
-}
-
-resource "kubernetes_service" "scan" {
-  metadata {
-    name = "scan-service"
-  }
-
-  spec {
-    selector {
-      app = "${kubernetes_deployment.scan-client.metadata.0.labels.app}"
-    }
-
-    port {
-      port        = 80
-      target_port = 3000
-    }
-
-    type = "LoadBalancer"
   }
 }

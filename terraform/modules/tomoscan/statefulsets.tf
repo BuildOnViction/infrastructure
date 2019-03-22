@@ -1,37 +1,38 @@
-resource "kubernetes_stateful_set" "master-db" {
+
+resource "kubernetes_stateful_set" "scan-db" {
   metadata {
-    name = "master-db-statefulset"
+    name = "scan-db-statefulset"
 
     labels {
-      app = "master-db"
+      app = "scan-db"
     }
   }
 
   spec {
     replicas = 1
 
-    service_name = "master-db"
+    service_name = "scan-db"
 
     selector {
       match_labels {
-        app = "master-db"
+        app = "scan-db"
       }
     }
 
     template {
       metadata {
         labels {
-          app = "master-db"
+          app = "scan-db"
         }
       }
 
       spec {
         container {
           image = "mongo:3.6"
-          name  = "master-db"
+          name  = "scan-db"
 
           volume_mount {
-            name       = "master-db-volume"
+            name       = "scan-db-volume"
             mount_path = "/data/db"
             read_only  = false
           }
@@ -41,7 +42,7 @@ resource "kubernetes_stateful_set" "master-db" {
 
     volume_claim_template {
       metadata {
-        name = "master-db-volume"
+        name = "scan-db-volume"
       }
 
       spec {
@@ -50,7 +51,7 @@ resource "kubernetes_stateful_set" "master-db" {
 
         resources {
           requests {
-            storage = "${var.db_size}"
+            storage = "100Gi"
           }
         }
       }

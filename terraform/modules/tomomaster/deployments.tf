@@ -25,7 +25,7 @@ resource "kubernetes_deployment" "master" {
 
       spec {
         container {
-          image = "tomochain/tomomaster:${var.deployment_master_image_tag}"
+          image = "tomochain/tomomaster:${var.master_image_tag}"
           name  = "master"
 
           env {
@@ -80,7 +80,7 @@ resource "kubernetes_deployment" "master-crawler" {
 
       spec {
         container {
-          image = "tomochain/tomomaster:${var.deployment_master-crawler_image_tag}"
+          image = "tomochain/tomomaster:${var.crawler_image_tag}"
           name  = "master-crawler"
           args  = ["run", "crawl"]
 
