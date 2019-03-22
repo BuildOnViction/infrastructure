@@ -51,7 +51,7 @@ resource "kubernetes_stateful_set" "scan-db" {
 
         resources {
           requests {
-            storage = "100Gi"
+            storage = "${var.db_size}"
           }
         }
       }
