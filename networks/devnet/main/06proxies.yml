@@ -16,15 +16,6 @@ services:
         constraints:
           - node.labels.role == proxy
 
-  blockchain-proxy:
-    image: tomochain/nginx:latest
-    volumes:
-      - ./res/blockchain-proxy/nginx.conf:/etc/nginx/nginx.conf
-    deploy:
-      placement:
-        constraints:
-          - node.labels.role == proxy
-
 secrets:
   proxy_cert_pem:
     external: true
