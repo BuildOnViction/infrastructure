@@ -104,8 +104,6 @@ services:
           - node.labels.project == fullnode
           - node.labels.fullnode == tomoscan01
 
-
-
 volumes:
   tomoscan_data:
   tomoscan_data_redis:
