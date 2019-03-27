@@ -1,4 +1,3 @@
-
 resource "kubernetes_stateful_set" "scan-db" {
   metadata {
     name = "scan-db-statefulset"
