@@ -39,6 +39,14 @@ resource "kubernetes_stateful_set" "master-db" {
       }
     }
 
+    update_strategy {
+      type = "RollingUpdate"
+
+      rolling_update {
+        partition = 1
+      }
+    }
+
     volume_claim_template {
       metadata {
         name = "master-db-volume"
