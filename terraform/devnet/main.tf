@@ -17,5 +17,5 @@ module "tomomaster" {
 module "tomoscan" {
   source = "../modules/tomoscan"
 
-  crawler_replicas = 3
+  crawler_replicas = 2
 }
