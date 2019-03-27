@@ -43,7 +43,7 @@ resource "kubernetes_service" "master" {
 
   spec {
     selector {
-      app = "${kubernetes_deployment.master.metadata.0.labels.app}"
+      app = "${kubernetes_deployment.master-server.metadata.0.labels.app}"
     }
 
     port {

@@ -1,9 +1,9 @@
-resource "kubernetes_deployment" "master" {
+resource "kubernetes_deployment" "master-server" {
   metadata {
-    name = "master-deployment"
+    name = "master-server-deployment"
 
     labels {
-      app = "master"
+      app = "master-server"
     }
   }
 
@@ -12,21 +12,21 @@ resource "kubernetes_deployment" "master" {
 
     selector {
       match_labels {
-        app = "master"
+        app = "master-server"
       }
     }
 
     template {
       metadata {
         labels {
-          app = "master"
+          app = "master-server"
         }
       }
 
       spec {
         container {
           image = "tomochain/tomomaster:${var.master_image_tag}"
-          name  = "master"
+          name  = "master-server"
 
           env {
             name  = "TOMOSCAN_API_URL"
