@@ -5,3 +5,7 @@ output "tomoscan_ip" {
 output "tomomaster_ip" {
   value = "${module.tomomaster.loadbalancer_ip}"
 }
+
+output "netdata_ip" {
+  value = "${module.netdata.loadbalancer_ip}"
+}
