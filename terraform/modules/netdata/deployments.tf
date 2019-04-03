@@ -24,6 +24,12 @@ resource "kubernetes_deployment" "netdata-server" {
       }
 
       spec {
+        init_container {
+          name    = "test"
+          image   = "busybox:latest"
+          command = ["ls"]
+        }
+
         container {
           image = "netdata/netdata"
           name  = "netdata-master"
