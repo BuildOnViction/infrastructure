@@ -1,6 +1,7 @@
 resource "kubernetes_daemonset" "netdata-slave" {
   metadata {
     name = "netdata-slave-daemonset"
+
     labels {
       app = "netdata-slave"
     }

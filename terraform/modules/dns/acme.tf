@@ -16,11 +16,11 @@ resource "acme_certificate" "certificate" {
   common_name     = "${var.fqdn}"
 
   dns_challenge {
-    provider           = "cloudflare"
+    provider = "cloudflare"
 
     config {
       CLOUDFLARE_EMAIL   = "${var.cloudflare_email}"
-      CLOUDFLARE_API_KEY = "${var.cloudflare_api_key}"  
+      CLOUDFLARE_API_KEY = "${var.cloudflare_api_key}"
     }
   }
 }
