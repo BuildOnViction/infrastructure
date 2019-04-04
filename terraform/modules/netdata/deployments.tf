@@ -25,8 +25,8 @@ resource "kubernetes_deployment" "netdata-server" {
 
       spec {
         init_container {
-          name    = "test"
-          image   = "busybox:latest"
+          name    = "init-config"
+          image   = "alpine:latest"
           command = ["ls"]
         }
 
