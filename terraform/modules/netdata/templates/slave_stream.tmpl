@@ -12,7 +12,7 @@
 
 [stream]
     # Enable this on slaves, to have them send metrics.
-    enabled = no
+    enabled = yes
 
     # Where is the receiving netdata?
     # A space separated list of:
@@ -28,10 +28,10 @@
     # PORT      = the port number or service name (/etc/services)
     #
     # This communication is not HTTP (it cannot be proxied by web proxies).
-    destination =
+    destination = ${master_address}
 
     # The API_KEY to use (as the sender)
-    api key =
+    api key = ${api_guid}
 
     # The timeout to connect and send metrics
     timeout seconds = 60

@@ -80,12 +80,12 @@
 # If the key is not listed here, it will not be able to push metrics.
 
 # [API_KEY] is [YOUR-API-KEY], i.e [11111111-2222-3333-4444-555555555555]
-[API_KEY]
+[${api_guid}]
     # Default settings for this API key
 
     # You can disable the API key, by setting this to: no
     # The default (for unknown API keys) is: no
-    enabled = no
+    enabled = yes
 
     # A list of simple patterns matching the IPs of the servers that
     # will be pushing metrics using this API key.
