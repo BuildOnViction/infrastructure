@@ -25,6 +25,19 @@ resource "kubernetes_daemonset" "netdata-slave" {
         container {
           image = "netdata/netdata"
           name  = "netdata-slave"
+
+          volume_mount {
+            mount_path = "/etc/netdata/"
+            name       = "slave-conf"
+          }
+        }
+
+        volume {
+          name = "slave-conf"
+
+          config_map {
+            name = "slave-configmap"
+          }
         }
       }
     }
