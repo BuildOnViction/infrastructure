@@ -29,6 +29,9 @@ services:
 
   proxy:
     image: traefik:alpine
+    environment:
+      CF_API_EMAIL: $CLOUDFLARE_EMAIL
+      CF_API_KEY: $CLOUDFLARE_API_KEY
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
       - ./acme.json:/acme.json:rw
@@ -38,6 +41,9 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 8080:8080
+    labels:
+      - traefik.enable=false
 
 networks:
   masternode:
