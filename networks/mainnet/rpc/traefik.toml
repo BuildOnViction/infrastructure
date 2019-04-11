@@ -1,5 +1,7 @@
 defaultEntryPoints = ["http", "https"]
 
+[accessLog]
+
 [entryPoints]
   [entryPoints.http]
     address = ":80"
