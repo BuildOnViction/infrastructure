@@ -30,9 +30,9 @@ services:
   proxy:
     image: traefik:alpine
     volumes:
-      - var/run/docker.sock:/var/run/docker.sock:rw
-      - ./acme.json:./acme.json:rw
-      - ./traefik.toml:./traefik.toml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - ./acme.json:/acme.json:rw
+      - ./traefik.toml:/traefik.toml:ro
     networks:
       - masternode
     ports:
