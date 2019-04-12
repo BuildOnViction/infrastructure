@@ -22,7 +22,7 @@ services:
       - 30303:30303/udp
     labels:
       - traefik.backend=node
-      - traefik.frontend.rule=Host:${IDENTITY}.tomochain.com
+      - traefik.frontend.rule=Host:test-ha-rpc.tomochain.com
       - traefik.docker.network=masternode
       - traefik.port=8545
     restart: always
