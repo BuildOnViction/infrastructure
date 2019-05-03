@@ -12,7 +12,6 @@ services:
       placement:
         constraints:
           - node.labels.project == tomoscan
-          - node.labels.tomoscan == main
       update_config:
         parallelism: 1
         delay: 10s
@@ -44,7 +43,6 @@ services:
       placement:
         constraints:
           - node.labels.project == tomoscan
-          - node.labels.tomoscan == main
       update_config:
         parallelism: 1
         delay: 10s
@@ -61,7 +59,6 @@ services:
       placement:
         constraints:
           - node.labels.project == tomoscan
-          - node.labels.tomoscan == crawl
 
   tomoscan_pending_txs:
     image: tomochain/tomoscan-server:stable
@@ -74,7 +71,6 @@ services:
       placement:
         constraints:
           - node.labels.project == tomoscan
-          - node.labels.tomoscan == main
 
   tomoscan_db:
     image: mongo:3.6
@@ -84,7 +80,6 @@ services:
       placement:
         constraints:
           - node.labels.project == tomoscan
-          - node.labels.tomoscan == db
 
   tomoscan_redis:
     image: redis:4-alpine
@@ -92,7 +87,6 @@ services:
       placement:
         constraints:
           - node.labels.project == tomoscan
-          - node.labels.tomoscan == main
 
 
 volumes:
