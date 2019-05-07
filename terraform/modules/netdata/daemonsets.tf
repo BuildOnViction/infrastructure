@@ -14,6 +14,8 @@ resource "kubernetes_daemonset" "netdata-slave" {
       }
     }
 
+
+
     template {
       metadata {
         labels {
