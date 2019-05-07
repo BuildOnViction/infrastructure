@@ -14,9 +14,9 @@ module "netdata" {
   source = "../modules/netdata"
 }
 
-module "tomomaster" {
-  source = "../modules/tomomaster"
-}
+# module "tomomaster" {
+#   source = "../modules/tomomaster"
+# }
 
 module "tomoscan" {
   source = "../modules/tomoscan"
