@@ -11,7 +11,7 @@ data "template_file" "slave-stream" {
 
   vars = {
     api_guid       = "af3e2c19-dbab-47c5-91fd-fe64f9172b46"
-    master_address = "${kubernetes_deployment.netdata-master.metadata.0.labels.app}:1999"
+    master_address = "${kubernetes_deployment.netdata-master.metadata.0.labels.app}"
   }
 }
 
