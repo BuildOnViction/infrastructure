@@ -28,8 +28,14 @@ resource "kubernetes_daemonset" "netdata-slave" {
 
           volume_mount {
             mount_path = "/etc/netdata/stream.conf"
-            name       = "slave-conf"
+            name       = "slave-stream-conf"
             sub_path   = "stream.conf"
+          }
+
+          volume_mount {
+            mount_path = "/etc/netdata/netdata.conf"
+            name       = "slave-netdata-conf"
+            sub_path   = "netdata.conf"
           }
 
           volume_mount {
@@ -58,10 +64,18 @@ resource "kubernetes_daemonset" "netdata-slave" {
         }
 
         volume {
-          name = "slave-conf"
+          name = "slave-stream-conf"
 
           config_map {
-            name = "slave-configmap"
+            name = "slave-stream-configmap"
+          }
+        }
+
+        volume {
+          name = "slave-netdata-conf"
+
+          config_map {
+            name = "slave-netdata-configmap"
           }
         }
 

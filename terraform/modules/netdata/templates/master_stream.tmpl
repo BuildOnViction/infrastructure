@@ -1,55 +1,8 @@
-# [API_KEY] is [YOUR-API-KEY], i.e [11111111-2222-3333-4444-555555555555]
 [${api_guid}]
-    # Default settings for this API key
-
-    # You can disable the API key, by setting this to: no
-    # The default (for unknown API keys) is: no
     enabled = yes
-
-    # A list of simple patterns matching the IPs of the servers that
-    # will be pushing metrics using this API key.
-    # The metrics are received via the API port, so the same IPs
-    # should also be matched at netdata.conf [web].allow connections from
     allow from = *
-
-    # The default history in entries, for all hosts using this API key.
-    # You can also set it per host below.
-    # If you don't set it here, the history size of the central netdata
-    # will be used.
-    default history = 3600
-
-    # The default memory mode to be used for all hosts using this API key.
-    # You can also set it per host below.
-    # If you don't set it here, the memory mode of netdata.conf will be used.
-    # Valid modes:
-    #    save    save on exit, load on start
-    #    map     like swap (continuously syncing to disks - you need SSD)
-    #    ram     keep it in RAM, don't touch the disk
-    #    none    no database at all (use this on headless proxies)
-    default memory mode = ram
-
-    # Shall we enable health monitoring for the hosts using this API key?
-    # 3 possible values:
-    #    yes     enable alarms
-    #    no      do not enable alarms
-    #    auto    enable alarms, only when the sending netdata is connected
-    # You can also set it per host, below.
-    # The default is taken from [health].enabled of netdata.conf
+    update every = 10
+    default history = 86400
     health enabled by default = auto
-
-    # postpone alarms for a short period after the sender is connected
     default postpone alarms on connect seconds = 60
-
-    # allow or deny multiple connections for the same host?
-    # If you are sure all your netdata have their own machine GUID,
-    # set this to 'allow', since it allows faster reconnects.
-    # When set to 'deny', new connections for a host will not be
-    # accepted until an existing connection is cleared.
     multiple connections = allow
-
-    # need to route metrics differently? set these.
-    # the defaults are the ones at the [stream] section (above)
-    #default proxy enabled = yes | no
-    #default proxy destination = IP:PORT IP:PORT ...
-    #default proxy api key = API_KEY
-    #default proxy send charts matching = *
