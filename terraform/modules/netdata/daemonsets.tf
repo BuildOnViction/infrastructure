@@ -30,12 +30,14 @@ resource "kubernetes_daemonset" "netdata-slave" {
             mount_path = "/etc/netdata/stream.conf"
             name       = "slave-stream-conf"
             sub_path   = "stream.conf"
+            read_only  = true
           }
 
           volume_mount {
             mount_path = "/etc/netdata/netdata.conf"
             name       = "slave-netdata-conf"
             sub_path   = "netdata.conf"
+            read_only  = true
           }
 
           volume_mount {
@@ -58,7 +60,7 @@ resource "kubernetes_daemonset" "netdata-slave" {
 
           security_context {
             "capabilities" = {
-              "add" = ["SYS_PTRACE"]
+              "add" = ["SYS_PTRACE", "SYS_ADMIN"]
             }
           }
         }
