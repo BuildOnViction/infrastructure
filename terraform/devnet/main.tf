@@ -26,10 +26,6 @@ module "kubernetes" {
   name = "devnet"
 }
 
-# module "tomomaster" {
-#   source = "../modules/tomomaster"
-# }
-
 module "tomoscan" {
   source = "../modules/tomoscan"
 
