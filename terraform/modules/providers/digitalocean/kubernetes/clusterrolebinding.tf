@@ -1,6 +1,6 @@
-resource "kubernetes_cluster_role_binding" "helm" {
+resource "kubernetes_cluster_role_binding" "admin" {
     metadata {
-        name = "helm"
+        name = "admin"
     }
     role_ref {
         api_group = "rbac.authorization.k8s.io"
@@ -9,7 +9,7 @@ resource "kubernetes_cluster_role_binding" "helm" {
     }
     subject {
         kind = "ServiceAccount"
-        name = "helm"
+        name = "admin"
         namespace = "kube-system"
     }
 }

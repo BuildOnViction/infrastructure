@@ -1,6 +1,6 @@
-resource "kubernetes_service_account" "helm" {
+resource "kubernetes_service_account" "admin" {
   metadata {
-    name = "helm"
+    name = "admin"
     namespace = "kube-system"
   }
 }
