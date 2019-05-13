@@ -11,18 +11,18 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-    kubernetes {
-      host     = "${module.kubernetes.endpoint}"
+  kubernetes {
+    host = "${module.kubernetes.endpoint}"
 
-      client_certificate     = "${module.kubernetes.client_certificate}"
-      client_key             = "${module.kubernetes.client_key}"
-      cluster_ca_certificate = "${module.kubernetes.cluster_ca_certificate}"
-    }
+    client_certificate     = "${module.kubernetes.client_certificate}"
+    client_key             = "${module.kubernetes.client_key}"
+    cluster_ca_certificate = "${module.kubernetes.cluster_ca_certificate}"
+  }
 }
 
 module "kubernetes" {
   source = "../modules/providers/digitalocean/kubernetes"
-  
+
   name = "devnet"
 }
 

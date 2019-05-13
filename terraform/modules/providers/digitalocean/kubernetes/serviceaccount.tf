@@ -1,6 +1,6 @@
 resource "kubernetes_service_account" "admin" {
   metadata {
-    name = "admin"
+    name      = "admin"
     namespace = "kube-system"
   }
 }
