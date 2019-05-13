@@ -6,6 +6,6 @@ output "tomoscan_ip" {
 #   value = "${module.tomomaster.loadbalancer_ip}"
 # }
 
-output "netdata_ip" {
-  value = "${module.netdata.loadbalancer_ip}"
-}
+# output "netdata_ip" {
+#   value = "${module.netdata.loadbalancer_ip}"
+# }

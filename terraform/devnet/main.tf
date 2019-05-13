@@ -10,10 +10,6 @@ provider "kubernetes" {
   cluster_ca_certificate = "${base64decode(digitalocean_kubernetes_cluster.devnet.kube_config.0.cluster_ca_certificate)}"
 }
 
-module "netdata" {
-  source = "../modules/netdata"
-}
-
 # module "tomomaster" {
 #   source = "../modules/tomomaster"
 # }
