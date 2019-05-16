@@ -1,9 +1,9 @@
 variable "service_type" {
-  default = "LoadBalancer"
+  default     = "LoadBalancer"
   description = "Kubernetes service type for the main netdata service"
 }
 
 variable "storage_class" {
-  default = "do-block-storage"
+  default     = "do-block-storage"
   description = "Kubernetes storage class used for netdata storage"
 }
