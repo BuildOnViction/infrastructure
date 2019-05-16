@@ -1,5 +1,5 @@
-resource "digitalocean_kubernetes_cluster" "devnet" {
-  name    = "devnet"
+resource "digitalocean_kubernetes_cluster" "cluster" {
+  name    = "${var.name}"
   region  = "${var.region}"
   version = "1.13.3-do.0"
 

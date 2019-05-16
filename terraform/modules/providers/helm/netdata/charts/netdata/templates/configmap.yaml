@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netdata-conf-slave
+  labels:
+    app: {{ template "netdata.name" . }}
+    chart: {{ template "netdata.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  netdata.conf: {{ toYaml .Values.slave.netdata_config | indent 4 }}
+  stream.conf: {{ toYaml .Values.slave.stream_config | indent 4 }}
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netdata-conf-master
+  labels:
+    app: {{ template "netdata.name" . }}
+    chart: {{ template "netdata.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  netdata.conf: {{ toYaml .Values.master.netdata_config | indent 4 }}
+  stream.conf: {{ toYaml .Values.master.stream_config | indent 4 }}
+  health_alarm_notify.conf: {{ toYaml .Values.master.health_config | indent 4 }}
+  example.conf: |-
+    alarm: example_alarm1
+      on: example.random
+    every: 2s
+    warn: $random1 > (($status >= $WARNING)  ? (70) : (80))
+    crit: $random1 > (($status == $CRITICAL) ? (80) : (90))
+    info: random
+      to: sysadmin
+
