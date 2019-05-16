@@ -1,0 +1,26 @@
+defaultEntryPoints = ["http", "https"]
+
+[accessLog]
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+      [entryPoints.http.redirect]
+        entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+      [entryPoints.https.tls]
+
+[acme]
+email = "etienne@tomochain.com"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+  [acme.dnsChallenge]
+    provider = "cloudflare"
+    delayBeforeCheck = 5
+
+[docker]
+domain = "tomochain.com"
+watch = true
+network = "masternode"

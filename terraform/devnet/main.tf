@@ -35,5 +35,5 @@ module "netdata" {
 module "tomoscan" {
   source = "../modules/tomoscan"
 
-  crawler_replicas = 2
+  crawler_replicas = 6
 }
