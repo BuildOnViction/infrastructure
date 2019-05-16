@@ -29,7 +29,7 @@ module "kubernetes" {
 }
 
 module "netdata" {
-  source = "../modules/netdata"
+  source = "../modules/providers/helm/netdata"
 }
 
 module "tomoscan" {
