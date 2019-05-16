@@ -13,3 +13,7 @@ output "client_key" {
 output "cluster_ca_certificate" {
   value = "${base64decode(digitalocean_kubernetes_cluster.cluster.kube_config.0.cluster_ca_certificate)}"
 }
+
+output "service_account" {
+  value = "${kubernetes_service_account.admin.metadata.0.name}"
+}

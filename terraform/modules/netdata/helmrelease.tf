@@ -4,23 +4,21 @@ resource "helm_release" "netdata" {
 
   set {
     name  = "service.type"
-    value = "LoadBalancer"
+    value = "${var.service_type}"
   }
 
   set {
     name  = "master.database.storageclass"
-    value = "do-block-storage"
+    value = "${var.storage_class}"
   }
 
   set {
     name  = "master.alarms.storageclass"
-    value = "do-block-storage"
+    value = "${var.storage_class}"
   }
 
   set {
     name  = "master.alarms.volumesize"
     value = "1Gi"
   }
-
-  depends_on = ["kubernetes_service_account.helm"]
 }

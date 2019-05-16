@@ -11,6 +11,8 @@ provider "kubernetes" {
 }
 
 provider "helm" {
+  service_account = "${module.kubernetes.service_account}"
+
   kubernetes {
     host = "${module.kubernetes.endpoint}"
 
@@ -24,6 +26,10 @@ module "kubernetes" {
   source = "../modules/providers/digitalocean/kubernetes"
 
   name = "devnet"
+}
+
+module "netdata" {
+  source = "../modules/netdata"
 }
 
 module "tomoscan" {
