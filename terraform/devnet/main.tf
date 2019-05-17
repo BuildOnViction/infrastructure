@@ -1,3 +1,13 @@
+terraform {
+  backend "remote" {
+    organization = "tomochain"
+
+    workspaces {
+      name = "devnet"
+    }
+  }
+}
+
 provider "digitalocean" {
   token = "${var.do_token}"
 }
