@@ -21,4 +21,14 @@ resource "helm_release" "netdata" {
     name  = "master.alarms.volumesize"
     value = "1Gi"
   }
+
+  set {
+    name  = "notifications.slackurl"
+    value = "${var.notifications_url}"
+  }
+
+  set {
+    name  = "notifications.slackrecipient"
+    value = "${var.notifications_url}"
+  }
 }

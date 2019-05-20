@@ -40,6 +40,9 @@ module "kubernetes" {
 
 module "netdata" {
   source = "../modules/providers/helm/netdata"
+
+  notifications_url       = "${var.notifications_url}"
+  notifications_recipient = "netdata-devnet"
 }
 
 module "tomoscan" {
