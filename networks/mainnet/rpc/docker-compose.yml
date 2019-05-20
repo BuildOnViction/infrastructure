@@ -21,10 +21,14 @@ services:
       - 30303:30303/tcp
       - 30303:30303/udp
     labels:
-      - traefik.backend=node
-      - traefik.frontend.rule=Host:rpc.tomochain.com
-      - traefik.docker.network=masternode
-      - traefik.port=8545
+      - traefik.rpc.backend=node
+      - traefik.rpc.frontend.rule=Host:rpc.tomochain.com
+      - traefik.rpc.docker.network=masternode
+      - traefik.rpc.port=8545
+      - traefik.ws.backend=node
+      - traefik.ws.frontend.rule=Host:ws.tomochain.com
+      - traefik.ws.docker.network=masternode
+      - traefik.ws.port=8546
     restart: always
 
   proxy:
