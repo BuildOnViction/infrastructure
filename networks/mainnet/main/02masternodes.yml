@@ -37,7 +37,7 @@ services:
       - tomochain_pk_tomochain01
       - netstats_ws_secret
     volumes:
-      - sgp1-vol-mainnet-masternode01-chaindata:/tomochain/data
+      - /mnt/sgp1_vol_mainnet_masternode01_chaindata/data:/tomochain/data
     deploy:
       placement:
         constraints:
@@ -80,7 +80,7 @@ services:
       - tomochain_pk_tomochain02
       - netstats_ws_secret
     volumes:
-      - sgp1-vol-mainnet-masternode02-chaindata:/tomochain/data
+      - /mnt/sgp1_vol_mainnet_masternode02_chaindata/data:/tomochain/data
     deploy:
       placement:
         constraints:
@@ -122,7 +122,7 @@ services:
       - tomochain_pk_tomochain03
       - netstats_ws_secret
     volumes:
-      - sgp1-vol-mainnet-masternode03-chaindata:/tomochain/data
+      - /mnt/sgp1_vol_mainnet_masternode03_chaindata/data:/tomochain/data
     deploy:
       placement:
         constraints:
@@ -144,12 +144,4 @@ secrets:
     external: true
 
   netstats_ws_secret:
-    external: true
-
-volumes:
-  sgp1-vol-mainnet-masternode01-chaindata:
-    external: true
-  sgp1-vol-mainnet-masternode02-chaindata:
-    external: true
-  sgp1-vol-mainnet-masternode03-chaindata:
     external: true
