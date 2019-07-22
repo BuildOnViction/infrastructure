@@ -52,6 +52,24 @@ services:
           - node.role != manager
           - node.labels.app == tomoscan
 
+  tomoscan_producer:
+    image: tomochain/tomoscan-server:testnet
+    command: run producer
+    environment:
+      MONGODB_URI: mongodb://tomoscan_db:27017/explorer
+      REDIS_HOST: tomoscan_redis
+      SLACK_WEBHOOK_URL_FILE: /run/secrets/slack_webhook_url
+      NODE_ENV: 'testnet'
+      WEB3_URI: 'http://172.31.7.98:8545'
+      WEB3_WS_URI: 'ws://172.31.7.98:8546'
+    secrets:
+      - slack_webhook_url
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.app == tomoscan
+
   tomoscan_db:
     image: mongo:3.6
     volumes:
