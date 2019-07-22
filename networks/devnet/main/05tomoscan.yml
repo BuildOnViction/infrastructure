@@ -56,9 +56,9 @@ services:
         constraints:
           - node.labels.type == apps
 
-  tomoscan_pending_txs:
+  tomoscan_producer:
     image: tomochain/tomoscan-server:latest
-    command: run subscribe-pending-tx
+    command: run producer
     environment:
       MONGODB_URI: mongodb://tomoscan_db:27017/explorer
       REDIS_HOST: tomoscan_redis
