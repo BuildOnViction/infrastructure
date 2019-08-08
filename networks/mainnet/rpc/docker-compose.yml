@@ -4,6 +4,11 @@ services:
 
   node:
     image: tomochain/node:stable
+    logging:
+      driver: "json-file"
+      options:
+        max-file: 5
+        max-size: 10m
     environment:
       IDENTITY: $IDENTITY
       PRIVATE_KEY: $PRIVATE_KEY
@@ -41,6 +46,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:rw
       - ./acme.json:/acme.json:rw
       - ./traefik.toml:/traefik.toml:ro
+    logging:
+      driver: "json-file"
+      options:
+        max-file: 5
+        max-size: 10m
     networks:
       - masternode
     ports:
