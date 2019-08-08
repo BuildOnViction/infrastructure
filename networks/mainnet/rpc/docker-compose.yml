@@ -7,8 +7,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-file: 5
-        max-size: 10m
+        max-file: "5"
+        max-size: "10m"
     environment:
       IDENTITY: $IDENTITY
       PRIVATE_KEY: $PRIVATE_KEY
@@ -49,8 +49,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-file: 5
-        max-size: 10m
+        max-file: "5"
+        max-size: "10m"
     networks:
       - masternode
     ports:
